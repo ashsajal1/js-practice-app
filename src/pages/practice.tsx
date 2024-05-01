@@ -1,14 +1,13 @@
 import { ChangeEvent, useState } from "react"
 import { qna } from "../lib/qna";
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { renderAnswer } from "../lib/renderAnswer";
 import NotFoundCard from "../components/ui/not-found-card";
 
 export default function Practice() {
     const [char, setChar] = useState('');
     const { questonId } = useParams()
-
-    // console.log(questonId)
+    const navigate = useNavigate()
     let context;
     if (questonId) {
         context = qna.filter(i => i.id === parseInt(questonId))[0]
@@ -18,9 +17,9 @@ export default function Practice() {
         setChar(e.target.value)
     }
 
-    const handleSubmit = (e:ChangeEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // console.log(char)
+        navigate('/result')
     }
 
     if (context === undefined) {

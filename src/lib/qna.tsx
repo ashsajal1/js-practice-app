@@ -15,4 +15,19 @@ export const qna: QnaTypes[] = [
     question: "What is promise in Javascript?",
     answer: "A promise in JavaScript represents the eventual completion or failure of an asynchronous operation, encapsulating its result."
   },
+  {
+    id: 4,
+    question: "What is promise in Javascript?",
+    answer: "A promise in JavaScript represents the eventual completion or failure of an asynchronous operation, encapsulating its result."
+  },
+  {
+    id: 5,
+    question: "What is promise in Javascript?",
+    answer: "A promise in JavaScript represents the eventual completion or failure of an asynchronous operation, encapsulating its result."
+  },
+  {
+    id: 6,
+    question: "What is promise in Javascript?",
+    answer: "A promise in JavaScript represents the eventual completion or failure of an asynchronous operation, encapsulating its result."
+  },
 ]
