@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .g-text {
+        @apply bg-gradient-to-br from-blue-600 to-blue-900 bg-clip-text text-transparent
+    }
+
+    .btn {
+        @apply bg-gradient-to-br from-blue-600 to-blue-900 p-2 rounded text-white flex items-center justify-center hover:to-blue-950 active:ring cursor-pointer select-none
+    }
+}
