@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react"
 import { qna } from "../lib/qna";
 import { useParams } from 'react-router-dom'
 import { renderAnswer } from "../lib/renderAnswer";
-import NotFoundCard from "../components/not-found-card";
+import NotFoundCard from "../components/ui/not-found-card";
 
 export default function Practice() {
     const [char, setChar] = useState('');

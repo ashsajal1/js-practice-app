@@ -1,4 +1,4 @@
-import QuestionCard from "../components/question-card";
+import QuestionCard from "../components/ui/question-card";
 import { qna } from "../lib/qna";
 
 export default function Home() {
