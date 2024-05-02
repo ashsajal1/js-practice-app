@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { useThemeContext } from "../../hooks/useThemeContext";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const {isDarkMode, toggleMode} = useThemeContext()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,7 +29,7 @@ export default function Navbar() {
             <Link to={'/'} className="g-text font-extrabold text-2xl">JS Practice</Link>
             <div className="flex items-center justify-between gap-2">
                 <div>
-                    <div onClick={() => setIsDarkMode(!isDarkMode)} className="ghost-btn">
+                    <div onClick={toggleMode} className="ghost-btn">
                         {isDarkMode ? <MoonIcon className="h-6 w-6 text-black" />: <SunIcon className="h-6 w-6 text-black" />}
                     </div>
                 </div>
