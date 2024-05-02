@@ -35,7 +35,7 @@ export default function Practice() {
                 </div>
 
                 <form  data-aos='fade-right' onSubmit={handleSubmit}>
-                    <textarea onChange={handlePromptChange} rows={6} placeholder="Enter the answer below" className="p-2 mt-4 w-full rounded border outline-none focus:ring ring-blue-200 focus:border-none dark:bg-black dark:border-gray-600" />
+                    <textarea onChange={handlePromptChange} rows={6} placeholder="Enter the answer below" className="p-2 mt-4 w-full rounded border outline-none focus:ring ring-blue-200 focus:border-none dark:bg-black dark:border-gray-600 dark:text-white" />
 
                     <button className="mt-2 btn w-full" type="submit">Submit</button>
                 </form>
