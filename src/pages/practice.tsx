@@ -27,15 +27,15 @@ export default function Practice() {
     }
 
     return (
-        <div className="p-12 border rounded">
+        <div className="p-12">
             <div>
-                <div>{context.question}</div>
-                <div className="select-none font-bold md:text-2xl text-xl border flex-wrap flex p-2 g-text">
+                <div className="dark:text-white mb-2">{context.question}</div>
+                <div className="select-none font-bold md:text-2xl text-xl border dark:border-gray-800 rounded flex-wrap flex p-2 g-text">
                     {renderAnswer(context.answer, char)}
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <textarea onChange={handlePromptChange} rows={6} placeholder="Enter the answer below" className="p-2 mt-4 w-full rounded border outline-none focus:ring ring-blue-200 focus:border-none" />
+                    <textarea onChange={handlePromptChange} rows={6} placeholder="Enter the answer below" className="p-2 mt-4 w-full rounded border outline-none focus:ring ring-blue-200 focus:border-none dark:bg-black dark:border-gray-600" />
 
                     <button className="mt-2 btn w-full" type="submit">Submit</button>
                 </form>
