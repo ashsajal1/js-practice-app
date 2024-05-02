@@ -3,8 +3,8 @@ import { qna } from "../lib/qna";
 
 export default function Result() {
     return (
-        <div>
-            <h1 className="g-text font-extralight text-3xl p-6 text-center">You have completed one Practice.</h1>
+        <div className="h-screen m-auto">
+            <h1 className="g-text font-extralight text-3xl pt-6 text-center">You have completed one Practice.</h1>
 
             <div className="p-4">
                 <p className="my-2 font-bold g-text">Suggested</p>
