@@ -7,8 +7,10 @@ import { useEffect } from "react";
 
 export default function Layout() {
     useEffect(() => {
-        AOS.init();
-    },[])
+        AOS.init({
+            once: true,
+        });
+    }, [])
     return (
         <>
             <Navbar />
