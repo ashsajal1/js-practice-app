@@ -22,7 +22,7 @@ export default function Navbar() {
         }
     }, [])
 
-    const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm' : ''
+    const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-70 backdrop-blur-sm' : ''
 
     return (
         <nav className={`flex items-center justify-between border-b dark:border-gray-800 p-2 h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
