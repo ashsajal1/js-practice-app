@@ -25,7 +25,7 @@ export default function Navbar() {
     const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm' : ''
 
     return (
-        <nav className={`flex items-center justify-between border-b p-2 h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
+        <nav className={`flex items-center justify-between border-b dark:border-gray-800 p-2 h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
             <Link to={'/'} className="g-text font-extrabold text-2xl">JS Practice</Link>
             <div className="flex items-center justify-between gap-2">
                 <div>
