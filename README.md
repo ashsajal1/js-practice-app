@@ -1,27 +1,79 @@
-# React + TypeScript + Vite
+# JavaScript Practice App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![JavaScript Practice App](https://github.com/ashsajal1/js-practice-app/blob/main/public/logo.png?raw=true)
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+JavaScript Practice App is a web application designed to help users practice interview questions on JavaScript topics. Built with React, TypeScript, and Tailwind CSS, this app provides a user-friendly interface for users to test their knowledge and skills in JavaScript.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Choose from a variety of JavaScript topics to practice.
+- View questions related to the selected topic.
+- Test your knowledge with interactive quizzes.
+- Receive immediate feedback on your answers.
+- Track your progress and performance.
 
-- Configure the top-level `parserOptions` property like this:
+## Demo
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+Check out the live demo [here](https://js-practice-app.vercel.app).
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ashsajal1/js-practice-app.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Navigate into the project directory:
+
+```bash
+cd js-practice-app
+```
+
+3. Install dependencies:
+
+```bash
+pnpm install
+```
+
+4. Start the development server:
+
+```bash
+pnpm dev
+```
+
+5. Open your browser and visit `http://localhost:5173` to view the app.
+
+## Usage
+
+1. Choose a JavaScript topic from the navigation menu.
+2. Read the questions related to the selected topic.
+3. Select an answer for each question.
+4. Submit your answers and receive immediate feedback.
+5. Track your progress and performance in the dashboard.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add your feature'`).
+5. Push to the branch (`git push origin feature/your-feature`).
+6. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ashsajal1/js-practice-app/blob/main/LICENSE) file for details.
+
+## Contact
+
+If you have any questions or suggestions, feel free to contact the project creator:
+
+- GitHub: [ashsajal1](https://github.com/ashsajal1)
+- Email: ashsajal@yahoo.com
