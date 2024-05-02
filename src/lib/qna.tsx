@@ -1,4 +1,4 @@
-type QnaTypes = { id: number, question: string, answer: string, topic: string }
+export type QnaTypes = { id: number, question: string, answer: string, topic: string }
 export const qna: QnaTypes[] = [
   {
     id: 1,
