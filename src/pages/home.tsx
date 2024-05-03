@@ -2,7 +2,6 @@ import { useState, useMemo } from "react";
 import QuestionCard from "../components/ui/question-card";
 import { QnaTypes, qna } from "../lib/qna";
 import { getRandomSort } from "../lib/random";
-import Blob from "../components/ui/blob";
 
 export default function Home() {
   const [sortedQuestions, setSortedQuestions] = useState<QnaTypes[]>([]);
