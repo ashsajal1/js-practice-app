@@ -12,7 +12,7 @@ export default function Result() {
 
             <div className="p-4">
                 <p className="my-2 font-bold g-text">Suggested</p>
-                <div className="flex items-center justify-between w-auto gap-2 overflow-x-scroll">
+                <div className="flex items-center justify-between w-auto gap-2 overflow-x-scroll scrollbar-thumb-blue-700 scrollbar-thin scrollbar-w-1">
                    {qna.map(i => (
                     <SuggestedCard key={i.id} id={i.id} question={i.question} answer={i.answer} />
                    ))}
