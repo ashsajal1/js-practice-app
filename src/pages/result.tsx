@@ -12,7 +12,7 @@ export default function Result() {
         content = <>
             <h1 className="g-text font-extralight text-3xl pt-6 text-center">You have completed "{question}" question.</h1>
 
-            <SocialMedia />
+            <SocialMedia question={question} />
         </>
     } else {
         content = <>
