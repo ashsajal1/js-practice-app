@@ -5,7 +5,7 @@ import { useThemeContext } from "../../hooks/useThemeContext";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const {isDarkMode, toggleMode} = useThemeContext()
+    const { isDarkMode, toggleMode } = useThemeContext()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,10 +30,10 @@ export default function Navbar() {
             <div className="flex items-center justify-between gap-2">
                 <div>
                     <div onClick={toggleMode} className="ghost-btn">
-                        {isDarkMode ? <MoonIcon className="h-6 w-6 text-black dark:text-white" />: <SunIcon className="h-6 w-6 text-black dark:text-white" />}
+                        {isDarkMode ? <MoonIcon className="h-6 w-6 text-black dark:text-white" /> : <SunIcon className="h-6 w-6 text-black dark:text-white" />}
                     </div>
                 </div>
-                <button className="btn">Add Question</button>
+                <a href="https://github.com/ashsajal1/js-practice-app/" target="_blink" className="btn">Add Question</a>
             </div>
         </nav>
     )
