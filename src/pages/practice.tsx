@@ -6,11 +6,11 @@ import NotFoundCard from "../components/ui/not-found-card";
 
 export default function Practice() {
     const [char, setChar] = useState('');
-    const { questonId } = useParams()
+    const { questionId } = useParams()
     const navigate = useNavigate()
-    let context;
-    if (questonId) {
-        context = qna.filter(i => i.id === parseInt(questonId))[0]
+    let context: { question: string; answer: string; id?: number; topic?: string; } | undefined;
+    if (questionId) {
+        context = qna.filter(i => i.id === parseInt(questionId))[0]
     }
 
     const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -19,7 +19,7 @@ export default function Practice() {
 
     const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        navigate('/result')
+        navigate('/result', { state: { question: context?.question } })
     }
 
     if (context === undefined) {
