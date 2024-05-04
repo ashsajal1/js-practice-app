@@ -10,7 +10,7 @@ export default function Result() {
     if (location.state?.question) {
         const question = location.state?.question;
         content = <>
-            <h1 className="g-text font-extralight text-3xl pt-6 text-center">You have completed "{question}" question.</h1>
+            <h1 className="g-text font-extralight text-3xl p-6 text-center">You have completed "{question}" question.</h1>
 
             <SocialMedia question={question} />
         </>
