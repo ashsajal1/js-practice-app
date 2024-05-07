@@ -1,10 +1,33 @@
-export type QnaTypes = { id: number, question: string, answer: string, topic: string }
+export type QnaTypes = {
+  id: number,
+  question: string,
+  answer: string,
+  topic: string,
+  quiz?: QuizProps | null
+};
+
+export interface QuizProps {
+  question: string,
+  options: string[],
+  answer: string
+}
+
 export const qna: QnaTypes[] = [
   {
     id: 1,
     question: "What is promise in Javascript?",
     answer: "A promise in JavaScript represents the eventual completion or failure of an asynchronous operation, encapsulating its result.",
-    topic: "javascript"
+    topic: "javascript",
+    quiz: {
+      question: "What is a promise in JavaScript?",
+      options: [
+        "A. A guarantee that a function will always return a value",
+        "B. A representation of an asynchronous operation's eventual completion or failure",
+        "C. A way to prevent errors in JavaScript code",
+        "D. A method for creating loops in JavaScript"
+      ],
+      answer: "B. A representation of an asynchronous operation's eventual completion or failure",
+    }
   },
   {
     id: 2,
