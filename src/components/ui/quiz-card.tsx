@@ -16,7 +16,7 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
             navigate('/result', {
                 state: { question: question }
             })
-        }, 2000);
+        }, 2000 * 200);
         
     }
 
@@ -35,11 +35,11 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
     }
 
     return (
-        <div className="p-4 rounded border shadow">
-            <p className="text-lg font-medium my-2">{quiz.question}</p>
+        <div className="p-4 rounded border shadow dark:border-gray-600">
+            <p className="text-lg font-medium my-2 dark:text-white">{quiz.question}</p>
             {quiz.options.map((i) => (
                 <>
-                    <p onClick={() => setSelectedOption(i)} className={`p-2 border rounded mb-2 cursor-pointer select-none ${selectedOption === i ? 'border-blue-700' : ''}`}>{i}</p>
+                    <p onClick={() => setSelectedOption(i)} className={`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 dark:text-white ${selectedOption === i ? 'border-blue-700 dark:border-blue-700' : ''}`}>{i}</p>
                 </>
             ))}
             <button onClick={handleQuizSubmit} className="btn w-full">Submit</button>
