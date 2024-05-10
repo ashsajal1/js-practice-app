@@ -30,11 +30,6 @@ export default function Practice() {
         }
     }
 
-    const handleQuizSubmit = () => {
-        navigate('/result', {
-            state: { question: context?.question }
-        })
-    }
 
     if (context === undefined) {
         return <NotFoundCard content='Question' />
@@ -56,7 +51,7 @@ export default function Practice() {
 
             <div className={`${showQuiz ? '' : 'hidden'}`}>
                 {context?.quiz && (
-                    <QuizCard handleSubmit={handleQuizSubmit} quiz={context.quiz} />
+                    <QuizCard question={context.question} quiz={context.quiz} />
                 )
                 }
             </div>
