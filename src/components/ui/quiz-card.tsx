@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { QuizProps } from "../../lib/qna";
+import Timer from "./timer";
 
 export default function QuizCard({ quiz, question }: { quiz: QuizProps, question: string }) {
     const [selectedOption, setSelectedOption] = useState('')
@@ -8,7 +9,7 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
     const [isRightAnswer, setIsRightAnswer] = useState(false)
     const navigate = useNavigate();
     const handleQuizSubmit = () => {
-        if(selectedOption === quiz.answer) {
+        if (selectedOption === quiz.answer) {
             setIsRightAnswer(true)
         }
         setHasSubmitted(true)
@@ -16,21 +17,26 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
             navigate('/result', {
                 state: { question: question }
             })
-        }, 2000);
-        
+        }, 5000);
+    }
+
+    const handleConfirm = () => {
+        navigate('/result', {
+            state: { question: question }
+        })
     }
 
     if (hasSubmitted) {
         return (<>
-        <div className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200':'bg-red-200'}`}>
-            <p className="text-lg font-medium my-2">{quiz.question}</p>
-            {quiz.options.map((i) => (
-                <>
-                    <p className={`p-2 dark:text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600':''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''} ${!isRightAnswer && selectedOption === i? 'bg-red-600':''} ${!isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''}`}>{i}</p>
-                </>
-            ))}
-            <button className="btn w-full">{3}</button>
-        </div>
+            <div className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
+                <p className="text-lg font-medium my-2">{quiz.question}</p>
+                {quiz.options.map((i) => (
+                    <>
+                        <p className={`p-2 dark:text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:text-white dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:text-white dark:border-gray-800' : ''}`}>{i}</p>
+                    </>
+                ))}
+                <div onClick={handleConfirm} className="btn w-full">Confirm or <Timer />/5</div>
+            </div>
         </>)
     }
 
