@@ -16,7 +16,7 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
             navigate('/result', {
                 state: { question: question }
             })
-        }, 2000 * 200);
+        }, 2000);
         
     }
 
@@ -26,10 +26,10 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
             <p className="text-lg font-medium my-2">{quiz.question}</p>
             {quiz.options.map((i) => (
                 <>
-                    <p className={`p-2 border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600':''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''} ${!isRightAnswer && selectedOption === i? 'bg-red-600':''} ${!isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''}`}>{i}</p>
+                    <p className={`p-2 dark:text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600':''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''} ${!isRightAnswer && selectedOption === i? 'bg-red-600':''} ${!isRightAnswer && selectedOption !== i? 'border border-white text-black dark:text-white dark:border-gray-800':''}`}>{i}</p>
                 </>
             ))}
-            <button onClick={handleQuizSubmit} className="btn w-full">Submit</button>
+            <button className="btn w-full">{3}</button>
         </div>
         </>)
     }
