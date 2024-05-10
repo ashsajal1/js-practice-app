@@ -8,23 +8,27 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [isRightAnswer, setIsRightAnswer] = useState(false)
     const navigate = useNavigate();
-    const handleQuizSubmit = () => {
-        if (selectedOption === quiz.answer) {
-            setIsRightAnswer(true)
-        }
-        setHasSubmitted(true)
-        setTimeout(() => {
-            navigate('/result', {
-                state: { question: question }
-            })
-        }, 5000);
-    }
-
     const handleConfirm = () => {
+        clearTimeout(submissionTimeout); // clear the previous timeout
         navigate('/result', {
             state: { question: question }
-        })
-    }
+        });
+    };
+
+    // define submissionTimeout variable to hold the timeout ID
+    let submissionTimeout: ReturnType<typeof setTimeout>;
+
+    const handleQuizSubmit = () => {
+        if (selectedOption === quiz.answer) {
+            setIsRightAnswer(true);
+        }
+        setHasSubmitted(true);
+        submissionTimeout = setTimeout(() => {
+            navigate('/result', {
+                state: { question: question }
+            });
+        }, 5000);
+    };
 
     if (hasSubmitted) {
         return (<>
