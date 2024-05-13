@@ -48,7 +48,7 @@ export default function Practice() {
     }
 
     return (
-        <div className="p-12 h-screen">
+        <div className={`p-12 ${context?.code? '':'h-screen'}`}>
             <div className={`${showQuiz ? 'hidden' : ''}`}>
                 <div data-aos='fade-right' className="dark:text-white mb-2">{context.question}</div>
                 <div data-aos='fade-right' className="select-none font-bold md:text-2xl text-xl border dark:border-gray-800 rounded flex-wrap flex p-2 g-text">
