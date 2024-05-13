@@ -15,6 +15,8 @@ export default function Practice() {
         context = qna.filter(i => i.id === parseInt(questionId))[0]
     }
 
+    // console.log(context?.code)
+
     const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setChar(e.target.value)
     }
@@ -48,6 +50,16 @@ export default function Practice() {
                     <button className="mt-2 btn w-full" type="submit">Submit</button>
                 </form>
             </div>
+            {context?.code && (
+                <>
+                    <div className="border p-2 rounded mt-4">
+                        <code className="text-black dark:text-white">
+                            {context?.code}
+                        </code>
+                    </div>
+                </>
+            )}
+
 
             <div className={`${showQuiz ? '' : 'hidden'}`}>
                 {context?.quiz && (
