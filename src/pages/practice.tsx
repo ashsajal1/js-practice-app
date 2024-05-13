@@ -1,9 +1,11 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { QnaTypes, qna } from "../lib/qna";
 import { useNavigate, useParams } from 'react-router-dom'
 import { renderAnswer } from "../lib/renderAnswer";
 import NotFoundCard from "../components/ui/not-found-card";
 import QuizCard from "../components/ui/quiz-card";
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
 
 export default function Practice() {
     const [char, setChar] = useState('');
@@ -14,6 +16,14 @@ export default function Practice() {
     if (questionId) {
         context = qna.filter(i => i.id === parseInt(questionId))[0]
     }
+
+    useEffect(() => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            if (block instanceof HTMLElement) {
+                hljs.highlightBlock(block);
+            }
+        });
+    }, [context?.code]);
 
     // console.log(context?.code)
 
@@ -52,14 +62,13 @@ export default function Practice() {
             </div>
             {context?.code && (
                 <>
-                    <div className="border p-2 rounded mt-4">
+                    <pre className="border p-2 rounded mt-4">
                         <code className="text-black dark:text-white">
                             {context?.code}
                         </code>
-                    </div>
+                    </pre>
                 </>
             )}
-
 
             <div className={`${showQuiz ? '' : 'hidden'}`}>
                 {context?.quiz && (
