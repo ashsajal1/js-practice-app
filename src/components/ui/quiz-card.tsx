@@ -36,7 +36,7 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
                 <p className="text-lg font-medium my-2">{quiz.question}</p>
                 {quiz.options.map((i) => (
                     <>
-                        <p className={`p-2 dark:text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:text-white dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:text-white dark:border-gray-800' : ''}`}>{i}</p>
+                        <p className={`p-2 text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:border-gray-800' : ''}`}>{i}</p>
                     </>
                 ))}
                 <div onClick={handleConfirm} className="btn w-full">Confirm or <Timer />/5</div>
@@ -49,7 +49,7 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
             <p className="text-lg font-medium my-2 dark:text-white">{quiz.question}</p>
             {quiz.options.map((i) => (
                 <>
-                    <p onClick={() => setSelectedOption(i)} className={`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 dark:text-white ${selectedOption === i ? 'border-blue-700 dark:border-blue-700' : ''}`}>{i}</p>
+                    <p onClick={() => setSelectedOption(i)} className={`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 dark:text-white ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`}>{i}</p>
                 </>
             ))}
             <button onClick={handleQuizSubmit} className="btn w-full">Submit</button>
