@@ -60,6 +60,14 @@ export default function Practice() {
                     <button className="mt-2 btn w-full" type="submit">Submit</button>
                 </form>
             </div>
+
+            <div className={`${showQuiz ? '' : 'hidden'}`}>
+                {context?.quiz && (
+                    <QuizCard question={context.question} quiz={context.quiz} />
+                )
+                }
+            </div>
+
             {context?.code && (
                 <>
                     <h3 className="mt-6 text-xl font-extralight text-left border-b pb-2">Code example</h3>
@@ -70,14 +78,6 @@ export default function Practice() {
                     </pre>
                 </>
             )}
-
-            <div className={`${showQuiz ? '' : 'hidden'}`}>
-                {context?.quiz && (
-                    <QuizCard question={context.question} quiz={context.quiz} />
-                )
-                }
-            </div>
-
         </div>
     )
 }
