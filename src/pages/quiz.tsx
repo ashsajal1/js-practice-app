@@ -17,7 +17,12 @@ export default function Quiz() {
     }, []);
 
     useEffect(() => {
-        setCurrentQuestion(quizQuestions[currentQuestinIndex])
+        if(quizQuestions.length > currentQuestinIndex + 1) {
+            setCurrentQuestion(quizQuestions[currentQuestinIndex])
+        } else {
+            setCurrentQuestinIndex(0)
+            setCurrentQuestion(quizQuestions[0])
+        }
     }, [currentQuestinIndex]);
 
     if (isCompletedCurrentQuiz) {
