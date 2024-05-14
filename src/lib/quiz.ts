@@ -1,4 +1,4 @@
-interface QuizQuestion {
+export interface QuizQuestionType {
     id: number;
     question: string;
     code?: string;
@@ -10,7 +10,7 @@ interface QuizQuestion {
     lang: string;
   }
   
-  export const quizQuestions: QuizQuestion[] = [
+  export const quizQuestions: QuizQuestionType[] = [
     {
       id: 1,
       question: "What does the following code snippet do?",
