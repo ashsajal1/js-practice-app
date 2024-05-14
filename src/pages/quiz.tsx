@@ -37,6 +37,7 @@ export default function Quiz() {
             <div>
                 <div className="w-full md:w-1/3 border p-6 md:p-4 rounded">
                     <p>{curretnQuestion?.question}</p>
+                    <p className='py-2 text-sm font-extralight'>Type : <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{curretnQuestion?.type}</span></p>
 
                     {curretnQuestion?.code && <pre><code>{curretnQuestion.code}</code></pre>}
 
