@@ -8,6 +8,7 @@ export default function Quiz() {
     const [currentQuestinIndex, setCurrentQuestinIndex] = useState(0);
     const [curretnQuestion, setCurrentQuestion] = useState<QuizQuestionType | null>(null)
     const [isCompletedCurrentQuiz, setIsCompletedCurrentQuiz] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('')
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
             if (block instanceof HTMLElement) {
@@ -42,7 +43,7 @@ export default function Quiz() {
                     {curretnQuestion?.code && <pre><code>{curretnQuestion.code}</code></pre>}
 
                     <div>
-                        {curretnQuestion?.options?.map(i => <div className="p-2 rounded border my-1">{i}</div>)}
+                        {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={`p-2 select-none cursor-pointer rounded border my-1 ${selectedOption === i ? 'border-blue-600':''}`}>{i}</div>)}
                     </div>
 
                     <div onClick={() => { setIsCompletedCurrentQuiz(true) }} className="btn">Submit</div>
