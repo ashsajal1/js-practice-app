@@ -18,7 +18,7 @@ export default function Quiz() {
                 hljs.highlightBlock(block);
             }
         });
-    }, []);
+    }, [currentQuestinIndex]);
 
     useEffect(() => {
         if (quizQuestions.length > currentQuestinIndex + 1) {
@@ -58,7 +58,7 @@ export default function Quiz() {
                     <p className='dark:text-white'>{curretnQuestion?.question}</p>
                     <p className='py-2 text-sm font-extralight dark:text-white'>Type : <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{curretnQuestion?.type}</span></p>
 
-                    {curretnQuestion?.code && <pre><code>{curretnQuestion.code}</code></pre>}
+                    <pre><code>{curretnQuestion?.code}</code></pre>
 
                     <div>
                         {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={cn(`p-2 dark:text-white select-none cursor-pointer rounded border my-1 dark:border-gray-800 ${selectedOption === i ? 'border-blue-600 dark:border-blue-600' : ''}`)}>{i}</div>)}
