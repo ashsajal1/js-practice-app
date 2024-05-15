@@ -32,7 +32,7 @@ export default function Quiz() {
         return <>
             <div className='grid place-items-center pt-12 px-4  md:p-12 pb-24'>
                 <div className="w-full md:w-1/3 border dark:border-gray-800 p-6 md:p-4 rounded">
-                    <h1>You have completed {currentQuestinIndex + 1} question!</h1>
+                    {/* <h1>You have completed {currentQuestinIndex + 1} question!</h1> */}
 
                     <div className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
                         <p className="text-lg font-medium my-2">{curretnQuestion?.question}</p>
