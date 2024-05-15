@@ -3,6 +3,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { useEffect, useState } from "react";
 import { QuizQuestionType, quizQuestions } from '../lib/quiz';
+import { cn } from '../lib/cn';
 
 export default function Quiz() {
     const [currentQuestinIndex, setCurrentQuestinIndex] = useState(0);
@@ -60,7 +61,7 @@ export default function Quiz() {
                     {curretnQuestion?.code && <pre><code>{curretnQuestion.code}</code></pre>}
 
                     <div>
-                        {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={`p-2 dark:text-white select-none cursor-pointer rounded border my-1 dark:border-gray-800 ${selectedOption === i ? 'border-blue-600 dark:border-blue-600' : ''}`}>{i}</div>)}
+                        {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={cn(`p-2 dark:text-white select-none cursor-pointer rounded border my-1 dark:border-gray-800 ${selectedOption === i ? 'border-blue-600 dark:border-blue-600' : ''}`)}>{i}</div>)}
                     </div>
 
                     <div onClick={() => { setIsCompletedCurrentQuiz(true); setIsRightAnswer((curretnQuestion?.answer === selectedOption)) }} className="btn">Submit</div>
