@@ -21,7 +21,7 @@ export default function Quiz() {
     }, [currentQuestinIndex]);
 
     useEffect(() => {
-        if (quizQuestions.length > currentQuestinIndex + 1) {
+        if (quizQuestions.length > currentQuestinIndex) {
             setCurrentQuestion(quizQuestions[currentQuestinIndex])
         } else {
             setCurrentQuestinIndex(0)
@@ -45,7 +45,7 @@ export default function Quiz() {
 
                     </div>
 
-                    <div className='btn mt-2' onClick={() => { setCurrentQuestinIndex(prevIndex => prevIndex + 1); setIsCompletedCurrentQuiz(false) }}>Practice next</div>
+                    <div className='btn mt-2' onClick={() => { setCurrentQuestinIndex(prevIndex => prevIndex + 1); setIsCompletedCurrentQuiz(false); setIsRightAnswer(false) }}>Practice next</div>
                 </div>
             </div>
         </>
