@@ -31,7 +31,7 @@ export default function Quiz() {
     if (isCompletedCurrentQuiz) {
         return <>
             <div className='grid place-items-center pt-12 px-4  md:p-12 mb-24'>
-                <div className="w-full md:w-1/3 border p-6 md:p-4 rounded">
+                <div className="w-full md:w-1/3 border dark:border-gray-800 p-6 md:p-4 rounded">
                     <h1>You have completed {currentQuestinIndex + 1} question!</h1>
 
                     <div className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
@@ -53,14 +53,14 @@ export default function Quiz() {
     return (
         <>
             <div className='grid place-items-center pt-12 px-4  md:p-12 mb-24'>
-                <div className="w-full md:w-1/3 border p-6 md:p-4 rounded">
+                <div className="w-full md:w-1/3 border dark:border-gray-800 p-6 md:p-4 rounded">
                     <p className='dark:text-white'>{curretnQuestion?.question}</p>
                     <p className='py-2 text-sm font-extralight dark:text-white'>Type : <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{curretnQuestion?.type}</span></p>
 
                     {curretnQuestion?.code && <pre><code>{curretnQuestion.code}</code></pre>}
 
                     <div>
-                        {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={`p-2 dark:text-white select-none cursor-pointer rounded border my-1 ${selectedOption === i ? 'border-blue-600' : ''}`}>{i}</div>)}
+                        {curretnQuestion?.options?.map(i => <div onClick={() => setSelectedOption(i)} className={`p-2 dark:text-white select-none cursor-pointer rounded border my-1 dark:border-gray-800 ${selectedOption === i ? 'border-blue-600 dark:border-blue-600' : ''}`}>{i}</div>)}
                     </div>
 
                     <div onClick={() => { setIsCompletedCurrentQuiz(true); setIsRightAnswer((curretnQuestion?.answer === selectedOption)) }} className="btn">Submit</div>
