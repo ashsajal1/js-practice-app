@@ -38,7 +38,7 @@ export default function Quiz() {
                         <p className="text-lg font-medium my-2">{curretnQuestion?.question}</p>
                         {curretnQuestion?.options?.map((i) => (
                             <>
-                                <p className={`p-2 text-black border rounded mb-2 cursor-pointer select-none ${curretnQuestion.answer === i ? 'bg-green-600' : ''} ${selectedOption === curretnQuestion.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:border-gray-800' : ''}`}>{i}</p>
+                                <p className={`p-2 text-black border border-black rounded mb-2 cursor-pointer select-none ${curretnQuestion.answer === i ? 'bg-green-600' : ''} ${selectedOption === curretnQuestion.answer && selectedOption === i ? 'bg-green-600' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} `}>{i}</p>
                             </>
                         ))}
 
