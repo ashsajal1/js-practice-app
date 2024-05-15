@@ -4,6 +4,7 @@ import NotFound from './pages/not-found'
 import Home from './pages/home'
 import Layout from './pages/layout'
 import Result from './pages/result'
+import Quiz from './pages/quiz'
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ export const router = createBrowserRouter([
         element: <Result />
       },
       {
-        path: '/q/:questionId',
+        path: '/quiz',
+        element: <Quiz />
+      },
+      {
+        path: '/practice/q/:questionId',
         element: <Practice />
       },
       {

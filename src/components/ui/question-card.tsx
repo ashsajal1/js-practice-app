@@ -7,7 +7,7 @@ export default function QuestionCard({ question, answer, id }: { question: strin
                 <p className='font-bold'>{question.slice(0, 40)} {question.length > 40 ? '...' : ''}</p>
                 <p className='font-light'>{answer.slice(0, 80)}...</p>
                 <div className='mt-4'>
-                    <Link to={`/q/${id.toString()}`} className='btn'>Practice</Link>
+                    <Link to={`/practice/q/${id.toString()}`} className='btn'>Practice</Link>
                 </div>
             </div>
         </>
