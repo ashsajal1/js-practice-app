@@ -46,9 +46,9 @@ export default function Navbar() {
 
             </div>
 
-            <div className={`${isShowMenu ? 'flex':'hidden'} items-center flex-col gap-2 w-full mt-6`}>
-                <Link className="btn w-full" to='/quiz'>Play Quiz</Link>
-                <Link className="btn w-full" to='/quiz'>Add Quiz</Link>
+            <div className={`${isShowMenu ? 'flex':'hidden'} items-center flex-col gap-2 w-full mt-6 md:hidden`}>
+                <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Play Quiz</Link>
+                <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Add Quiz</Link>
             </div>
         </nav>
     )
