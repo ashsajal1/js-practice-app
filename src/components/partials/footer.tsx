@@ -8,9 +8,9 @@ export default function Footer() {
         <div>
           <h3 className="font-extrabold g-text">Follow us</h3>
           <ul>
-            <li><a className="flex items-center gap-1" href="https://www.linkedin.com/in/ashsajal/"><CiLinkedin /> Linkedin</a></li>
-            <li><a className="flex items-center gap-1" href="https://twitter.com/ashsajal1"><CiTwitter /> Twitter</a></li>
-            <li><a className="flex items-center gap-1" href="https://github.com/ashsajal1"><LiaGithub /> Twitter</a></li>
+            <li><a target="blink" className="flex items-center gap-1" href="https://www.linkedin.com/in/ashsajal/"><CiLinkedin /> Linkedin</a></li>
+            <li><a target="blink" className="flex items-center gap-1" href="https://twitter.com/ashsajal1"><CiTwitter /> Twitter</a></li>
+            <li><a target="blink" className="flex items-center gap-1" href="https://github.com/ashsajal1"><LiaGithub /> Twitter</a></li>
           </ul>
         </div>
 
