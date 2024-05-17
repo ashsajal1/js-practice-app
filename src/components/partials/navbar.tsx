@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MoonIcon, SunIcon, Bars3CenterLeftIcon } from '@heroicons/react/24/outline'
+import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 
@@ -41,7 +41,9 @@ export default function Navbar() {
                         <Link to='/quiz' className="btn">Play Quiz</Link>
                     </div>
 
-                    <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className="h-6 w-6 dark:text-white text-black md:hidden" />
+                    <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu? 'hidden':''}`} />
+                    
+                    <XMarkIcon onClick={() => setIsShowMenu(false)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu? '':'hidden'}`} />
 
                 </div>
 
