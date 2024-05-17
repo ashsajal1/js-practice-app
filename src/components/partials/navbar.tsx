@@ -33,7 +33,11 @@ export default function Navbar() {
                         {isDarkMode ? <MoonIcon className="h-6 w-6 text-black dark:text-white" /> : <SunIcon className="h-6 w-6 text-black dark:text-white" />}
                     </div>
                 </div>
-                <a href="https://github.com/ashsajal1/js-practice-app/" target="_blink" className="btn">Add Question</a>
+                <div className="hidden md:flex items-center gap-2">
+                    <a href="https://github.com/ashsajal1/js-practice-app/" target="_blink" className="btn">Add Question</a>
+                    <Link to='/quiz' className="btn">Play Quiz</Link>
+                </div>
+
             </div>
         </nav>
     )
