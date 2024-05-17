@@ -4,6 +4,7 @@ import Footer from "../components/partials/footer";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 
 export default function Layout() {
     useEffect(() => {
@@ -15,7 +16,9 @@ export default function Layout() {
         <>
             <Navbar />
             <main className="mt-[80px] dark:bg-black">
-                <Outlet />
+                <AnimatePresence>
+                    <Outlet />
+                </AnimatePresence>
             </main>
             <Footer />
         </>
