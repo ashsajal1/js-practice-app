@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { MoonIcon, SunIcon, Bars3CenterLeftIcon } from '@heroicons/react/24/outline'
 import { useThemeContext } from "../../hooks/useThemeContext";
 
 export default function Navbar() {
@@ -37,6 +37,8 @@ export default function Navbar() {
                     <a href="https://github.com/ashsajal1/js-practice-app/" target="_blink" className="btn">Add Question</a>
                     <Link to='/quiz' className="btn">Play Quiz</Link>
                 </div>
+
+                <Bars3CenterLeftIcon className="h-6 w-6 dark:text-white text-black md:hidden"  />
 
             </div>
         </nav>
