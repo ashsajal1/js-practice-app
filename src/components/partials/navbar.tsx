@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MoonIcon, SunIcon, Bars3CenterLeftIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 
 export default function Navbar() {
@@ -46,10 +47,17 @@ export default function Navbar() {
 
             </div>
 
-            <div className={`${isShowMenu ? 'flex':'hidden'} items-center flex-col gap-2 w-full mt-6 md:hidden`}>
+            <motion.div
+                initial={{ height: 0}}
+                animate={{ height: 'auto'}}
+                transition={{
+                    duration: 1000,
+                    type: 'tween'
+                }}
+                className={`${isShowMenu ? 'flex' : 'hidden'} items-center flex-col gap-2 w-full mt-6 md:hidden`}>
                 <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Play Quiz</Link>
                 <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Add Quiz</Link>
-            </div>
+            </motion.div>
         </nav>
     )
 }
