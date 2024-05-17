@@ -7,6 +7,7 @@ import { useThemeContext } from "../../hooks/useThemeContext";
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [isShowMenu, setIsShowMenu] = useState(false);
+    const [isShowIconAnimaition, setIsShowIconAnimation] = useState(false);
     const { isDarkMode, toggleMode } = useThemeContext()
 
     useEffect(() => {
@@ -24,6 +25,18 @@ export default function Navbar() {
         }
     }, [])
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsShowIconAnimation(true);
+            setTimeout(() => {
+                setIsShowIconAnimation(false);
+            }, 2000);
+        }, 5000);
+    
+        return () => clearInterval(interval);
+    }, []);
+    
+
     const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-60 backdrop-blur-sm' : ''
 
     return (
@@ -33,7 +46,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between gap-2">
                     <div>
                         <div onClick={toggleMode} className="ghost-btn">
-                            {isDarkMode ? <MoonIcon className="h-6 w-6 text-black dark:text-white" /> : <SunIcon className="h-6 w-6 text-black dark:text-white" />}
+                            {isDarkMode ? <MoonIcon className={`h-6 w-6 text-black dark:text-white ${isShowIconAnimaition? 'animate-pulse':''}`} /> : <SunIcon className={`h-6 w-6 text-black dark:text-white ${isShowIconAnimaition? 'animate-spin':''}`} />}
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-2">
@@ -41,17 +54,17 @@ export default function Navbar() {
                         <Link to='/quiz' className="btn">Play Quiz</Link>
                     </div>
 
-                    <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu? 'hidden':''}`} />
-                    
-                    <XMarkIcon onClick={() => setIsShowMenu(false)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu? '':'hidden'}`} />
+                    <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu ? 'hidden' : ''}`} />
+
+                    <XMarkIcon onClick={() => setIsShowMenu(false)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu ? '' : 'hidden'}`} />
 
                 </div>
 
             </div>
 
             <motion.div
-                initial={{ height: 0}}
-                animate={{ height: 'auto'}}
+                initial={{ height: 0 }}
+                animate={{ height: 'auto' }}
                 transition={{
                     duration: 1000,
                     type: 'tween'
