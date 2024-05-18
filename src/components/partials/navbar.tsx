@@ -80,9 +80,9 @@ export default function Navbar() {
                         type: 'tween'
                     }}
                     className={`flex items-center gap-2 w-full mt-6 md:hidden`}>
-                    <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Play Quiz</Link>
+                    <Link onClick={() => setIsShowMenu(!isShowMenu)} className="w-full" to='/quiz'><Button className="w-full" variant="outline">Play Quiz</Button></Link>
                     <Link className="w-full" onClick={() => setIsShowMenu(!isShowMenu)} to='/quiz'>
-                        <Button className="w-full" variant="solid">Add Quiz</Button>
+                        <Button className="w-full" variant="outline">Add Quiz</Button>
                     </Link>
                 </motion.div>}
             </AnimatePresence>
