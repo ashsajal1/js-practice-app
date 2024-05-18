@@ -1,5 +1,7 @@
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import Button from "./button";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function GotoTop() {
     const [showTopBtn, setShowTopBtn] = useState(false)
@@ -27,9 +29,20 @@ export default function GotoTop() {
 
     return (
         <>
-            {showTopBtn && <div onClick={handleGoToTop} className="fixed bottom-12 right-12 border">
-                <ArrowUpCircleIcon className="h-6 w-6" />
-            </div>}
+            <AnimatePresence mode="wait">
+                {showTopBtn && <motion.div
+                    initial={{ scale: 0, x: -1000 }}
+                    animate={{ scale: 1, x: 0 }}
+                    transition={{
+                        duration: 1,
+                        type: "spring"
+                    }}
+                >
+                    <Button onClick={handleGoToTop} variant="solid" className="fixed bottom-12 right-12">
+                        <ArrowUpCircleIcon className="h-6 w-6 text-white" />
+                    </Button>
+                </motion.div>}
+            </AnimatePresence>
         </>
     )
 }
