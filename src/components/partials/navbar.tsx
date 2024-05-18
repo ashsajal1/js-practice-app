@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/re
 import { AnimatePresence, motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
-import { CiTrophy } from "react-icons/ci";
+import { CiTrophy, CiBeaker1 } from "react-icons/ci";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -65,6 +65,12 @@ export default function Navbar() {
                                 Play Quiz
                             </Button>
                         </Link>
+                        <Link className="" to='/quiz'>
+                        <Button className="flex items-center gap-1" variant="outline">
+                        <CiBeaker1 className="h-5 w-5" />
+                        Start Interview
+                        </Button>
+                    </Link>
                     </div>
 
                     <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu ? 'hidden' : ''}`} />
@@ -90,7 +96,10 @@ export default function Navbar() {
                         Play Quiz
                     </Button></Link>
                     <Link className="w-full" onClick={() => setIsShowMenu(!isShowMenu)} to='/quiz'>
-                        <Button className="w-full" variant="outline">Add Quiz</Button>
+                        <Button className="w-full flex items-center gap-1" variant="outline">
+                        <CiBeaker1 className="h-5 w-5" />
+                        Start Interview
+                        </Button>
                     </Link>
                 </motion.div>}
             </AnimatePresence>
