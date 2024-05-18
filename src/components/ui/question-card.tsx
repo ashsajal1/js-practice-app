@@ -5,9 +5,6 @@ export default function QuestionCard({ question, answer, id }: { question: strin
     return (
         <>
             <motion.div
-                drag
-                dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-                dragElastic={0.3}
                 data-aos='fade-up'
                 className="flex flex-col rounded p-4 border dark:border-gray-700 w-full md:min-w-[350px] md:max-w-[430px] bg-white dark:bg-black dark:text-white">
                 <p className='font-bold'>{question.slice(0, 40)} {question.length > 40 ? '...' : ''}</p>
