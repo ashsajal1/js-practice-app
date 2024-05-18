@@ -5,7 +5,10 @@ export default function Interview() {
 
     return (
         <div className="p-4">
-            <Message text={fullQuestion} />
+            <div className="flex items-start gap-2 justify-start">
+                <div className="w-[40px] h-[40px] rounded-full bg-black"></div>
+                <Message text={fullQuestion} />
+            </div>
         </div>
     );
 }
