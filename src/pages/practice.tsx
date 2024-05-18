@@ -72,7 +72,7 @@ export default function Practice() {
 
                 {context?.code && (
                     <>
-                        <h3 className="mt-6 text-xl font-extralight text-left border-b pb-2">Code example</h3>
+                        <h3 className="mt-6 text-xl font-extralight text-left border-b dark:border-b-gray-800 pb-2 dark:text-white">Code example</h3>
                         <pre className="border p-2 rounded mt-4">
                             <code className="text-black dark:text-white">
                                 {context?.code}
