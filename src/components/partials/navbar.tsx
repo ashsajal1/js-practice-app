@@ -65,7 +65,7 @@ export default function Navbar() {
                                 Play Quiz
                             </Button>
                         </Link>
-                        <Link className="" to='/quiz'>
+                        <Link to='/interview'>
                         <Button className="flex items-center gap-1" variant="outline">
                         <CiBeaker1 className="h-5 w-5" />
                         Start Interview
