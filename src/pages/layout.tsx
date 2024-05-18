@@ -5,13 +5,17 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import GotoTop from "../components/ui/go-to-top";
 
 export default function Layout() {
+
     useEffect(() => {
         AOS.init({
             once: true,
         });
     }, [])
+
+
     return (
         <>
             <Navbar />
@@ -20,6 +24,7 @@ export default function Layout() {
                     <Outlet />
                 </AnimatePresence>
             </main>
+            <GotoTop />
             <Footer />
         </>
     )
