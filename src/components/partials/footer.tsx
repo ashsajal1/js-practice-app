@@ -13,13 +13,13 @@ export default function Footer() {
       }}
       className="flex flex-col gap-6 items-start justify-between p-4 border-t dark:bg-black dark:text-white dark:border-gray-700 w-full">
 
-      <div>
-        <h3 className="font-extrabold g-text">About</h3>
-        <p>The project is built as a side project by Ashfiquzzaman Sajal. It is open source and you can contrubute by adding new questions or enhance the UI design.</p>
-      </div>
-
       <div className="flex w-full justify-between flex-col md:flex-row gap-6">
-        <div>
+        <div className="md:w-1/3 w-3/4">
+          <h3 className="font-extrabold g-text">About</h3>
+          <p className="">The project is built as a side project by Ashfiquzzaman Sajal. It is open source and you can contrubute by adding new questions or enhance the UI design.</p>
+        </div>
+
+        <div className="w-1/3">
           <h3 className="font-extrabold g-text">Follow us</h3>
           <ul>
             <li><a target="blink" className="flex items-center gap-1" href="https://www.linkedin.com/in/ashsajal/"><CiLinkedin /> Linkedin</a></li>
