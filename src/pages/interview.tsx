@@ -26,7 +26,7 @@ export default function Interview() {
 
     return (
         <div className="p-4">
-            <div className="mb-4">
+            <div className="mb-4 flex flex-col gap-2">
                 {messages.map((message, index) => (
                     <div key={index} className={`flex ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
                         <Message text={message.text} />
