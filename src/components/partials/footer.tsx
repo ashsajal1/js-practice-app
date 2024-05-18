@@ -1,8 +1,17 @@
 import { CiLinkedin, CiTwitter } from "react-icons/ci";
 import { LiaGithub } from "react-icons/lia";
+import { motion } from 'framer-motion'
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-start justify-between p-4 border-t dark:bg-black dark:text-white dark:border-gray-700 w-full">
+    <motion.footer
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      transition={{
+        type:'spring',
+        duration: 0.5,
+        delay: 0
+      }}
+      className="flex flex-col items-start justify-between p-4 border-t dark:bg-black dark:text-white dark:border-gray-700 w-full">
 
       <div className="flex w-full justify-between flex-col md:flex-row gap-6">
         <div>
@@ -34,6 +43,6 @@ export default function Footer() {
       </div>
 
       <p className="text-center w-full mt-6">All rights reserved &copy; {new Date().getFullYear()}</p>
-    </footer>
+    </motion.footer>
   )
 }
