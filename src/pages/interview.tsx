@@ -29,7 +29,11 @@ export default function Interview() {
             <div className="mb-4 flex flex-col gap-2">
                 {messages.map((message, index) => (
                     <div key={index} className={`flex ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
-                        <Message text={message.text} />
+                        <div className='flex gap-2'>
+                            {message.user === 'Robot' &&<div className='flex items-center justify-center w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
+                            <Message text={message.text} />
+                            {message.user === 'User' &&<div className='w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
+                        </div>
                     </div>
                 ))}
             </div>
