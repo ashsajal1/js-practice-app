@@ -4,11 +4,15 @@ import { QuizProps } from "../../lib/qna";
 import Timer from "./timer";
 import { cn } from "../../lib/cn";
 
+// define submissionTimeout variable to hold the timeout ID
+let submissionTimeout: ReturnType<typeof setTimeout>;
+
 export default function QuizCard({ quiz, question }: { quiz: QuizProps, question: string }) {
     const [selectedOption, setSelectedOption] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [isRightAnswer, setIsRightAnswer] = useState(false)
     const navigate = useNavigate();
+
     const handleConfirm = () => {
         clearTimeout(submissionTimeout); // clear the previous timeout
         navigate('/result', {
@@ -16,14 +20,13 @@ export default function QuizCard({ quiz, question }: { quiz: QuizProps, question
         });
     };
 
-    // define submissionTimeout variable to hold the timeout ID
-    let submissionTimeout: ReturnType<typeof setTimeout>;
-
     const handleQuizSubmit = () => {
         if (selectedOption === quiz.answer) {
             setIsRightAnswer(true);
         }
         setHasSubmitted(true);
+        // clear any existing timeout before setting a new one
+        clearTimeout(submissionTimeout);
         submissionTimeout = setTimeout(() => {
             navigate('/result', {
                 state: { question: question }
