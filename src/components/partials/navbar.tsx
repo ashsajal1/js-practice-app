@@ -40,7 +40,14 @@ export default function Navbar() {
     const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-60 backdrop-blur-sm' : ''
 
     return (
-        <nav className={`flex flex-col items-center justify-between z-10 border-b dark:border-gray-800 p-4 min-h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
+        <motion.nav
+        initial={{y:-100}}
+        animate={{y:0}}
+        transition={{
+            duration: 0.1
+        }}
+         
+         className={`flex flex-col items-center justify-between z-10 border-b dark:border-gray-800 p-4 min-h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
             <div className="flex w-full items-center justify-between">
                 <Link to={'/'} className="g-text font-extrabold text-2xl select-none">JS Practice</Link>
                 <div className="flex items-center justify-between gap-2">
@@ -73,6 +80,6 @@ export default function Navbar() {
                 <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Play Quiz</Link>
                 <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Add Quiz</Link>
             </motion.div>
-        </nav>
+        </motion.nav>
     )
 }
