@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
+import Button from "../ui/button";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -37,7 +38,7 @@ export default function Navbar() {
     }, []);
 
 
-    const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-60 backdrop-blur-sm' : ''
+    const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm' : ''
 
     return (
         <motion.nav
@@ -78,9 +79,11 @@ export default function Navbar() {
                         duration: 0.2,
                         type: 'tween'
                     }}
-                    className={`flex items-center flex-col gap-2 w-full mt-6 md:hidden`}>
+                    className={`flex items-center gap-2 w-full mt-6 md:hidden`}>
                     <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Play Quiz</Link>
-                    <Link onClick={() => setIsShowMenu(!isShowMenu)} className="btn w-full" to='/quiz'>Add Quiz</Link>
+                    <Link className="w-full" onClick={() => setIsShowMenu(!isShowMenu)} to='/quiz'>
+                        <Button className="w-full" variant="solid">Add Quiz</Button>
+                    </Link>
                 </motion.div>}
             </AnimatePresence>
 
