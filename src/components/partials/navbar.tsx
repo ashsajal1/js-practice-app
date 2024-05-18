@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/re
 import { AnimatePresence, motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
+import { CiTrophy } from "react-icons/ci";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -58,8 +59,12 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-2">
-                        <a href="https://github.com/ashsajal1/js-practice-app/" target="_blink" className="btn">Add Question</a>
-                        <Link to='/quiz' className="btn">Play Quiz</Link>
+                        <Link to='/quiz'>
+                            <Button className="flex items-center gap-1">
+                                <CiTrophy className="h-5 w-5" />
+                                Play Quiz
+                            </Button>
+                        </Link>
                     </div>
 
                     <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu ? 'hidden' : ''}`} />
