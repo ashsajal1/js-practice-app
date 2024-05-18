@@ -8,7 +8,7 @@ export default function Message({ text }: { text: string }) {
         let currentIndex = 0;
         const intervalId = setInterval(() => {
             if (currentIndex < text.length) {
-                setDisplayedQuestion(prev => prev + text[currentIndex]);
+                setDisplayedQuestion(prev => prev + text.charAt(currentIndex));
                 currentIndex++;
             } else {
                 clearInterval(intervalId);
