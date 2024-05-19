@@ -1,28 +1,24 @@
 import { useState } from 'react';
 import Message from '../components/ui/message';
+import { quizQuestions } from '../lib/quiz'
+
+type MessageType = {
+    user: string;
+    text: string;
+    options?: string[];
+    answered?: boolean;
+    code?: string;
+};
 
 export default function Interview() {
-    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[], answered?: boolean }[]>([]);
+    const [messages, setMessages] = useState<MessageType[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
-
-    const quizQuestions = [
-        {
-            text: "What is the capital of France?",
-            options: ["Berlin", "Madrid", "Paris", "Lisbon"],
-            correctOption: 2
-        },
-        {
-            text: "What is 2 + 2?",
-            options: ["3", "4", "5", "6"],
-            correctOption: 1
-        }
-    ];
 
     const startQuiz = () => {
         if (quizQuestions.length > 0) {
             const firstQuestion = quizQuestions[0];
-            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options, answered: false }]);
+            setMessages([{ user: 'Robot', text: firstQuestion.question, options: firstQuestion.options, answered: false, code: firstQuestion.code }]);
             setCurrentQuestionIndex(0);
             setScore(0);
         }
@@ -30,8 +26,9 @@ export default function Interview() {
 
     const handleOptionSelect = (index: number) => {
         const currentQuestion = quizQuestions[currentQuestionIndex];
-        const isCorrect = index === currentQuestion.correctOption;
-        const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.options[currentQuestion.correctOption]}"`;
+        const selectedOption = currentQuestion.options ? currentQuestion.options[index] : "";
+        const isCorrect = selectedOption === currentQuestion.answer;
+        const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.answer}"`;
         const newScore = isCorrect ? score + 1 : score;
         const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
 
@@ -41,7 +38,7 @@ export default function Interview() {
 
         const newMessages = [
             ...updatedMessages,
-            { user: 'User', text: `Option ${index + 1}: ${currentQuestion.options[index]}` },
+            { user: 'User', text: `Option ${index + 1}: ${selectedOption}` },
             { user: 'Robot', text: feedback }
         ];
 
@@ -49,7 +46,7 @@ export default function Interview() {
             newMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
         } else {
             const nextQuestion = quizQuestions[currentQuestionIndex + 1];
-            newMessages.push({ user: 'Robot', text: nextQuestion.text, options: nextQuestion.options, answered: false });
+            newMessages.push({ user: 'Robot', text: nextQuestion.question, options: nextQuestion.options, answered: false, code: nextQuestion.code });
         }
 
         setMessages(newMessages);
@@ -68,6 +65,7 @@ export default function Interview() {
                             )}
                             <div className="w-full">
                                 <Message text={message.text} />
+                                {message.code && <pre className="bg-gray-200 p-2 mt-2">{message.code}</pre>}
                                 {message.options && !message.answered && (
                                     <div className="flex gap-2 flex-wrap">
                                         {message.options.map((option, optionIndex) => (
