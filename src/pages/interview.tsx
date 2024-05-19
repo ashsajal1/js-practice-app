@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Message from '../components/ui/message';
 import { quizQuestions } from '../lib/quiz'
 import { AnimatePresence, motion } from "framer-motion"
@@ -17,6 +17,13 @@ export default function Interview() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [isBotWriting, setIsBotWriting] = useState(false);
+    const lastMessageRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (lastMessageRef.current) {
+            lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [messages]);
 
     const startQuiz = () => {
         if (quizQuestions.length > 0) {
@@ -77,8 +84,8 @@ export default function Interview() {
                             {message.user === 'Robot' && (
                                 <img className='[40px] h-[40px] rounded-full contain-content' src="/image/interviewer.jpg" alt="interviewer" />
                             )}
-                            <div className="w-full">
-                                <Message className={`${message.user === 'Robot'?'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none':'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none'}`} text={message.text} />
+                            <div ref={lastMessageRef} className="w-full">
+                                <Message className={`${message.user === 'Robot' ? 'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none' : 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none'}`} text={message.text} />
                                 {message.code && <pre className="bg-gray-200 text-wrap p-2 mt-2">{message.code}</pre>}
 
                                 <AnimatePresence>
