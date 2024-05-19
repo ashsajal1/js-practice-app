@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Message from '../components/ui/message';
 import { quizQuestions } from '../lib/quiz'
+import { AnimatePresence, motion } from "framer-motion"
 
 type MessageType = {
     user: string;
@@ -78,19 +79,29 @@ export default function Interview() {
                             <div className="w-full">
                                 <Message text={message.text} />
                                 {message.code && <pre className="bg-gray-200 p-2 mt-2">{message.code}</pre>}
-                                {message.options && !message.answered && (
-                                    <div className="flex gap-2 flex-wrap">
-                                        {message.options.map((option, optionIndex) => (
-                                            <button
-                                                key={optionIndex}
-                                                className="border p-2 mt-2"
-                                                onClick={() => handleOptionSelect(optionIndex)}
-                                            >
-                                                {option}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+
+                                <AnimatePresence>
+                                    {message.options && !message.answered && (
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            transition={{
+                                                duration: 0.3
+                                            }}
+                                            className="flex gap-2 flex-wrap"
+                                        >
+                                            {message.options.map((option, optionIndex) => (
+                                                <button
+                                                    key={optionIndex}
+                                                    className="border p-2 mt-2"
+                                                    onClick={() => handleOptionSelect(optionIndex)}
+                                                >
+                                                    {option}
+                                                </button>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                             {message.user === 'User' && (
                                 <img className='[40px] h-[40px] rounded-full' src="/image/user.jpg" alt="interviewer" />
