@@ -60,22 +60,27 @@ export default function Interview() {
                     <div key={index} className={`flex flex-col w-full ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
                         <div className='flex gap-2 w-3/4'>
                             {message.user === 'Robot' && <div className='flex items-center justify-center w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
-                            <Message text={message.text} />
+
+                            <div className='w-full'>
+                                <Message text={message.text} />
+                                {message.options && (
+                                    <div className="flex gap-2 flex-wrap">
+                                        {message.options.map((option, optionIndex) => (
+                                            <button
+                                                key={optionIndex}
+                                                className="border p-2 mt-2"
+                                                onClick={() => handleOptionSelect(optionIndex)}
+                                            >
+                                                {option}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
                             {message.user === 'User' && <div className='w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
                         </div>
-                        {message.options && (
-                            <div className="flex gap-2">
-                                {message.options.map((option, optionIndex) => (
-                                    <button
-                                        key={optionIndex}
-                                        className="border p-2 mt-2"
-                                        onClick={() => handleOptionSelect(optionIndex)}
-                                    >
-                                        {option}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+
                     </div>
                 ))}
             </div>
