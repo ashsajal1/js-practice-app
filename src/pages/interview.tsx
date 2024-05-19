@@ -112,8 +112,8 @@ export default function Interview() {
                     </div>
                 ))}
             </div>
-            <div className="flex">
-                {messages.length === 0 && <button className="border p-2 ml-2" onClick={startQuiz}>Start Quiz</button>}
+            <div className="flex items-center justify-center w-full">
+                {messages.length === 0 && <button className="border p-2 ml-2" onClick={startQuiz}>Start Interview</button>}
             </div>
         </div>
     );
