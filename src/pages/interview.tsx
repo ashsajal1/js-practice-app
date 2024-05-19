@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Message from '../components/ui/message';
 
 export default function Interview() {
-    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[]; correctOption?: number }[]>([]);
-    const [currentQuestion, setCurrentQuestion] = useState<{ text: string; options: string[]; correctOption: number } | null>(null);
+    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[] }[]>([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [score, setScore] = useState(0);
 
-    // Initial quiz questions (can be fetched from an API or defined elsewhere)
     const quizQuestions = [
         {
             text: "What is the capital of France?",
@@ -22,43 +22,35 @@ export default function Interview() {
     const startQuiz = () => {
         if (quizQuestions.length > 0) {
             const firstQuestion = quizQuestions[0];
-            setCurrentQuestion(firstQuestion);
-            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options, correctOption: firstQuestion.correctOption }]);
+            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options }]);
+            setCurrentQuestionIndex(0);
+            setScore(0);
         }
     };
 
     const handleOptionSelect = (index: number) => {
-        if (currentQuestion) {
-            const isCorrect = index === currentQuestion.correctOption;
-            const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.options[currentQuestion.correctOption]}"`;
-            const newMessages = [
-                ...messages,
-                { user: 'User', text: `Option ${index + 1}: ${currentQuestion.options[index]}` },
-                { user: 'Robot', text: feedback }
-            ];
-            setMessages(newMessages);
+        const currentQuestion = quizQuestions[currentQuestionIndex];
+        const isCorrect = index === currentQuestion.correctOption;
+        const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.options[currentQuestion.correctOption]}"`;
+        const newScore = isCorrect ? score + 1 : score;
+        const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
 
-            // Move to the next question
-            const nextQuestionIndex = quizQuestions.indexOf(currentQuestion) + 1;
-            if (nextQuestionIndex < quizQuestions.length) {
-                const nextQuestion = quizQuestions[nextQuestionIndex];
-                setTimeout(() => {
-                    setMessages(prevMessages => [
-                        ...prevMessages,
-                        { user: 'Robot', text: nextQuestion.text, options: nextQuestion.options, correctOption: nextQuestion.correctOption }
-                    ]);
-                    setCurrentQuestion(nextQuestion);
-                }, 1000);
-            } else {
-                setTimeout(() => {
-                    setMessages(prevMessages => [
-                        ...prevMessages,
-                        { user: 'Robot', text: "Quiz finished!" }
-                    ]);
-                    setCurrentQuestion(null);
-                }, 1000);
-            }
+        const newMessages = [
+            ...messages,
+            { user: 'User', text: `Option ${index + 1}: ${currentQuestion.options[index]}` },
+            { user: 'Robot', text: feedback }
+        ];
+
+        if (isLastQuestion) {
+            newMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
+        } else {
+            const nextQuestion = quizQuestions[currentQuestionIndex + 1];
+            newMessages.push({ user: 'Robot', text: nextQuestion.text, options: nextQuestion.options });
         }
+
+        setMessages(newMessages);
+        setScore(newScore);
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
     };
 
     return (
@@ -88,7 +80,7 @@ export default function Interview() {
                 ))}
             </div>
             <div className="flex">
-                {!currentQuestion && <button className="border p-2 ml-2" onClick={startQuiz}>Start Quiz</button>}
+                {messages.length === 0 && <button className="border p-2 ml-2" onClick={startQuiz}>Start Quiz</button>}
             </div>
         </div>
     );
