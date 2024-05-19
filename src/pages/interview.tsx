@@ -79,7 +79,7 @@ export default function Interview() {
                             )}
                             <div className="w-full">
                                 <Message className={`${message.user === 'Robot'?'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none':'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none'}`} text={message.text} />
-                                {message.code && <pre className="bg-gray-200 p-2 mt-2">{message.code}</pre>}
+                                {message.code && <pre className="bg-gray-200 text-wrap p-2 mt-2">{message.code}</pre>}
 
                                 <AnimatePresence>
                                     {message.options && !message.answered && (
