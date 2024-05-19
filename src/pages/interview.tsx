@@ -73,7 +73,7 @@ export default function Interview() {
             <div className="mb-4 flex flex-col gap-2 w-full">
                 {messages.map((message, index) => (
                     <div key={index} className={`flex w-full ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
-                        <div className={`flex gap-2 w-3/4 ${message.user === 'User' ? 'items-end' : 'items-start'}`}>
+                        <div className={`flex gap-2 w-full md:w-3/4 ${message.user === 'User' ? 'items-end' : 'items-start'}`}>
                             {message.user === 'Robot' && (
                                 <img className='[40px] h-[40px] rounded-full contain-content' src="/image/interviewer.jpg" alt="interviewer" />
                             )}
