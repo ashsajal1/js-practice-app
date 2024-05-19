@@ -2,26 +2,63 @@ import { useState } from 'react';
 import Message from '../components/ui/message';
 
 export default function Interview() {
-    const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
-    const [input, setInput] = useState('');
+    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[]; correctOption?: number }[]>([]);
+    const [currentQuestion, setCurrentQuestion] = useState<{ text: string; options: string[]; correctOption: number } | null>(null);
 
-    const handleSendMessage = () => {
-        if (input.trim()) {
-            const newMessages = [...messages, { user: 'User', text: input.trim() }];
-            setMessages(newMessages);
-            setInput('');
+    // Initial quiz questions (can be fetched from an API or defined elsewhere)
+    const quizQuestions = [
+        {
+            text: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+            correctOption: 2
+        },
+        {
+            text: "What is 2 + 2?",
+            options: ["3", "4", "5", "6"],
+            correctOption: 1
+        }
+    ];
 
-            // Simulate a robot response after a delay
-            setTimeout(() => {
-                const robotMessage = { user: 'Robot', text: generateRobotResponse(input.trim()) };
-                setMessages(prevMessages => [...prevMessages, robotMessage]);
-            }, 1000);
+    const startQuiz = () => {
+        if (quizQuestions.length > 0) {
+            const firstQuestion = quizQuestions[0];
+            setCurrentQuestion(firstQuestion);
+            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options, correctOption: firstQuestion.correctOption }]);
         }
     };
 
-    const generateRobotResponse = (userMessage: string) => {
-        // Simple example response
-        return `You said: "${userMessage}"`;
+    const handleOptionSelect = (index: number) => {
+        if (currentQuestion) {
+            const isCorrect = index === currentQuestion.correctOption;
+            const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.options[currentQuestion.correctOption]}"`;
+            const newMessages = [
+                ...messages,
+                { user: 'User', text: `Option ${index + 1}: ${currentQuestion.options[index]}` },
+                { user: 'Robot', text: feedback }
+            ];
+            setMessages(newMessages);
+
+            // Move to the next question
+            const nextQuestionIndex = quizQuestions.indexOf(currentQuestion) + 1;
+            if (nextQuestionIndex < quizQuestions.length) {
+                const nextQuestion = quizQuestions[nextQuestionIndex];
+                setTimeout(() => {
+                    setMessages(prevMessages => [
+                        ...prevMessages,
+                        { user: 'Robot', text: nextQuestion.text, options: nextQuestion.options, correctOption: nextQuestion.correctOption }
+                    ]);
+                    setCurrentQuestion(nextQuestion);
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    setMessages(prevMessages => [
+                        ...prevMessages,
+                        { user: 'Robot', text: "Quiz finished!" }
+                    ]);
+                    setCurrentQuestion(null);
+                }, 1000);
+            }
+        }
     };
 
     return (
@@ -30,24 +67,28 @@ export default function Interview() {
                 {messages.map((message, index) => (
                     <div key={index} className={`flex w-full ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
                         <div className='flex gap-2 w-3/4'>
-                            {message.user === 'Robot' &&<div className='flex items-center justify-center w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
+                            {message.user === 'Robot' && <div className='flex items-center justify-center w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
                             <Message text={message.text} />
-                            {message.user === 'User' &&<div className='w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
+                            {message.user === 'User' && <div className='w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
                         </div>
+                        {message.options && (
+                            <div className="flex flex-col gap-2">
+                                {message.options.map((option, optionIndex) => (
+                                    <button
+                                        key={optionIndex}
+                                        className="border p-2 mt-2"
+                                        onClick={() => handleOptionSelect(optionIndex)}
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
             <div className="flex">
-                <input
-                    className="border p-2 flex-grow"
-                    type="text"
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    placeholder="Type a message"
-                />
-                <button className="border p-2 ml-2" onClick={handleSendMessage}>
-                    Send
-                </button>
+                {!currentQuestion && <button className="border p-2 ml-2" onClick={startQuiz}>Start Quiz</button>}
             </div>
         </div>
     );
