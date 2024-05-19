@@ -57,14 +57,14 @@ export default function Interview() {
         <div className="p-4 w-full">
             <div className="mb-4 flex flex-col gap-2 w-full">
                 {messages.map((message, index) => (
-                    <div key={index} className={`flex w-full ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
+                    <div key={index} className={`flex flex-col w-full ${message.user === 'User' ? 'justify-end' : 'justify-start'}`}>
                         <div className='flex gap-2 w-3/4'>
                             {message.user === 'Robot' && <div className='flex items-center justify-center w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
                             <Message text={message.text} />
                             {message.user === 'User' && <div className='w-[40px] h-[40px] p-1 bg-black rounded-full'></div>}
                         </div>
                         {message.options && (
-                            <div className="flex flex-col gap-2">
+                            <div className="flex gap-2">
                                 {message.options.map((option, optionIndex) => (
                                     <button
                                         key={optionIndex}
