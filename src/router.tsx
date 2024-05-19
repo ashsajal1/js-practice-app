@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Layout from './pages/layout'
 import Result from './pages/result'
 import Quiz from './pages/quiz'
+import Interview from './pages/interview'
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: '/result',
         element: <Result />
+      },
+      {
+        path: '/interview',
+        element: <Interview />
       },
       {
         path: '/quiz',
