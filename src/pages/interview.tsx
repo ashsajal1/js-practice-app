@@ -78,7 +78,7 @@ export default function Interview() {
                                 <img className='[40px] h-[40px] rounded-full contain-content' src="/image/interviewer.jpg" alt="interviewer" />
                             )}
                             <div className="w-full">
-                                <Message text={message.text} />
+                                <Message className={`${message.user === 'Robot'?'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none':'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none'}`} text={message.text} />
                                 {message.code && <pre className="bg-gray-200 p-2 mt-2">{message.code}</pre>}
 
                                 <AnimatePresence>
