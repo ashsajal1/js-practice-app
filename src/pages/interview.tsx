@@ -113,7 +113,7 @@ export default function Interview() {
                 ))}
             </div>
             <div className="flex items-center justify-center w-full">
-                {messages.length === 0 && <button className="border p-2 ml-2" onClick={startQuiz}>Start Interview</button>}
+                {messages.length === 0 && <Button className="p-2 ml-2" onClick={startQuiz}>Start Interview</Button>}
             </div>
         </div>
     );
