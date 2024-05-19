@@ -31,11 +31,11 @@ export default function GotoTop() {
         <>
             <AnimatePresence mode="wait">
                 {showTopBtn && <motion.div
-                    initial={{ scale: 0, x: -1000 }}
-                    animate={{ scale: 1, x: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     transition={{
                         duration: 1,
-                        type: "spring"
+                        type: "spring",
                     }}
                 >
                     <Button onClick={handleGoToTop} variant="solid" className="fixed bottom-12 right-12">
