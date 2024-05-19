@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Message from '../components/ui/message';
 
 export default function Interview() {
-    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[] }[]>([]);
+    const [messages, setMessages] = useState<{ user: string; text: string; options?: string[], answered?: boolean }[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
 
@@ -22,7 +22,7 @@ export default function Interview() {
     const startQuiz = () => {
         if (quizQuestions.length > 0) {
             const firstQuestion = quizQuestions[0];
-            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options }]);
+            setMessages([{ user: 'Robot', text: firstQuestion.text, options: firstQuestion.options, answered: false }]);
             setCurrentQuestionIndex(0);
             setScore(0);
         }
@@ -35,8 +35,12 @@ export default function Interview() {
         const newScore = isCorrect ? score + 1 : score;
         const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
 
+        const updatedMessages = messages.map((message, idx) => (
+            idx === messages.length - 1 ? { ...message, answered: true } : message
+        ));
+
         const newMessages = [
-            ...messages,
+            ...updatedMessages,
             { user: 'User', text: `Option ${index + 1}: ${currentQuestion.options[index]}` },
             { user: 'Robot', text: feedback }
         ];
@@ -45,7 +49,7 @@ export default function Interview() {
             newMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
         } else {
             const nextQuestion = quizQuestions[currentQuestionIndex + 1];
-            newMessages.push({ user: 'Robot', text: nextQuestion.text, options: nextQuestion.options });
+            newMessages.push({ user: 'Robot', text: nextQuestion.text, options: nextQuestion.options, answered: false });
         }
 
         setMessages(newMessages);
@@ -64,7 +68,7 @@ export default function Interview() {
                             )}
                             <div className="w-full">
                                 <Message text={message.text} />
-                                {message.options && (
+                                {message.options && !message.answered && (
                                     <div className="flex gap-2 flex-wrap">
                                         {message.options.map((option, optionIndex) => (
                                             <button
