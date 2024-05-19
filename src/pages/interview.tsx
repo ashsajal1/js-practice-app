@@ -14,6 +14,7 @@ export default function Interview() {
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
+    const [isBotWriting, setIsBotWriting] = useState(false);
 
     const startQuiz = () => {
         if (quizQuestions.length > 0) {
@@ -25,6 +26,8 @@ export default function Interview() {
     };
 
     const handleOptionSelect = (index: number) => {
+        if (isBotWriting) return;
+
         const currentQuestion = quizQuestions[currentQuestionIndex];
         const selectedOption = currentQuestion.options ? currentQuestion.options[index] : "";
         const isCorrect = selectedOption === currentQuestion.answer;
@@ -39,19 +42,28 @@ export default function Interview() {
         const newMessages = [
             ...updatedMessages,
             { user: 'User', text: `Option ${index + 1}: ${selectedOption}` },
-            { user: 'Robot', text: feedback }
         ];
 
-        if (isLastQuestion) {
-            newMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
-        } else {
-            const nextQuestion = quizQuestions[currentQuestionIndex + 1];
-            newMessages.push({ user: 'Robot', text: nextQuestion.question, options: nextQuestion.options, answered: false, code: nextQuestion.code });
-        }
-
         setMessages(newMessages);
-        setScore(newScore);
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setIsBotWriting(true);
+
+        setTimeout(() => {
+            const botMessages: MessageType[] = [
+                { user: 'Robot', text: feedback }
+            ];
+
+            if (isLastQuestion) {
+                botMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
+            } else {
+                const nextQuestion = quizQuestions[currentQuestionIndex + 1];
+                botMessages.push({ user: 'Robot', text: nextQuestion.question, options: nextQuestion.options, answered: false, code: nextQuestion.code });
+            }
+
+            setMessages([...newMessages, ...botMessages]);
+            setScore(newScore);
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setIsBotWriting(false);
+        }, 1000);
     };
 
     return (
