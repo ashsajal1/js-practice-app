@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Message from '../components/ui/message';
 import { quizQuestions } from '../lib/quiz'
 import { AnimatePresence, motion } from "framer-motion"
+import Button from '../components/ui/button';
 
 type MessageType = {
     user: string;
@@ -91,13 +92,14 @@ export default function Interview() {
                                             className="flex gap-2 flex-wrap"
                                         >
                                             {message.options.map((option, optionIndex) => (
-                                                <button
+                                                <Button
+                                                    variant='outline'
                                                     key={optionIndex}
                                                     className="border p-2 mt-2"
                                                     onClick={() => handleOptionSelect(optionIndex)}
                                                 >
                                                     {option}
-                                                </button>
+                                                </Button>
                                             ))}
                                         </motion.div>
                                     )}
