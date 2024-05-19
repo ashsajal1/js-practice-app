@@ -93,7 +93,7 @@ export default function Interview() {
                                 )}
                             </div>
                             {message.user === 'User' && (
-                                <div className="w-[40px] h-[40px] p-1 bg-black rounded-full"></div>
+                                <img className='[40px] h-[40px] rounded-full' src="/image/user.jpg" alt="interviewer" />
                             )}
                         </div>
                     </div>
