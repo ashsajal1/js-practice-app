@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Message from '../components/ui/message';
-import { quizQuestions } from '../lib/quiz'
+import { QuizQuestionType, quizQuestions } from '../lib/quiz'
 import { AnimatePresence, motion } from "framer-motion"
 import Button from '../components/ui/button';
+import { getRandomSort } from '../lib/random';
 
 type MessageType = {
     user: string;
@@ -14,10 +15,16 @@ type MessageType = {
 
 export default function Interview() {
     const [messages, setMessages] = useState<MessageType[]>([]);
+    const [questions, setQuestions] = useState<QuizQuestionType[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [isBotWriting, setIsBotWriting] = useState(false);
     const lastMessageRef = useRef<HTMLDivElement>(null);
+
+    console.log(questions)
+    useEffect(()=> {
+        setQuestions(quizQuestions.sort(getRandomSort).slice(0, 5))
+    }, [])
 
     useEffect(() => {
         if (lastMessageRef.current) {
@@ -26,8 +33,8 @@ export default function Interview() {
     }, [messages]);
 
     const startQuiz = () => {
-        if (quizQuestions.length > 0) {
-            const firstQuestion = quizQuestions[0];
+        if (questions.length > 0) {
+            const firstQuestion = questions[0];
             setMessages([{ user: 'Robot', text: firstQuestion.question, options: firstQuestion.options, answered: false, code: firstQuestion.code }]);
             setCurrentQuestionIndex(0);
             setScore(0);
@@ -37,12 +44,12 @@ export default function Interview() {
     const handleOptionSelect = (index: number) => {
         if (isBotWriting) return;
 
-        const currentQuestion = quizQuestions[currentQuestionIndex];
+        const currentQuestion = questions[currentQuestionIndex];
         const selectedOption = currentQuestion.options ? currentQuestion.options[index] : "";
         const isCorrect = selectedOption === currentQuestion.answer;
         const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.answer}"`;
         const newScore = isCorrect ? score + 1 : score;
-        const isLastQuestion = currentQuestionIndex === quizQuestions.length - 1;
+        const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
         const updatedMessages = messages.map((message, idx) => (
             idx === messages.length - 1 ? { ...message, answered: true } : message
@@ -62,9 +69,9 @@ export default function Interview() {
             ];
 
             if (isLastQuestion) {
-                botMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${quizQuestions.length}` });
+                botMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${questions.length}` });
             } else {
-                const nextQuestion = quizQuestions[currentQuestionIndex + 1];
+                const nextQuestion = questions[currentQuestionIndex + 1];
                 botMessages.push({ user: 'Robot', text: nextQuestion.question, options: nextQuestion.options, answered: false, code: nextQuestion.code });
             }
 
