@@ -14,8 +14,16 @@ export default function Quiz() {
     const [isRightAnswer, setIsRightAnswer] = useState(false);
     const [questions, setQuestions] = useState<QuizQuestionType[]>([]);
 
+    const shuffleArray = (array: string[]): string[] => {
+        return array.sort(() => Math.random() - 0.5);
+    };
+    
     useEffect(() => {
-        setQuestions(quizQuestions.sort(getRandomSort).slice(0, 5));
+        const shuffledQuestions = quizQuestions.sort(getRandomSort).slice(0, 5).map(question => ({
+            ...question,
+            options: shuffleArray([...question.options ?? []])
+        }));
+        setQuestions(shuffledQuestions);
     }, []);
 
     useEffect(() => {
