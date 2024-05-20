@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="flex w-full justify-between flex-col md:flex-row gap-6">
         <div className="md:w-1/3 w-3/4">
           <h3 className="font-extrabold g-text">About</h3>
-          <p className="">The project is built as a side project by Ashfiquzzaman Sajal. It is open source and you can contrubute by adding new questions or enhance the UI design.</p>
+          <p className="">The project was developed as a side endeavor by Ashfiquzzaman Sajal. It is open-source, allowing for contributions such as the addition of new questions or enhancements to the user interface design.</p>
         </div>
 
         <div className="w-1/3">
