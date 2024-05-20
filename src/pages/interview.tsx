@@ -21,7 +21,7 @@ export default function Interview() {
     const [isBotWriting, setIsBotWriting] = useState(false);
     const lastMessageRef = useRef<HTMLDivElement>(null);
 
-    console.log(questions)
+    // console.log(questions)
     useEffect(()=> {
         setQuestions(quizQuestions.sort(getRandomSort).slice(0, 5))
     }, [])

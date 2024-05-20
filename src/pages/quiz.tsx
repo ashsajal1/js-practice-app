@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { QuizQuestionType, quizQuestions } from '../lib/quiz';
 import { cn } from '../lib/cn';
 import AnimatedPage from '../components/ui/animated-page';
+import { getRandomSort } from '../lib/random';
 
 export default function Quiz() {
     const [currentQuestinIndex, setCurrentQuestinIndex] = useState(0);
@@ -12,6 +13,11 @@ export default function Quiz() {
     const [isCompletedCurrentQuiz, setIsCompletedCurrentQuiz] = useState(false)
     const [selectedOption, setSelectedOption] = useState('')
     const [isRightAnswer, setIsRightAnswer] = useState(false)
+    const [questions, setQuestions] = useState<QuizQuestionType[]>([]);
+
+    useEffect(() => {
+        setQuestions(quizQuestions.sort(getRandomSort).slice(0, 5))
+    }, [])
 
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
@@ -22,13 +28,13 @@ export default function Quiz() {
     }, [currentQuestinIndex]);
 
     useEffect(() => {
-        if (quizQuestions.length > currentQuestinIndex) {
-            setCurrentQuestion(quizQuestions[currentQuestinIndex])
+        if (questions.length > currentQuestinIndex) {
+            setCurrentQuestion(questions[currentQuestinIndex])
         } else {
             setCurrentQuestinIndex(0)
-            setCurrentQuestion(quizQuestions[0])
+            setCurrentQuestion(questions[0])
         }
-    }, [currentQuestinIndex]);
+    }, [currentQuestinIndex, questions]);
 
     if (isCompletedCurrentQuiz) {
         return <>
