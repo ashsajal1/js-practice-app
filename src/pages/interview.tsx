@@ -105,7 +105,7 @@ export default function Interview() {
                                             }}
                                             className="flex gap-2 flex-wrap"
                                         >
-                                            {message.options.map((option, optionIndex) => (
+                                            {message.options.sort(getRandomSort).map((option, optionIndex) => (
                                                 <Button
                                                     variant='outline'
                                                     key={optionIndex}
