@@ -19,7 +19,7 @@ export default function Quiz() {
     };
     
     useEffect(() => {
-        const shuffledQuestions = quizQuestions.sort(getRandomSort).slice(0, 5).map(question => ({
+        const shuffledQuestions = quizQuestions.sort(getRandomSort).map(question => ({
             ...question,
             options: shuffleArray([...question.options ?? []])
         }));
