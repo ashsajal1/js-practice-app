@@ -69,7 +69,7 @@ export default function Interview() {
             ];
 
             if (isLastQuestion) {
-                botMessages.push({ user: 'Robot', text: `Quiz finished! Your score: ${newScore}/${questions.length}` });
+                botMessages.push({ user: 'Robot', text: `Interview finished! Your score: ${newScore}/${questions.length}` });
             } else {
                 const nextQuestion = questions[currentQuestionIndex + 1];
                 botMessages.push({ user: 'Robot', text: nextQuestion.question, options: nextQuestion.options, answered: false, code: nextQuestion.code });
@@ -120,7 +120,7 @@ export default function Interview() {
                                 </AnimatePresence>
                             </div>
                             {message.user === 'User' && (
-                                <img className='[40px] h-[40px] rounded-full' src="/image/user.jpg" alt="interviewer" />
+                                <img className='[40px] h-[40px] rounded-full' src="/image/user.jpg" alt="user" />
                             )}
                         </div>
                     </div>
