@@ -1,12 +1,12 @@
 import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
-import { useTypedSelector } from "../features/useTypedSelector";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export default function Home() {
 
 
   const sortedQuestions = useTypedSelector((state) => state.topic.topics);
-  
+
   return (
     <AnimatedPage>
       <div className="p-4 flex flex-col items-center justify-center relative">
