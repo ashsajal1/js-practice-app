@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { qna, QnaTypes } from "../../../lib/qna";
-import { getRandomSort } from "../../../lib/random";
+import { QnaTypes, qna } from "../../lib/qna";
+import { getRandomSort } from "../../lib/random";
 
 interface TopicState {
   topics: QnaTypes[];
