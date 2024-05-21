@@ -3,7 +3,7 @@ import topicReducer from "./features/topic/topicSlice";
 
 const store = configureStore({
   reducer: {
-    todo: topicReducer,
+    topic: topicReducer,
   },
 });
 
