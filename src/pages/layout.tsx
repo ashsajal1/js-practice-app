@@ -4,8 +4,10 @@ import Footer from "../components/partials/footer";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import GotoTop from "../components/ui/go-to-top";
+import { getRandomTopics } from "../features/topic/topicSlice";
 
 export default function Layout() {
 
@@ -13,7 +15,14 @@ export default function Layout() {
         AOS.init({
             once: true,
         });
+
     }, [])
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getRandomTopics());
+    }, [dispatch]);
 
 
     return (

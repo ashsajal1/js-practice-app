@@ -1,16 +1,11 @@
-import { useState, useMemo } from "react";
 import QuestionCard from "../components/ui/question-card";
-import { QnaTypes, qna } from "../lib/qna";
-import { getRandomSort } from "../lib/random";
 import AnimatedPage from "../components/ui/animated-page";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export default function Home() {
-  const [sortedQuestions, setSortedQuestions] = useState<QnaTypes[]>([]);
 
-  useMemo(() => {
-    const sortedQna = qna.slice(0, 15).sort(getRandomSort);
-    setSortedQuestions(sortedQna);
-  }, []);
+
+  const sortedQuestions = useTypedSelector((state) => state.topic.topics);
 
   return (
     <AnimatedPage>
