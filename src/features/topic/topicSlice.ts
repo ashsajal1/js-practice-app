@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { QnaTypes, qna } from "../../lib/qna";
-import { getRandomSort } from "../../lib/random";
+import { QnaTypes } from "../../lib/qna";
+import { generateRandomTopics } from "../../lib/random";
 
 interface TopicState {
   topics: QnaTypes[];
@@ -24,8 +24,3 @@ const topicSlice = createSlice({
 export const { getRandomTopics } = topicSlice.actions;
 
 export default topicSlice.reducer;
-
-const generateRandomTopics = (): QnaTypes[] => {
-  const randomTopics = qna.slice().sort(getRandomSort);
-  return randomTopics;
-};
