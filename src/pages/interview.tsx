@@ -126,8 +126,8 @@ export default function Interview() {
                     </div>
                 ))}
             </div>
-            <div className="flex items-center justify-center w-full">
-                {messages.length === 0 && <Button className="p-2 ml-2" onClick={startQuiz}>Start Interview</Button>}
+            <div className="flex items-center justify-center w-full py-24">
+                {messages.length === 0 && <Button className="p-4 ml-2" onClick={startQuiz}>Start Interview</Button>}
             </div>
         </div>
     );
