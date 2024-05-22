@@ -1,3 +1,4 @@
+import { rustConcepts } from "./concepts/rust";
 import { QnaTypes, qna } from "./qna";
 
 export function getRandomSort() {
@@ -5,6 +6,6 @@ export function getRandomSort() {
 }
 
 export const generateRandomTopics = (): QnaTypes[] => {
-  const randomTopics = qna.slice().sort(getRandomSort);
+  const randomTopics = qna.concat(rustConcepts).slice().sort(getRandomSort);
   return randomTopics;
 };
