@@ -5,7 +5,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 export default function Concept() {
 
 
-  const sortedQuestions = useTypedSelector((state) => state.topic.topics);
+  const sortedQuestions = useTypedSelector((state) => state.topic.topics).slice(0, 15);
 
   return (
     <AnimatedPage>
