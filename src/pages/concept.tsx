@@ -2,6 +2,7 @@ import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useLocation, useNavigate } from 'react-router-dom';
+import TopicBadge from "../components/ui/topic-badge";
 
 export default function Concept() {
     const location = useLocation();
@@ -35,10 +36,10 @@ export default function Concept() {
                             <div className="text-center text-gray-500">No questions found for the topic "{topic}". Instead search by topic:</div>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <a href="/concept?topic=javascript" className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">JavaScript</a>
-                                <a href="/concept?topic=react" className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">React</a>
-                                <a href="/concept?topic=rust" className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">Rust</a>
-                                <a href="/concept?topic=golang" className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">Golang</a>
+                                <TopicBadge topic="javascript" />
+                                <TopicBadge topic="react" />
+                                <TopicBadge topic="rust" />
+                                <TopicBadge topic="golang" />
                             </div>
                         </div>
                     </>
