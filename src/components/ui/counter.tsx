@@ -24,7 +24,7 @@ const Counter = ({ value = 113, speed = 40, ...props }: CounterProps) => {
     }, [speed, value]);
 
     return (
-        <span className={cn(className)}>{count}</span>
+        <span className={cn(className)}>{count}+</span>
     );
 };
 
