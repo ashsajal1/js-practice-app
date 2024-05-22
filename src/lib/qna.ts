@@ -1,10 +1,11 @@
 export type QnaTypes = {
-  id: number;
+  id: number | string;
   question: string;
   answer: string;
   topic: string;
   quiz?: QuizProps | null;
   code?: string | null;
+  subTopic?: string;
 };
 
 export interface QuizProps {
