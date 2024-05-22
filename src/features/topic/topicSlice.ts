@@ -22,7 +22,7 @@ const topicSlice = createSlice({
     },
     getTopicById: (state, action: PayloadAction<string>) => {
       const topicId = action.payload;
-      const foundTopic = state.topics.find((topic) => topic.id === parseInt(topicId));
+      const foundTopic = state.topics.find((topic) => topic.id.toString() === topicId.toString());
       state.currentTopic = foundTopic || null;
     },
   },
