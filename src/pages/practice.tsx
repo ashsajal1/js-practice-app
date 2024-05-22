@@ -29,7 +29,7 @@ export default function Practice() {
   useEffect(() => {
     document.querySelectorAll("pre code").forEach((block) => {
       if (block instanceof HTMLElement) {
-        hljs.highlightBlock(block);
+        hljs.highlightElement(block);
       }
     });
   }, [isLoading]);
