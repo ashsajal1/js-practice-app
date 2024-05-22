@@ -22,6 +22,14 @@ export default function Practice() {
   const { currentTopic } = useTypedSelector((state) => state.topic);
 
   useEffect(() => {
+    document.querySelectorAll("pre code").forEach((block) => {
+      if (block instanceof HTMLElement) {
+        hljs.highlightBlock(block);
+      }
+    });
+  }, [currentTopic?.code]);
+
+  useEffect(() => {
     const fetchTopic = async () => {
       try {
         await dispatch(getTopicById(questionId || ""));
@@ -39,14 +47,6 @@ export default function Practice() {
     };
     fetchTopic();
   }, [dispatch, questionId]);
-
-  useEffect(() => {
-    document.querySelectorAll("pre code").forEach((block) => {
-      if (block instanceof HTMLElement) {
-        hljs.highlightBlock(block);
-      }
-    });
-  }, [currentTopic?.code]);
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setChar(e.target.value);
@@ -114,7 +114,7 @@ export default function Practice() {
               Code example
             </h3>
             <pre className="border p-2 rounded mt-4">
-              <code className="text-black dark:text-white">{currentTopic.code}</code>
+              <code className="text-black text-wrap dark:text-white">{currentTopic.code}</code>
             </pre>
           </>
         )}
