@@ -22,7 +22,7 @@ const conceptSlice = createSlice({
     },
     getConceptById: (state, action: PayloadAction<string>) => {
       const conceptId = action.payload;
-      const foundConcept = state.concepts.find((concept) => concept.id.toString() === conceptId.toString());
+      const foundConcept = generateRandomConcepts().find((concept) => concept.id.toString() === conceptId.toString());
       state.currentConcept = foundConcept || null;
     },
   },
