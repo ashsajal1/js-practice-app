@@ -44,7 +44,7 @@ export default function Home() {
 
         <div className="flex items-center">
           <div className="flex flex-col gap-2 justify-center items-center">
-            <Counter className="" value={129} />
+            <Counter className="text-blue-700" value={129} />
             <span className="font-bold">Topics to Practice</span>
           </div>
         </div>

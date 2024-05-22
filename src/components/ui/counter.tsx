@@ -1,12 +1,14 @@
 import { useState, useEffect, HTMLAttributes } from 'react';
+import { cn } from '../../lib/cn';
 
 interface CounterProps extends HTMLAttributes<HTMLSpanElement> {
     value?: number,
-    speed?: number
+    speed?: number,
 }
 
-const Counter = ({ value = 113, speed = 40 }: CounterProps) => {
+const Counter = ({ value = 113, speed = 40, ...props }: CounterProps) => {
     const [count, setCount] = useState(1);
+    const {className} = props
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -22,7 +24,7 @@ const Counter = ({ value = 113, speed = 40 }: CounterProps) => {
     }, [speed, value]);
 
     return (
-        <span>{count}</span>
+        <span className={cn(className)}>{count}</span>
     );
 };
 
