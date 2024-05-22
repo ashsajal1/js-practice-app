@@ -32,7 +32,7 @@ export default function Home() {
           <Button>
             <CiSearch className="h-4 w-4" />
           </Button>
-          
+
         </form>
 
         <div className="flex gap-2 items-center">
@@ -42,8 +42,11 @@ export default function Home() {
           <TopicBadge topic="golang" />
         </div>
 
-        <div>
-            <Counter value={129} />
+        <div className="flex items-center">
+          <div className="flex flex-col gap-2 justify-center items-center">
+            <Counter className="" value={129} />
+            <span className="font-bold">Topics to Practice</span>
+          </div>
         </div>
       </section>
 
