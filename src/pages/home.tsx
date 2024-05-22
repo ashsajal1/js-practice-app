@@ -6,6 +6,7 @@ import Button from "../components/ui/button";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopicBadge from "../components/ui/topic-badge";
+import Counter from "../components/ui/counter";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
@@ -31,6 +32,7 @@ export default function Home() {
           <Button>
             <CiSearch className="h-4 w-4" />
           </Button>
+          
         </form>
 
         <div className="flex gap-2 items-center">
