@@ -22,7 +22,7 @@ export default function Practice() {
 
   const searchParams = new URLSearchParams(location.search);
   const conceptId = searchParams.get('id') || '';
-  console.log(searchParams, conceptId)
+  // console.log(searchParams, conceptId)
 
   const { currentTopic } = useTypedSelector((state) => state.topic);
 
