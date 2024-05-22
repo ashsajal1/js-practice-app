@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/partials/navbar";
 import Footer from "../components/partials/footer";
 import AOS from 'aos';
@@ -10,12 +10,13 @@ import GotoTop from "../components/ui/go-to-top";
 import { getRandomTopics } from "../features/topic/topicSlice";
 
 export default function Layout() {
+    const location = useLocation();
+    // console.log(location)
 
     useEffect(() => {
         AOS.init({
             once: true,
         });
-
     }, [])
 
     const dispatch = useDispatch();
@@ -23,7 +24,6 @@ export default function Layout() {
     useEffect(() => {
         dispatch(getRandomTopics());
     }, [dispatch]);
-
 
     return (
         <>
@@ -34,7 +34,7 @@ export default function Layout() {
                 </AnimatePresence>
             </main>
             <GotoTop />
-            <Footer />
+            {location.pathname !== '/interview' && <Footer />}
         </>
     )
 }
