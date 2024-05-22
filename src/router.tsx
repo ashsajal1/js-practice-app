@@ -6,6 +6,7 @@ import Layout from './pages/layout'
 import Result from './pages/result'
 import Quiz from './pages/quiz'
 import Interview from './pages/interview'
+import Concept from './pages/concept'
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/concept',
+        element: <Concept />
       },
       {
         path: '/result',
