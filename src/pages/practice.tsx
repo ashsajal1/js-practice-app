@@ -13,6 +13,8 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 export default function Practice() {
   const [char, setChar] = useState("");
   const [showQuiz, setShowQuiz] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<null | string>(null);
   const { questionId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,7 +22,22 @@ export default function Practice() {
   const { currentTopic } = useTypedSelector((state) => state.topic);
 
   useEffect(() => {
-    dispatch(getTopicById(questionId || ""));
+    const fetchTopic = async () => {
+      try {
+        await dispatch(getTopicById(questionId || ""));
+        setIsLoading(false);
+      } catch (err) {
+        if (typeof err === 'string') {
+            setError(err);
+          } else if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError('An unknown error occurred');
+          }
+          setIsLoading(false);
+      }
+    };
+    fetchTopic();
   }, [dispatch, questionId]);
 
   useEffect(() => {
@@ -45,6 +62,14 @@ export default function Practice() {
       });
     }
   };
+
+  if (isLoading) {
+    return <>Loading</>;
+  }
+
+  if (error) {
+    return <>Error</>;
+  }
 
   if (!currentTopic) {
     return <NotFoundCard content="Question" />;
