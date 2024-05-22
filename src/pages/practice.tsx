@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { renderAnswer } from "../lib/renderAnswer";
 import NotFoundCard from "../components/ui/not-found-card";
 import QuizCard from "../components/ui/quiz-card";
@@ -9,15 +9,20 @@ import AnimatedPage from "../components/ui/animated-page";
 import { useDispatch } from "react-redux";
 import { getTopicById } from "../features/topic/topicSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useLocation } from 'react-router-dom';
 
 export default function Practice() {
   const [char, setChar] = useState("");
   const [showQuiz, setShowQuiz] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
-  const { questionId } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const searchParams = new URLSearchParams(location.search);
+  const conceptId = searchParams.get('id') || '';
+  console.log(searchParams, conceptId)
 
   const { currentTopic } = useTypedSelector((state) => state.topic);
 
@@ -32,21 +37,22 @@ export default function Practice() {
   useEffect(() => {
     const fetchTopic = async () => {
       try {
-        await dispatch(getTopicById(questionId || ""));
+
+        await dispatch(getTopicById(conceptId));
         setIsLoading(false);
       } catch (err) {
         if (typeof err === 'string') {
-            setError(err);
-          } else if (err instanceof Error) {
-            setError(err.message);
-          } else {
-            setError('An unknown error occurred');
-          }
-          setIsLoading(false);
+          setError(err);
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+        setIsLoading(false);
       }
     };
     fetchTopic();
-  }, [dispatch, questionId]);
+  }, [dispatch, conceptId]);
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setChar(e.target.value);

@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
         element: <Quiz />
       },
       {
-        path: '/practice/q/:questionId',
+        path: '/practice',
         element: <Practice />
       },
       {
