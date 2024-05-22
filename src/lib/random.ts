@@ -1,4 +1,5 @@
 import { golangConcepts } from "./concepts/golang";
+import { reactConcepts } from "./concepts/react";
 import { rustConcepts } from "./concepts/rust";
 import { QnaTypes, qna } from "./qna";
 
@@ -8,7 +9,7 @@ export function getRandomSort() {
 
 export const generateRandomConcepts = (): QnaTypes[] => {
   const randomTopics = qna
-    .concat(rustConcepts, golangConcepts)
+    .concat(rustConcepts, golangConcepts, reactConcepts)
     .slice()
     .sort(getRandomSort);
   return randomTopics;
