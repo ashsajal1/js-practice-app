@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QnaTypes } from "../../lib/qna";
 import { generateRandomTopics } from "../../lib/random";
 
-interface TopicState {
+export interface TopicState {
   topics: QnaTypes[];
   currentTopic: QnaTypes | null;
 }
