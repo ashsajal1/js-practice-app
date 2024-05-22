@@ -19,7 +19,7 @@ const Counter = ({ value = 113, speed = 40 }: CounterProps) => {
         }, speed);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [speed, value]);
 
     return (
         <span>{count}</span>
