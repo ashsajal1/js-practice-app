@@ -12,7 +12,7 @@ export default function Concept() {
     const topic = searchParams.get('topic') || 'all';
 
     const questions = useTypedSelector((state) => state.topic.topics);
-    const filteredQuestions = topic === 'all' ? questions : questions.filter((question) => question.topic.includes(topic));
+    const filteredQuestions = topic === 'all' ? questions : questions.filter((question) => question.topic.toLowerCase().includes(topic.toLowerCase()));
     const totalQuestions = filteredQuestions.length;
     const questionsPerPage = 15;
     const totalPages = Math.ceil(totalQuestions / questionsPerPage);
