@@ -110,7 +110,7 @@ export default function Practice() {
 
         <div className={`${showQuiz ? "" : "hidden"}`}>
           {currentConcept.quiz && (
-            <QuizCard question={currentConcept.question} quiz={currentConcept.quiz} />
+            <QuizCard uniqueKey={currentConcept.id} question={currentConcept.question} quiz={currentConcept.quiz} />
           )}
         </div>
 
