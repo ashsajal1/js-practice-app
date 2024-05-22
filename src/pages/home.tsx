@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import Button from "../components/ui/button";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TopicBadge from "../components/ui/topic-badge";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
@@ -18,7 +19,7 @@ export default function Home() {
 
   return (
     <AnimatedPage>
-      <section className="p-12 flex items-center justify-center">
+      <section className="p-12 flex flex-col gap-6 items-center justify-center">
         <form onSubmit={handleSearch} className="border dark:border-gray-700 flex items-center justify-between rounded px-2 w-1/2 md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
           <input
             onChange={(e) => setTopic(e.target.value)}
@@ -31,6 +32,13 @@ export default function Home() {
             <CiSearch className="h-4 w-4" />
           </Button>
         </form>
+
+        <div className="flex gap-2 items-center">
+          <TopicBadge topic="javascript" />
+          <TopicBadge topic="react" />
+          <TopicBadge topic="rust" />
+          <TopicBadge topic="golang" />
+        </div>
       </section>
 
       <div className="p-4 flex flex-col items-center justify-center relative">
