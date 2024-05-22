@@ -11,15 +11,15 @@ export default function Concept() {
     const page = parseInt(searchParams.get('page') || '1', 10);
     const topic = searchParams.get('topic') || 'all';
 
-    const questions = useTypedSelector((state) => state.concept.concepts);
-    const filteredQuestions = topic === 'all' ? questions : questions.filter((question) => question.topic.toLowerCase().includes(topic.toLowerCase()));
-    const totalQuestions = filteredQuestions.length;
+    const concepts = useTypedSelector((state) => state.concept.concepts);
+    const filteredConcepts = topic === 'all' ? concepts : concepts.filter((concept) => concept.topic.toLowerCase().includes(topic.toLowerCase()));
+    const totalQuestions = filteredConcepts.length;
     const questionsPerPage = 15;
     const totalPages = Math.ceil(totalQuestions / questionsPerPage);
 
     const startIndex = (page - 1) * questionsPerPage;
     const endIndex = startIndex + questionsPerPage;
-    const displayedQuestions = filteredQuestions.slice(startIndex, endIndex);
+    const displayedQuestions = filteredConcepts.slice(startIndex, endIndex);
 
     const handlePageChange = (newPage: number) => {
         navigate(`/concept?page=${newPage}&topic=${topic}`);
