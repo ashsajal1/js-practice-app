@@ -1,12 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import topicReducer, { TopicState } from "../features/topic/topicSlice";
+import topicReducer, { ConceptState } from "../features/concept/conceptSlice";
 
 const rootReducer = combineReducers({
-  topic: topicReducer,
+  concept: topicReducer,
 });
 
 export type RootState = {
-  topic: TopicState;
+  concept: ConceptState;
 };
 
 export default rootReducer;

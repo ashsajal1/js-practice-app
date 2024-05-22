@@ -7,7 +7,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/default.css";
 import AnimatedPage from "../components/ui/animated-page";
 import { useDispatch } from "react-redux";
-import { getTopicById } from "../features/topic/topicSlice";
+import { getConceptById } from "../features/concept/conceptSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useLocation } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ export default function Practice() {
   const conceptId = searchParams.get('id') || '';
   // console.log(searchParams, conceptId)
 
-  const { currentTopic } = useTypedSelector((state) => state.topic);
+  const { currentConcept } = useTypedSelector((state) => state.concept);
 
   useEffect(() => {
     document.querySelectorAll("pre code").forEach((block) => {
@@ -38,7 +38,7 @@ export default function Practice() {
     const fetchTopic = async () => {
       try {
 
-        await dispatch(getTopicById(conceptId));
+        await dispatch(getConceptById(conceptId));
         setIsLoading(false);
       } catch (err) {
         if (typeof err === 'string') {
@@ -60,11 +60,11 @@ export default function Practice() {
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (currentTopic?.quiz) {
+    if (currentConcept?.quiz) {
       setShowQuiz(true);
     } else {
       navigate("/result", {
-        state: { question: currentTopic?.question },
+        state: { question: currentConcept?.question },
       });
     }
   };
@@ -77,22 +77,22 @@ export default function Practice() {
     return <>Error</>;
   }
 
-  if (!currentTopic) {
+  if (!currentConcept) {
     return <NotFoundCard content="Question" />;
   }
 
   return (
     <AnimatedPage>
-      <div className={`p-12 ${currentTopic.code ? "" : "h-screen"}`}>
+      <div className={`p-12 ${currentConcept.code ? "" : "h-screen"}`}>
         <div className={`${showQuiz ? "hidden" : ""}`}>
           <div data-aos="fade-right" className="dark:text-white mb-2">
-            {currentTopic.question}
+            {currentConcept.question}
           </div>
           <div
             data-aos="fade-right"
             className="select-none font-bold md:text-2xl text-xl border dark:border-gray-800 rounded flex-wrap flex p-2 g-text"
           >
-            {renderAnswer(currentTopic.answer, char)}
+            {renderAnswer(currentConcept.answer, char)}
           </div>
 
           <form data-aos="fade-right" onSubmit={handleSubmit}>
@@ -109,18 +109,18 @@ export default function Practice() {
         </div>
 
         <div className={`${showQuiz ? "" : "hidden"}`}>
-          {currentTopic.quiz && (
-            <QuizCard question={currentTopic.question} quiz={currentTopic.quiz} />
+          {currentConcept.quiz && (
+            <QuizCard question={currentConcept.question} quiz={currentConcept.quiz} />
           )}
         </div>
 
-        {currentTopic.code && (
+        {currentConcept.code && (
           <>
             <h3 className="mt-6 text-xl font-extralight text-left border-b dark:border-b-gray-800 pb-2 dark:text-white">
               Code example
             </h3>
             <pre className="border p-2 rounded mt-4">
-              <code className="text-black text-wrap dark:text-white">{currentTopic.code}</code>
+              <code className="text-black text-wrap dark:text-white">{currentConcept.code}</code>
             </pre>
           </>
         )}

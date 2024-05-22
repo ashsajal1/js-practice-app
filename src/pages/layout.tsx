@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import GotoTop from "../components/ui/go-to-top";
-import { getRandomTopics } from "../features/topic/topicSlice";
+import { getRandomConcepts } from "../features/concept/conceptSlice";
 
 export default function Layout() {
     const location = useLocation();
@@ -22,7 +22,7 @@ export default function Layout() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getRandomTopics());
+        dispatch(getRandomConcepts());
     }, [dispatch]);
 
     return (

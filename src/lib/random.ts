@@ -6,7 +6,7 @@ export function getRandomSort() {
   return Math.random() - 0.5;
 }
 
-export const generateRandomTopics = (): QnaTypes[] => {
+export const generateRandomConcepts = (): QnaTypes[] => {
   const randomTopics = qna
     .concat(rustConcepts, golangConcepts)
     .slice()

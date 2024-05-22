@@ -10,7 +10,7 @@ import CounterStat from "../components/partials/counter-stat";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
-  const questions = useTypedSelector((state) => state.topic.topics);
+  const questions = useTypedSelector((state) => state.concept.concepts);
   const navigate = useNavigate();
 
   const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
