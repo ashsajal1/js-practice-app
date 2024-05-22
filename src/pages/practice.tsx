@@ -27,7 +27,7 @@ export default function Practice() {
         hljs.highlightBlock(block);
       }
     });
-  }, [currentTopic?.code]);
+  }, [isLoading]);
 
   useEffect(() => {
     const fetchTopic = async () => {
