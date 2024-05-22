@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
-export default function QuestionCard({ question, answer, id }: { question: string, answer: string, id: number }) {
+export default function QuestionCard({ question, answer, id }: { question: string, answer: string, id: number | string }) {
     return (
         <>
             <motion.div
