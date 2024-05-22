@@ -8,7 +8,7 @@ interface CounterProps extends HTMLAttributes<HTMLSpanElement> {
 
 const Counter = ({ value = 113, speed = 40, ...props }: CounterProps) => {
     const [count, setCount] = useState(1);
-    const {className} = props
+    const { className } = props
 
     useEffect(() => {
         const interval = setInterval(() => {
