@@ -41,6 +41,10 @@ export default function Home() {
           <TopicBadge topic="rust" />
           <TopicBadge topic="golang" />
         </div>
+
+        <div>
+            <Counter value={129} />
+        </div>
       </section>
 
       <div className="p-4 flex flex-col items-center justify-center relative">

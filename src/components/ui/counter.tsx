@@ -1,17 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, HTMLAttributes } from 'react';
 
-const Counter = () => {
+interface CounterProps extends HTMLAttributes<HTMLSpanElement> {
+    value?: number,
+    speed?: number
+}
+
+const Counter = ({ value = 113, speed = 40 }: CounterProps) => {
     const [count, setCount] = useState(1);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCount((prevCount) => {
-                if (prevCount >= 1000) {
-                    return 1000;
+                if (prevCount >= value) {
+                    return value;
                 }
                 return prevCount + 1;
             });
-        }, 50);
+        }, speed);
 
         return () => clearInterval(interval);
     }, []);
