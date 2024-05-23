@@ -79,7 +79,7 @@ export default function Practice() {
   }
 
   if (error) {
-    return <>Error</>;
+    return <h1 className="p-24 mt-12 text-red-600">An unexpected error occurred!</h1>
   }
 
   if (!currentConcept) {
