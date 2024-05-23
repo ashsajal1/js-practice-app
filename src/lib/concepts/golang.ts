@@ -163,6 +163,18 @@ export const golangConcepts: QnaTypes[] = [
       fmt.Println("Received:", value)
   }
   `,
+    quiz: {
+      question:
+        "Which of the following statements about channels in Golang is true?",
+      options: [
+        "Channels allow goroutines to communicate by sharing variables directly.",
+        "Buffered channels can store values without blocking the sender until the buffer is full.",
+        "Unbuffered channels do not block the sender and receiver at all.",
+        "Channels in Golang are used only for error handling.",
+      ],
+      answer:
+        "Buffered channels can store values without blocking the sender until the buffer is full.",
+    },
   },
   {
     id: "golang-7",
@@ -197,6 +209,18 @@ export const golangConcepts: QnaTypes[] = [
       fmt.Println("Counter:", counter)
   }
   `,
+    quiz: {
+      question:
+        "What ensures that a write to a variable by one goroutine will be seen by another goroutine in Golang?",
+      options: [
+        "Direct access to the variable.",
+        "Use of global variables.",
+        "Synchronization events like channel operations, lock/unlock of a mutex.",
+        "Continuous polling of the variable by the goroutines.",
+      ],
+      answer:
+        "Synchronization events like channel operations, lock/unlock of a mutex.",
+    },
   },
   {
     id: "golang-8",
@@ -228,6 +252,11 @@ export const golangConcepts: QnaTypes[] = [
       PrintFields(p)
   }
   `,
+    quiz: {
+      question: "Which package in Golang provides the tools for reflection?",
+      options: ["os", "fmt", "reflect", "sync"],
+      answer: "reflect",
+    },
   },
   {
     id: "golang-9",
@@ -250,6 +279,17 @@ export const golangConcepts: QnaTypes[] = [
       fmt.Printf("HeapAlloc after GC = %v MB\\n", m.HeapAlloc / 1024 / 1024)
   }
   `,
+    quiz: {
+      question:
+        "Which function in Golang triggers a manual garbage collection?",
+      options: [
+        "runtime.TriggerGC()",
+        "runtime.StartGC()",
+        "runtime.GC()",
+        "runtime.Collect()",
+      ],
+      answer: "runtime.GC()",
+    },
   },
   {
     id: "golang-10",
@@ -281,5 +321,16 @@ export const golangConcepts: QnaTypes[] = [
       process(data)
   }
   `,
+    quiz: {
+      question: "What is the primary benefit of using `sync.Pool` in Golang?",
+      options: [
+        "To increase code readability.",
+        "To improve performance by reusing objects and reducing garbage collection overhead.",
+        "To manage database connections.",
+        "To simplify error handling.",
+      ],
+      answer:
+        "To improve performance by reusing objects and reducing garbage collection overhead.",
+    },
   },
 ];
