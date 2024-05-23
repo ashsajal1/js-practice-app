@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import Message from '../components/ui/message';
-import { QuizQuestionType, quizQuestions } from '../lib/quizzes/javascript'
 import { AnimatePresence, motion } from "framer-motion"
 import Button from '../components/ui/button';
 import { getRandomSort } from '../lib/random';
+import { quizQuestions } from '../lib/quizzes/javascript';
+import { QuizQuestionType } from '../lib/quizzes/types';
 
 type MessageType = {
     user: string;

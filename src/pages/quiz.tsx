@@ -1,10 +1,11 @@
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { useEffect, useState } from "react";
-import { QuizQuestionType, quizQuestions } from '../lib/quizzes/javascript';
 import { cn } from '../lib/cn';
 import AnimatedPage from '../components/ui/animated-page';
 import { getRandomSort } from '../lib/random';
+import { QuizQuestionType } from '../lib/quizzes/types';
+import { quizQuestions } from '../lib/quizzes/javascript';
 
 export default function Quiz() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
