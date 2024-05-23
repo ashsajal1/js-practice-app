@@ -1,7 +1,7 @@
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { useEffect, useState } from "react";
-import { QuizQuestionType, quizQuestions } from '../lib/quiz';
+import { QuizQuestionType, quizQuestions } from '../lib/quizzes/javascript';
 import { cn } from '../lib/cn';
 import AnimatedPage from '../components/ui/animated-page';
 import { getRandomSort } from '../lib/random';
