@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QnaTypes } from "../../lib/qna";
+import { QnaTypes } from "../../lib/concepts/javascript";
 import { generateRandomConcepts } from "../../lib/random";
 
 export interface ConceptState {

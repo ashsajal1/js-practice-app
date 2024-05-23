@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { QuizProps } from "../../lib/qna";
+import { QuizProps } from "../../lib/concepts/javascript";
 import Timer from "./timer";
 import { cn } from "../../lib/cn";
 

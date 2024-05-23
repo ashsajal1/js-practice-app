@@ -1,4 +1,4 @@
-import { QnaTypes } from "../qna";
+import { QnaTypes } from "./javascript";
 
 export const golangConcepts: QnaTypes[] = [
   {

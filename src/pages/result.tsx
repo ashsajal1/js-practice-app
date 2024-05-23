@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import SocialMedia from "../components/ui/social-media";
 import SuggestedCard from "../components/ui/suggested-card";
-import { qna } from "../lib/qna";
+import { qna } from "../lib/concepts/javascript";
 import AnimatedPage from "../components/ui/animated-page";
 
 export default function Result() {

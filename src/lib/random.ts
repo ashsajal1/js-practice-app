@@ -1,7 +1,7 @@
 import { golangConcepts } from "./concepts/golang";
 import { reactConcepts } from "./concepts/react";
 import { rustConcepts } from "./concepts/rust";
-import { QnaTypes, qna } from "./qna";
+import { QnaTypes, qna } from "./concepts/javascript";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
