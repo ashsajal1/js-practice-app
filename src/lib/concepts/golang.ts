@@ -143,4 +143,143 @@ export const golangConcepts: QnaTypes[] = [
   }
   `,
   },
+  {
+    id: "golang-6",
+    question:
+      "What are channels in Golang and how do they facilitate communication between goroutines?",
+    answer:
+      "Channels in Golang are a powerful feature for communication between goroutines. They allow goroutines to send and receive values of a specific type, making it easier to synchronize execution and share data safely. Channels can be buffered or unbuffered, with buffered channels allowing a specified number of values to be stored in the channel before it blocks further sends. By using channels, you can build concurrent programs that avoid the complexities of shared memory, as channels provide a clean and structured way to communicate and coordinate actions between goroutines.",
+    topic: "golang",
+    subTopic: "Golang Concurrency",
+    code: `
+  func main() {
+      ch := make(chan int, 1)
+      
+      go func() {
+          ch <- 42
+      }()
+      
+      value := <-ch
+      fmt.Println("Received:", value)
+  }
+  `,
+  },
+  {
+    id: "golang-7",
+    question:
+      "Explain the memory model of Golang and how it ensures safe concurrent access to shared variables.",
+    answer:
+      "Golang's memory model defines the rules for how operations on memory are performed in concurrent programming, ensuring safe access to shared variables. The model guarantees that a write to a variable by one goroutine will be seen by another goroutine that reads the variable only if there is a synchronization event (like channel operations, lock/unlock of a mutex, or other atomic operations) between the write and read. This prevents data races and ensures that programs behave predictably. Understanding the memory model is crucial for writing correct and efficient concurrent programs.",
+    topic: "golang",
+    subTopic: "Golang Concurrency",
+    code: `
+  var (
+      counter int
+      mu sync.Mutex
+  )
+  
+  func increment() {
+      mu.Lock()
+      counter++
+      mu.Unlock()
+  }
+  
+  func main() {
+      var wg sync.WaitGroup
+      for i := 0; i < 1000; i++ {
+          wg.Add(1)
+          go func() {
+              defer wg.Done()
+              increment()
+          }()
+      }
+      wg.Wait()
+      fmt.Println("Counter:", counter)
+  }
+  `,
+  },
+  {
+    id: "golang-8",
+    question:
+      "What is reflection in Golang, and how can the `reflect` package be used to inspect and manipulate objects at runtime?",
+    answer:
+      "Reflection in Golang is the ability to inspect and manipulate objects at runtime. The `reflect` package provides the tools to work with reflection, allowing you to dynamically examine the type, properties, and values of variables. This can be useful for tasks like serialization, deserialization, and writing generic functions. Reflection is powerful but should be used judiciously, as it can make code harder to understand and maintain, and it incurs a runtime cost.",
+    topic: "golang",
+    subTopic: "Advanced Golang",
+    code: `
+  func PrintFields(v interface{}) {
+      val := reflect.ValueOf(v)
+      typ := reflect.TypeOf(v)
+      
+      for i := 0; i < val.NumField(); i++ {
+          field := val.Field(i)
+          fieldType := typ.Field(i)
+          fmt.Printf("%s: %v\\n", fieldType.Name, field)
+      }
+  }
+  
+  type Person struct {
+      Name string
+      Age  int
+  }
+  
+  func main() {
+      p := Person{Name: "Alice", Age: 30}
+      PrintFields(p)
+  }
+  `,
+  },
+  {
+    id: "golang-9",
+    question:
+      "How does Golang's garbage collector work, and what are the implications for performance and memory management?",
+    answer:
+      "Golang's garbage collector (GC) is a concurrent, mark-and-sweep collector that automatically manages memory allocation and deallocation, helping to prevent memory leaks and other memory-related issues. The GC runs in the background, marking live objects and sweeping away unused ones. Golang's GC is designed to minimize pause times and impact on application performance, making it suitable for high-performance applications. Developers can influence GC behavior using runtime parameters and functions from the `runtime` package, such as `runtime.GC()` and `runtime.SetGCPercent()`.",
+    topic: "golang",
+    subTopic: "Advanced Golang",
+    code: `
+  func main() {
+      var m runtime.MemStats
+      runtime.ReadMemStats(&m)
+      fmt.Printf("HeapAlloc = %v MB\\n", m.HeapAlloc / 1024 / 1024)
+      
+      // Trigger a garbage collection
+      runtime.GC()
+      
+      runtime.ReadMemStats(&m)
+      fmt.Printf("HeapAlloc after GC = %v MB\\n", m.HeapAlloc / 1024 / 1024)
+  }
+  `,
+  },
+  {
+    id: "golang-10",
+    question:
+      "What is the purpose of the `sync.Pool` type in Golang, and how can it be used to improve performance in certain scenarios?",
+    answer:
+      "The `sync.Pool` type in Golang is a thread-safe pool of reusable objects that can be used to reduce the overhead of allocating and deallocating memory in high-performance applications. By reusing objects, `sync.Pool` helps to mitigate the impact of garbage collection and improve performance, particularly in scenarios where many objects are created and discarded rapidly. Objects are retrieved from the pool using the `Get` method and returned to the pool using the `Put` method. Proper use of `sync.Pool` can lead to significant performance improvements in memory-intensive applications.",
+    topic: "golang",
+    subTopic: "Golang Concurrency",
+    code: `
+  var pool = sync.Pool{
+      New: func() interface{} {
+          return new(bytes.Buffer)
+      },
+  }
+  
+  func process(data string) {
+      buf := pool.Get().(*bytes.Buffer)
+      buf.Reset()
+      defer pool.Put(buf)
+      
+      buf.WriteString(data)
+      // process the buffer
+      fmt.Println(buf.String())
+  }
+  
+  func main() {
+      data := "example data"
+      process(data)
+  }
+  `,
+  },
 ];
