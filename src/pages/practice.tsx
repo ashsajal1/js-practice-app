@@ -70,7 +70,12 @@ export default function Practice() {
   };
 
   if (isLoading) {
-    return <>Loading</>;
+    return <div className="w-full p-12">
+      <div className="w-full h-6 rounded animate-pulse bg-gray-100"></div>
+      <div className="w-full h-20 rounded animate-pulse bg-gray-100 mt-6"></div>
+      <div className="w-full h-40 rounded animate-pulse bg-gray-100 mt-6"></div>
+      <div className="w-full h-12 rounded animate-pulse bg-gray-100 mt-6"></div>
+    </div>
   }
 
   if (error) {
