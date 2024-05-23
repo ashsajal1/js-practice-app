@@ -15,11 +15,11 @@ const quizSlice = createSlice({
   initialState,
   reducers: {
     getAllQuiz: (state) => {
-      state.quiz = generateRandomQuizzes;
+      state.quizzes = generateRandomQuizzes;
     },
     getAllQuizByTopic: (state, action: PayloadAction<string>) => {
       const topic = action.payload;
-      state.quiz = generateRandomQuizzes.filter((i) => i.topic === topic);
+      state.quizzes = generateRandomQuizzes.filter((i) => i.topic === topic);
     },
   },
 });
