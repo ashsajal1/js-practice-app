@@ -3,13 +3,13 @@ import SocialMedia from "../components/ui/social-media";
 import SuggestedCard from "../components/ui/suggested-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { getRandomSort } from "../lib/random";
 
 export default function Result() {
     const location = useLocation();
     let content;
     // console.log(location.state)
-    const concepts = useTypedSelector(state => state.concept.concepts.filter(i => i.topic === location.state.topic)).slice(0,10)
-
+    const concepts = useTypedSelector(state => state.concept.concepts.filter(i => i.topic === location.state.topic).slice(0,10).sort(getRandomSort))
     if (location.state?.question) {
         const question = location.state?.question;
         content = <>
