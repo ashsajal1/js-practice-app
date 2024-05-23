@@ -10,7 +10,7 @@ import CounterStat from "../components/partials/counter-stat";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
-  const questions = useTypedSelector((state) => state.concept.concepts);
+  const concepts = useTypedSelector((state) => state.concept.concepts);
   const navigate = useNavigate();
 
   const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
@@ -46,9 +46,9 @@ export default function Home() {
       </section>
 
       <div className="p-4 flex flex-col items-center justify-center relative">
-        <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore questions to practice</h1>
+        <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore concepts to practice</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {questions.map((question) => (
+          {concepts.map((question) => (
             <QuestionCard
               question={question.question}
               answer={question.answer}
