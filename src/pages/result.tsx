@@ -1,13 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import SocialMedia from "../components/ui/social-media";
 import SuggestedCard from "../components/ui/suggested-card";
-import { qna } from "../lib/concepts/javascript";
 import AnimatedPage from "../components/ui/animated-page";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export default function Result() {
     const location = useLocation();
     let content;
-    console.log(location.state)
+    // console.log(location.state)
+    const concepts = useTypedSelector(state => state.concept.concepts.filter(i => i.topic === location.state.topic)).slice(0,10)
 
     if (location.state?.question) {
         const question = location.state?.question;
@@ -32,7 +33,7 @@ export default function Result() {
                 <div className="p-4">
                     <p className="my-2 font-bold g-text">Suggested</p>
                     <div className="flex items-center justify-between w-auto gap-2 overflow-x-scroll scrollbar-thumb-blue-700 scrollbar-thin scrollbar-w-1">
-                        {qna.map(i => (
+                        {concepts.map(i => (
                             <SuggestedCard key={i.id} id={i.id} question={i.question} answer={i.answer} />
                         ))}
                     </div>
