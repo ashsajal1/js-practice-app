@@ -3,11 +3,11 @@ import { QuizQuestionType } from "../../lib/quizzes/types";
 import { generateRandomQuizzes } from "../../lib/random";
 
 export interface QuizState {
-  quiz: QuizQuestionType[];
+  quizzes: QuizQuestionType[];
 }
 
 const initialState: QuizState = {
-  quiz: [],
+  quizzes: [],
 };
 
 const quizSlice = createSlice({
