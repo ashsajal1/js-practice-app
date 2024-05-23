@@ -7,6 +7,7 @@ import AnimatedPage from "../components/ui/animated-page";
 export default function Result() {
     const location = useLocation();
     let content;
+    console.log(location.state)
 
     if (location.state?.question) {
         const question = location.state?.question;

@@ -7,7 +7,7 @@ import { cn } from "../../lib/cn";
 // define submissionTimeout variable to hold the timeout ID
 let submissionTimeout: ReturnType<typeof setTimeout>;
 
-export default function QuizCard({ quiz, question, uniqueKey }: { quiz: QuizProps, question: string, uniqueKey: string | number }) {
+export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: QuizProps, question: string, uniqueKey: string | number, topic: string }) {
     const [selectedOption, setSelectedOption] = useState('');
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [isRightAnswer, setIsRightAnswer] = useState(false);
@@ -16,7 +16,7 @@ export default function QuizCard({ quiz, question, uniqueKey }: { quiz: QuizProp
     const handleConfirm = () => {
         clearTimeout(submissionTimeout); // clear the previous timeout
         navigate('/result', {
-            state: { question: question }
+            state: { question: question, topic: topic }
         });
     };
 
@@ -29,7 +29,7 @@ export default function QuizCard({ quiz, question, uniqueKey }: { quiz: QuizProp
         clearTimeout(submissionTimeout);
         submissionTimeout = setTimeout(() => {
             navigate('/result', {
-                state: { question: question }
+                state: { question: question, topic: topic }
             });
         }, 5000);
     };

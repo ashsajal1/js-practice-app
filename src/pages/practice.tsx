@@ -64,7 +64,7 @@ export default function Practice() {
       setShowQuiz(true);
     } else {
       navigate("/result", {
-        state: { question: currentConcept?.question },
+        state: { question: currentConcept?.question, topic: currentConcept?.topic },
       });
     }
   };
@@ -115,7 +115,7 @@ export default function Practice() {
 
         <div className={`${showQuiz ? "" : "hidden"}`}>
           {currentConcept.quiz && (
-            <QuizCard uniqueKey={currentConcept.id} question={currentConcept.question} quiz={currentConcept.quiz} />
+            <QuizCard topic={currentConcept.topic} uniqueKey={currentConcept.id} question={currentConcept.question} quiz={currentConcept.quiz} />
           )}
         </div>
 
