@@ -31,6 +31,8 @@ export default function Quiz() {
         });
     }, [currentQuestionIndex]);
 
+    console.log(quizzes)
+
     useEffect(() => {
         if (quizzes.length > currentQuestionIndex) {
             setCurrentQuestion(quizzes[currentQuestionIndex]);
