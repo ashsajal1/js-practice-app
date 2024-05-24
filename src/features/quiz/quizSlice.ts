@@ -24,5 +24,5 @@ const quizSlice = createSlice({
   },
 });
 
-export const { getAllQuiz } = quizSlice.actions;
+export const { getAllQuiz, getAllQuizByTopic } = quizSlice.actions;
 export default quizSlice.reducer;
