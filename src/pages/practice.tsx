@@ -40,7 +40,6 @@ export default function Practice() {
   useEffect(() => {
     const fetchTopic = async () => {
       try {
-
         await dispatch(getConceptById(conceptId));
         setIsLoading(false);
       } catch (err) {
@@ -56,6 +55,12 @@ export default function Practice() {
     };
     fetchTopic();
   }, [dispatch, conceptId]);
+
+  useEffect(() => {
+    if (currentConcept !== null) {
+      speak(currentConcept.answer)
+    }
+  }, [currentConcept, speak])
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setChar(e.target.value);
