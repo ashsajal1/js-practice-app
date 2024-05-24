@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { getAllQuiz } from '../features/quiz/quizSlice';
 import { useLocation } from 'react-router-dom';
+import { getRandomSort } from '../lib/random';
 
 
 export default function Quiz() {
@@ -25,7 +26,7 @@ export default function Quiz() {
 
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
-    const quizQuestions = quizzes.filter(quiz => quiz.lang.toLowerCase() === lang.toLowerCase())
+    const quizQuestions = quizzes.filter(quiz => quiz.lang.toLowerCase().includes(lang.toLowerCase()))
 
     // console.log(lang)
 
