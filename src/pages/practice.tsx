@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { getConceptById } from "../features/concept/conceptSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useLocation } from 'react-router-dom';
-import { HiSpeakerWave } from "react-icons/hi2";
+import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { useTextToSpeech } from "../hooks/useTextToSpeech";
 
 export default function Practice() {
@@ -21,7 +21,7 @@ export default function Practice() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { speak } = useTextToSpeech()
+  const { speak, stop } = useTextToSpeech()
 
   const searchParams = new URLSearchParams(location.search);
   const conceptId = searchParams.get('id') || '';
@@ -101,6 +101,7 @@ export default function Practice() {
           <div data-aos="fade-right" className="dark:text-white mb-2 flex items-center gap-2">
             {currentConcept.question}
             <HiSpeakerWave onClick={() => { speak(currentConcept.answer) }} />
+            <HiSpeakerXMark onClick={() => stop()} />
           </div>
           <div
             data-aos="fade-right"

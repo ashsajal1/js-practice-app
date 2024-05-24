@@ -27,7 +27,7 @@ export function useTextToSpeech() {
   const speak = (text: string, options: SpeechOptions = {}) => {
     if (!synth) return;
 
-    // cancel the current utterance before starting a new one
+    // Cancel the current utterance before starting a new one
     if (currentUtterance.current) {
       synth.cancel();
     }
@@ -43,5 +43,11 @@ export function useTextToSpeech() {
     synth.speak(utterance);
   };
 
-  return { speak };
+  const stop = () => {
+    if (!synth || !currentUtterance.current) return;
+    synth.cancel();
+    currentUtterance.current = null;
+  };
+
+  return { speak, stop };
 }
