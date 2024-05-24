@@ -7,17 +7,27 @@ import { QuizQuestionType } from '../lib/quizzes/types';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { getAllQuiz } from '../features/quiz/quizSlice';
+import { useLocation } from 'react-router-dom';
 
 
 export default function Quiz() {
+    const location = useLocation();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const { quizzes, loading, error } = useTypedSelector((state) => state.quiz);
+
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState<QuizQuestionType | null>(null);
     const [isCompletedCurrentQuiz, setIsCompletedCurrentQuiz] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [isRightAnswer, setIsRightAnswer] = useState(false);
+
+    const searchParams = new URLSearchParams(location.search);
+    const lang = searchParams.get('lang') || '';
+    const quizQuestions = quizzes.filter(quiz => quiz.lang.toLowerCase() === lang.toLowerCase())
+
+    // console.log(lang)
 
     useEffect(() => {
         dispatch(getAllQuiz());
@@ -31,16 +41,16 @@ export default function Quiz() {
         });
     }, [currentQuestionIndex]);
 
-    console.log(quizzes)
+    // console.log(quizQuestions)
 
     useEffect(() => {
-        if (quizzes.length > currentQuestionIndex) {
-            setCurrentQuestion(quizzes[currentQuestionIndex]);
+        if (quizQuestions.length > currentQuestionIndex) {
+            setCurrentQuestion(quizQuestions[currentQuestionIndex]);
         } else {
             setCurrentQuestionIndex(0);
-            setCurrentQuestion(quizzes[0]);
+            setCurrentQuestion(quizQuestions[0]);
         }
-    }, [currentQuestionIndex, quizzes]);
+    }, [currentQuestionIndex, quizQuestions]);
 
     const handleNextQuestion = () => {
         setCurrentQuestionIndex(prevIndex => prevIndex + 1);
