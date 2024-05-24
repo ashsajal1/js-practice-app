@@ -102,7 +102,7 @@ export default function Quiz() {
                     <p className='py-2 text-sm font-extralight dark:text-white'>
                         Type: <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{currentQuestion?.type}</span>
                     </p>
-                    <pre className={`${currentQuestion?.code? '':'hidden'}`}><code>{currentQuestion?.code}</code></pre>
+                    <pre className={`text-wrap ${currentQuestion?.code? '':'hidden'}`}><code>{currentQuestion?.code}</code></pre>
                     <div>
                         {currentQuestion?.options?.map((option, index) => (
                             <div
