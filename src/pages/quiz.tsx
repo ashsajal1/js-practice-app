@@ -3,29 +3,25 @@ import 'highlight.js/styles/default.css';
 import { useEffect, useState } from "react";
 import { cn } from '../lib/cn';
 import AnimatedPage from '../components/ui/animated-page';
-import { getRandomSort } from '../lib/random';
 import { QuizQuestionType } from '../lib/quizzes/types';
-import { quizQuestions } from '../lib/quizzes/javascript';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { getAllQuiz } from '../features/quiz/quizSlice';
+
 
 export default function Quiz() {
+    const dispatch = useDispatch();
+    const { quizzes, loading, error } = useTypedSelector((state) => state.quiz);
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState<QuizQuestionType | null>(null);
     const [isCompletedCurrentQuiz, setIsCompletedCurrentQuiz] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [isRightAnswer, setIsRightAnswer] = useState(false);
-    const [questions, setQuestions] = useState<QuizQuestionType[]>([]);
 
-    const shuffleArray = (array: string[]): string[] => {
-        return array.sort(() => Math.random() - 0.5);
-    };
-    
     useEffect(() => {
-        const shuffledQuestions = quizQuestions.sort(getRandomSort).map(question => ({
-            ...question,
-            options: shuffleArray([...question.options ?? []])
-        }));
-        setQuestions(shuffledQuestions);
-    }, []);
+        dispatch(getAllQuiz());
+    }, [dispatch]);
 
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
@@ -36,13 +32,13 @@ export default function Quiz() {
     }, [currentQuestionIndex]);
 
     useEffect(() => {
-        if (questions.length > currentQuestionIndex) {
-            setCurrentQuestion(questions[currentQuestionIndex]);
+        if (quizzes.length > currentQuestionIndex) {
+            setCurrentQuestion(quizzes[currentQuestionIndex]);
         } else {
             setCurrentQuestionIndex(0);
-            setCurrentQuestion(questions[0]);
+            setCurrentQuestion(quizzes[0]);
         }
-    }, [currentQuestionIndex, questions]);
+    }, [currentQuestionIndex, quizzes]);
 
     const handleNextQuestion = () => {
         setCurrentQuestionIndex(prevIndex => prevIndex + 1);
@@ -55,6 +51,14 @@ export default function Quiz() {
         setIsCompletedCurrentQuiz(true);
         setIsRightAnswer(currentQuestion?.answer === selectedOption);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     if (isCompletedCurrentQuiz) {
         return (
@@ -109,4 +113,3 @@ export default function Quiz() {
         </AnimatedPage>
     );
 }
-
