@@ -59,6 +59,7 @@ export default function Interview() {
         const selectedOption = currentQuestion.options ? currentQuestion.options[index] : "";
         const isCorrect = selectedOption === currentQuestion.answer;
         const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.answer}"`;
+        speak(feedback)
         const newScore = isCorrect ? score + 1 : score;
         const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
