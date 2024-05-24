@@ -5,6 +5,7 @@ import Button from '../components/ui/button';
 import { getRandomSort } from '../lib/random';
 import { quizQuestions } from '../lib/quizzes/javascript';
 import { QuizQuestionType } from '../lib/quizzes/types';
+import { useTextToSpeech } from '../hooks/useTextToSpeech';
 
 type MessageType = {
     user: string;
@@ -21,9 +22,10 @@ export default function Interview() {
     const [score, setScore] = useState(0);
     const [isBotWriting, setIsBotWriting] = useState(false);
     const lastMessageRef = useRef<HTMLDivElement>(null);
+    const { speak } = useTextToSpeech()
 
     // console.log(questions)
-    useEffect(()=> {
+    useEffect(() => {
         setQuestions(quizQuestions.sort(getRandomSort).slice(0, 5))
     }, [])
 
@@ -32,6 +34,14 @@ export default function Interview() {
             lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages]);
+
+    useEffect(() => {
+        if (messages.length > 0) {
+            if (messages[messages.length - 1].user === "Robot") {
+                speak(messages[messages.length - 1].text)
+            }
+        }
+    }, [messages, speak])
 
     const startQuiz = () => {
         if (questions.length > 0) {
@@ -49,6 +59,7 @@ export default function Interview() {
         const selectedOption = currentQuestion.options ? currentQuestion.options[index] : "";
         const isCorrect = selectedOption === currentQuestion.answer;
         const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.answer}"`;
+        speak(feedback)
         const newScore = isCorrect ? score + 1 : score;
         const isLastQuestion = currentQuestionIndex === questions.length - 1;
 

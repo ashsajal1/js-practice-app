@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { getConceptById } from "../features/concept/conceptSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useLocation } from 'react-router-dom';
+import { HiSpeakerWave } from "react-icons/hi2";
+import { useTextToSpeech } from "../hooks/useTextToSpeech";
 
 export default function Practice() {
   const [char, setChar] = useState("");
@@ -19,6 +21,7 @@ export default function Practice() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { speak } = useTextToSpeech()
 
   const searchParams = new URLSearchParams(location.search);
   const conceptId = searchParams.get('id') || '';
@@ -90,8 +93,9 @@ export default function Practice() {
     <AnimatedPage>
       <div className={`p-12 ${currentConcept.code ? "" : "h-screen"}`}>
         <div className={`${showQuiz ? "hidden" : ""}`}>
-          <div data-aos="fade-right" className="dark:text-white mb-2">
+          <div data-aos="fade-right" className="dark:text-white mb-2 flex items-center gap-2">
             {currentConcept.question}
+            <HiSpeakerWave onClick={() => { speak(currentConcept.answer) }} />
           </div>
           <div
             data-aos="fade-right"
