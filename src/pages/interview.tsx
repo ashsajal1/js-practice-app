@@ -37,7 +37,9 @@ export default function Interview() {
 
     useEffect(() => {
         if (messages.length > 0) {
-            speak(messages[messages.length - 1].text)
+            if (messages[messages.length - 1].user === "Robot") {
+                speak(messages[messages.length - 1].text)
+            }
         }
     }, [messages, speak])
 
