@@ -32,7 +32,7 @@ export default function Quiz() {
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
             if (block instanceof HTMLElement) {
-                hljs.highlightBlock(block);
+                hljs.highlightElement(block);
             }
         });
     }, [currentQuestionIndex]);
