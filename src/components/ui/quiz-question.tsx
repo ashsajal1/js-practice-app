@@ -1,4 +1,4 @@
-import { quizQuestions } from "../../lib/quiz"
+import { quizQuestions } from "../../lib/quizzes/javascript";
 
 export default function QuizQuestion() {
     const question = quizQuestions[0];
