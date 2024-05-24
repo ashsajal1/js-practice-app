@@ -1,6 +1,6 @@
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from '../lib/cn';
 import AnimatedPage from '../components/ui/animated-page';
 import { QuizQuestionType } from '../lib/quizzes/types';
@@ -23,6 +23,8 @@ export default function Quiz() {
     const lang = searchParams.get('lang') || '';
     const quizQuestions = quizzes.filter(quiz => quiz.lang.toLowerCase().includes(lang.toLowerCase()))
 
+    const preRef = useRef<HTMLPreElement>(null);
+
     // console.log(lang)
 
     useEffect(() => {
@@ -30,12 +32,10 @@ export default function Quiz() {
     }, [dispatch]);
 
     useEffect(() => {
-        document.querySelectorAll('pre code').forEach((block) => {
-            if (block instanceof HTMLElement) {
-                hljs.highlightElement(block);
-            }
-        });
-    }, [currentQuestionIndex]);
+        if (preRef.current) {
+          hljs.highlightElement(preRef.current);
+        }
+      }, [currentQuestionIndex, currentQuestion?.code]);
 
     // console.log(quizQuestions)
 
@@ -102,7 +102,7 @@ export default function Quiz() {
                     <p className='py-2 text-sm font-extralight dark:text-white'>
                         Type: <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{currentQuestion?.type}</span>
                     </p>
-                    <pre className={`text-wrap ${currentQuestion?.code? '':'hidden'}`}><code>{currentQuestion?.code}</code></pre>
+                    <pre ref={preRef} className={`text-wrap ${currentQuestion?.code? '':'hidden'}`}><code>{currentQuestion?.code}</code></pre>
                     <div>
                         {currentQuestion?.options?.map((option, index) => (
                             <div
