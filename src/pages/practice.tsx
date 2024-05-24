@@ -12,6 +12,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useLocation } from 'react-router-dom';
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { useTextToSpeech } from "../hooks/useTextToSpeech";
+import Button from "../components/ui/button";
 
 export default function Practice() {
   const [char, setChar] = useState("");
@@ -100,8 +101,7 @@ export default function Practice() {
         <div className={`${showQuiz ? "hidden" : ""}`}>
           <div data-aos="fade-right" className="dark:text-white mb-2 flex items-center gap-2">
             {currentConcept.question}
-            <HiSpeakerWave onClick={() => { speak(currentConcept.answer) }} />
-            <HiSpeakerXMark onClick={() => stop()} />
+            <HiSpeakerWave className="h-5 w-5" onClick={() => { speak(currentConcept.question) }} />
           </div>
           <div
             data-aos="fade-right"
@@ -127,6 +127,16 @@ export default function Practice() {
           {currentConcept.quiz && (
             <QuizCard topic={currentConcept.topic} uniqueKey={currentConcept.id} question={currentConcept.question} quiz={currentConcept.quiz} />
           )}
+        </div>
+        <div className="flex items-center mt-2 justify-between gap-2">
+          <Button onClick={() => { speak(currentConcept.answer) }} className="w-full flex items-center gap-2" variant="outline">
+            <HiSpeakerWave className="h-5 w-5" />
+            Relisten
+          </Button>
+          <Button onClick={() => stop()} className="w-full flex items-center gap-2" variant="outline">
+            <HiSpeakerXMark className="h-5 w-5" />
+            Stop Listening
+          </Button>
         </div>
 
         {currentConcept.code && (
