@@ -57,11 +57,6 @@ export default function Practice() {
     fetchTopic();
   }, [dispatch, conceptId]);
 
-  // useEffect(() => {
-  //   if (currentConcept !== null) {
-  //     speak(currentConcept.answer)
-  //   }
-  // }, [currentConcept, speak])
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setChar(e.target.value);
@@ -134,7 +129,7 @@ export default function Practice() {
         <div className="flex items-center mt-2 justify-between gap-2">
           <Button onClick={() => { speak(currentConcept.answer) }} className="w-full flex items-center gap-2" variant="outline">
             <HiSpeakerWave className="h-5 w-5" />
-            Relisten
+            Listen
           </Button>
           <Button onClick={() => stop()} className="w-full flex items-center gap-2" variant="outline">
             <HiSpeakerXMark className="h-5 w-5" />
