@@ -1,18 +1,31 @@
-// Extend the Window interface to include webkitSpeechRecognition
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    webkitSpeechRecognition: any;
-  }
+import { useState, useEffect } from 'react';
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start(): void;
+  stop(): void;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onend: () => void;
 }
 
-// Declare global variables for SpeechRecognition and SpeechRecognitionEvent
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// declare let SpeechRecognition: any;
-// eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/no-unused-vars
-// declare let SpeechRecognitionEvent: any;
+interface SpeechRecognitionEvent extends Event {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+}
 
-import { useState } from 'react';
+interface SpeechRecognitionResultList {
+  item(index: number): SpeechRecognitionResult;
+  length: number;
+}
+
+interface SpeechRecognitionResult {
+  isFinal: boolean;
+  [0]: {
+    transcript: string;
+  };
+}
 
 interface UseSpeechRecognitionReturn {
   transcript: string;
@@ -22,24 +35,25 @@ interface UseSpeechRecognitionReturn {
 }
 
 const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
-  const [transcript, setTranscript] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState<string>('');
+  const [isRecording, setIsRecording] = useState<boolean>(false);
   const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
 
-  const startRecording = () => {
+  useEffect(() => {
     if ('webkitSpeechRecognition' in window) {
-      const SpeechRecognitionInstance = new window.webkitSpeechRecognition();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const SpeechRecognitionInstance = new (window as any).webkitSpeechRecognition() as SpeechRecognition;
       SpeechRecognitionInstance.continuous = true;
       SpeechRecognitionInstance.interimResults = true;
       SpeechRecognitionInstance.lang = 'en-US';
 
       SpeechRecognitionInstance.onresult = (event: SpeechRecognitionEvent) => {
         let interimTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          if (event.results[i].isFinal) {
-            setTranscript(event.results[i][0].transcript);
+        for (let i = 0; i < event.results.length; i++) {
+          if (event.results.item(i).isFinal) {
+            setTranscript(event.results.item(i)[0].transcript);
           } else {
-            interimTranscript += event.results[i][0].transcript;
+            interimTranscript += event.results.item(i)[0].transcript;
           }
         }
         setTranscript(interimTranscript);
@@ -49,11 +63,20 @@ const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
         setIsRecording(false);
       };
 
-      SpeechRecognitionInstance.start();
       setRecognition(SpeechRecognitionInstance);
-      setIsRecording(true);
+
+      return () => {
+        SpeechRecognitionInstance.stop();
+      };
     } else {
       alert('Speech Recognition is not supported on this browser.');
+    }
+  }, []);
+
+  const startRecording = () => {
+    if (recognition) {
+      recognition.start();
+      setIsRecording(true);
     }
   };
 
