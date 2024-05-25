@@ -103,6 +103,7 @@ export default function Practice() {
             className="select-none font-bold md:text-2xl text-xl border dark:border-gray-800 rounded flex-wrap flex p-2 g-text"
           >
             {renderAnswer(currentConcept.answer, char)}
+            <HiSpeakerWave onClick={() => {speak(currentConcept.answer)}} className="h-5 w-5 text-blue-700 mt-[6px] ml-2" />
           </div>
 
           <form data-aos="fade-right" onSubmit={handleSubmit}>
