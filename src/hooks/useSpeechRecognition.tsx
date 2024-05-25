@@ -1,13 +1,16 @@
 // Extend the Window interface to include webkitSpeechRecognition
 declare global {
   interface Window {
-    webkitSpeechRecognition: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    webkitSpeechRecognition: any;
   }
 }
 
 // Declare global variables for SpeechRecognition and SpeechRecognitionEvent
-// declare let SpeechRecognition: unknown;
-// d
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// declare let SpeechRecognition: any;
+// eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/no-unused-vars
+// declare let SpeechRecognitionEvent: any;
 
 import { useState } from 'react';
 
