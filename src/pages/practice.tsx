@@ -75,8 +75,10 @@ export default function Practice() {
   const handleCaptureSpeech = () => {
     if (isRecording) {
       stopRecording()
+    } else {
+      startRecording()
     }
-    startRecording()
+
   }
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -128,6 +130,7 @@ export default function Practice() {
 
           <form data-aos="fade-right" onSubmit={handleSubmit}>
             <textarea
+              value={char}
               onChange={handlePromptChange}
               rows={6}
               placeholder="Enter the answer below"
