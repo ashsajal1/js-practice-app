@@ -67,6 +67,7 @@ export default function Practice() {
 
   useEffect(() => {
     if (transcript) {
+      alert(transcript)
       setChar(prevChar => prevChar + transcript);
     }
   }, [transcript]);
