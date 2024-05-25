@@ -7,11 +7,13 @@ import Result from './pages/result'
 import Quiz from './pages/quiz'
 import Interview from './pages/interview'
 import Concept from './pages/concept'
+import ErrorElement from './pages/error-element'
 
 export const router = createBrowserRouter([
   {
     path: '',
     element: <Layout />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: '/',
