@@ -1,3 +1,14 @@
+// Extend the Window interface to include webkitSpeechRecognition
+declare global {
+  interface Window {
+    webkitSpeechRecognition: unknown;
+  }
+}
+
+// Declare global variables for SpeechRecognition and SpeechRecognitionEvent
+// declare let SpeechRecognition: unknown;
+// d
+
 import { useState } from 'react';
 
 interface UseSpeechRecognitionReturn {
