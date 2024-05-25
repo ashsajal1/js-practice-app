@@ -13,7 +13,6 @@ import { useLocation } from 'react-router-dom';
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { useTextToSpeech } from "../hooks/useTextToSpeech";
 import Button from "../components/ui/button";
-import useSpeechRecognition from "../hooks/useSpeechRecognition";
 
 export default function Practice() {
   const [char, setChar] = useState("");
@@ -24,7 +23,6 @@ export default function Practice() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { speak, stop } = useTextToSpeech()
-  const { transcript, isRecording, startRecording, stopRecording } = useSpeechRecognition();
 
   const searchParams = new URLSearchParams(location.search);
   const conceptId = searchParams.get('id') || '';
@@ -64,22 +62,6 @@ export default function Practice() {
   //     speak(currentConcept.answer)
   //   }
   // }, [currentConcept, speak])
-
-  useEffect(() => {
-    if (transcript) {
-      alert(transcript)
-      setChar(prevChar => prevChar + transcript);
-    }
-  }, [transcript]);
-
-  const handleCaptureSpeech = () => {
-    if (isRecording) {
-      stopRecording()
-    } else {
-      startRecording()
-    }
-
-  }
 
   const handlePromptChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setChar(e.target.value);
@@ -136,14 +118,11 @@ export default function Practice() {
               placeholder="Enter the answer below"
               className="p-2 mt-4 w-full rounded border outline-none focus:ring-1 ring-blue-200 focus:border-none dark:bg-black dark:border-gray-600 dark:text-white"
             />
-            <div>
-              <button className="mt-2 btn w-full" type='button' onClick={handleCaptureSpeech}>
-                {isRecording ? 'Recording...' : 'Answer by Saying'}
-              </button>
-              <button className="mt-2 btn w-full" type="submit">
-                Submit
-              </button>
-            </div>
+
+            <button className="mt-2 btn w-full" type="submit">
+              Submit
+            </button>
+
           </form>
         </div>
 
