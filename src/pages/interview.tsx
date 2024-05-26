@@ -22,6 +22,7 @@ export default function Interview() {
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [score, setScore] = useState(0);
+    const [langTopic, setLangTopic] = useState('javascript');
     const [isBotWriting, setIsBotWriting] = useState(false);
     const [selectedQuizzes, setSelectedQuizzes] = useState<QuizQuestionType[]>([]);
     const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,12 @@ export default function Interview() {
     const dispatch = useDispatch();
 
     const { getParam } = useSearchParams();
-    const lang = getParam('lang');
+    const lang = getParam('lang')
+    useEffect(() => {
+        if (lang) {
+            setLangTopic(lang);
+        }
+    }, [lang]);
 
     useEffect(() => {
         dispatch(getAllQuiz());
@@ -50,23 +56,24 @@ export default function Interview() {
     }, [messages, speak]);
 
     const startQuiz = () => {
+        console.log('Selected Language/Topic:', langTopic);
         if (quizzes.length > 0) {
             let filteredQuizzes = [...quizzes];
 
-            if (lang) {
-                filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase() === lang.toLowerCase());
-            }
+
+            filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase() === langTopic.toLowerCase());
+
 
             if (filteredQuizzes.length === 0) {
                 setMessages([{ user: 'Robot', text: `No questions found for language ${lang}. Please select another language.` }]);
                 return;
             }
-            
+
             // Limit the number of questions to 5
             const shuffledQuizzes = filteredQuizzes.sort(getRandomSort).slice(0, 5);
             setSelectedQuizzes(shuffledQuizzes);
             const firstQuestion = shuffledQuizzes[0];
-            
+
 
             setMessages([
                 {
@@ -179,7 +186,15 @@ export default function Interview() {
                 ))}
             </div>
             <div className="flex items-center justify-center w-full py-24">
-                {messages.length === 0 && <Button className="p-4 ml-2" onClick={startQuiz}>Start Interview</Button>}
+                {messages.length === 0 && <div>
+                    <select value={langTopic} onChange={(e) => setLangTopic(e.target.value)} className='p-3 rounded outline-none w-full mb-2' title='select language'>
+                        <option value="Javascript">Javascript</option>
+                        <option value="golang">Golang</option>
+                        <option value="React">React</option>
+                        <option value="Dotnet">Dotnet</option>
+                    </select>
+                    <Button className="p-4 ml-2" onClick={startQuiz}>Start Interview</Button>
+                </div>}
             </div>
         </div>
     );
