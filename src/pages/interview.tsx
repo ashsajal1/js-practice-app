@@ -57,10 +57,16 @@ export default function Interview() {
                 filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase() === lang.toLowerCase());
             }
 
+            if (filteredQuizzes.length === 0) {
+                setMessages([{ user: 'Robot', text: `No questions found for language ${lang}. Please select another language.` }]);
+                return;
+            }
+            
             // Limit the number of questions to 5
             const shuffledQuizzes = filteredQuizzes.sort(getRandomSort).slice(0, 5);
             setSelectedQuizzes(shuffledQuizzes);
             const firstQuestion = shuffledQuizzes[0];
+            
 
             setMessages([
                 {
