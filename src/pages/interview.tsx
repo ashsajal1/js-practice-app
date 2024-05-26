@@ -25,17 +25,29 @@ export default function Interview() {
     const [langTopic, setLangTopic] = useState('javascript');
     const [isBotWriting, setIsBotWriting] = useState(false);
     const [selectedQuizzes, setSelectedQuizzes] = useState<QuizQuestionType[]>([]);
+    const [defaultLang, setDefaultLang] = useState([
+        { value: 'javascript', label: 'Javascript' },
+        { value: 'golang', label: 'Golang' },
+        { value: 'react', label: 'React' },
+        { value: 'dotnet', label: 'Dotnet' }
+    ]);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const { speak } = useTextToSpeech();
     const dispatch = useDispatch();
 
     const { getParam } = useSearchParams();
-    const lang = getParam('lang')
+    const lang = getParam('lang');
+
     useEffect(() => {
         if (lang) {
-            setLangTopic(lang);
+            const langLower = lang.toLowerCase();
+            setLangTopic(langLower);
+            const langExists = defaultLang.some(option => option.value === langLower);
+            if (!langExists) {
+                setDefaultLang(prev => [...prev, { value: langLower, label: lang }]);
+            }
         }
-    }, [lang]);
+    }, [lang, defaultLang]);
 
     useEffect(() => {
         dispatch(getAllQuiz());
@@ -59,13 +71,10 @@ export default function Interview() {
         console.log('Selected Language/Topic:', langTopic);
         if (quizzes.length > 0) {
             let filteredQuizzes = [...quizzes];
-
-
             filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase() === langTopic.toLowerCase());
 
-
             if (filteredQuizzes.length === 0) {
-                setMessages([{ user: 'Robot', text: `No questions found for language ${lang}. Please select another language.` }]);
+                setMessages([{ user: 'Robot', text: `No questions found for language ${langTopic}. Please select another language.` }]);
                 return;
             }
 
@@ -73,7 +82,6 @@ export default function Interview() {
             const shuffledQuizzes = filteredQuizzes.sort(getRandomSort).slice(0, 5);
             setSelectedQuizzes(shuffledQuizzes);
             const firstQuestion = shuffledQuizzes[0];
-
 
             setMessages([
                 {
@@ -188,10 +196,11 @@ export default function Interview() {
             <div className="flex items-center justify-center w-full py-24">
                 {messages.length === 0 && <div>
                     <select value={langTopic} onChange={(e) => setLangTopic(e.target.value)} className='p-3 rounded outline-none w-full mb-2' title='select language'>
-                        <option value="Javascript">Javascript</option>
-                        <option value="golang">Golang</option>
-                        <option value="React">React</option>
-                        <option value="Dotnet">Dotnet</option>
+                        {defaultLang.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
                     </select>
                     <Button className="p-4 ml-2" onClick={startQuiz}>Start Interview</Button>
                 </div>}
