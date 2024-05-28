@@ -39,43 +39,63 @@ export default function Quiz() {
         }
     }, [currentQuestion?.code]);
 
+    const playTone = useCallback((frequency: number) => {
+        const audioContext = audioContextRef.current;
+        if (audioContext) {
+            const oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.connect(audioContext.destination);
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+    }, []);
+
+    const playSubmitTone = useCallback(() => {
+        playTone(880);
+    }, [playTone]);
+
+    const playOptionTone = useCallback(() => {
+        playTone(440);
+    }, [playTone]);
+
     const handleNextQuestion = useCallback(() => {
+        playSubmitTone()
         setCurrentQuestionIndex(prevIndex => (prevIndex + 1) % quizQuestions.length);
         setIsCompletedCurrentQuiz(false);
         setIsRightAnswer(false);
         setSelectedOption('');
-    }, [quizQuestions.length]);
+    }, [playSubmitTone, quizQuestions.length]);
 
-    const playTone = useCallback((frequency: number) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-        const audioContext = new AudioContext();
-        const oscillator = audioContext.createOscillator();
-        oscillator.type = 'sine'; // You can change the type to 'square', 'sawtooth', 'triangle' for different sounds
-        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime); // Frequency in Hz
-        oscillator.connect(audioContext.destination);
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 0.1); // Duration in seconds
+    const audioContextRef = useRef<AudioContext | null>(null);
+
+    useEffect(() => {
+        // Create a single AudioContext instance
+        if (audioContextRef.current === null) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        }
+        return () => {
+            // Cleanup AudioContext on component unmount
+            if (audioContextRef.current) {
+                audioContextRef.current.close();
+                audioContextRef.current = null;
+            }
+        };
     }, []);
 
-    const playSubmitTone = useCallback(() => {
-        playTone(880); // Submit action tone (A5, one octave higher)
-    }, [playTone]);
+    
+
+    const handleOptionClick = (option: string) => {
+        setSelectedOption(option);
+        playOptionTone();
+    };
 
     const handleSubmit = useCallback(() => {
         setIsCompletedCurrentQuiz(true);
         setIsRightAnswer(currentQuestion?.answer === selectedOption);
         playSubmitTone();
     }, [currentQuestion?.answer, playSubmitTone, selectedOption]);
-
-    const playOptionTone = useCallback(() => {
-        playTone(440); // Option selection tone (A4)
-    }, [playTone]);
-
-    const handleOptionClick = (option: string) => {
-        setSelectedOption(option);
-        playOptionTone();
-    };
 
     if (loading) {
         return <div>Loading...</div>;
