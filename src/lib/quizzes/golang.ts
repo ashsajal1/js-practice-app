@@ -15,7 +15,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Function calls are straightforward in Go.",
     type: "practical",
     topic: "Function Calls",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Nil is only used with pointers, interfaces, maps, slices, channels, and function types.",
     type: "practical",
     topic: "Nil and Zero Values",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Variable declaration requires the use of var or := for initialization.",
     type: "theoretical",
     topic: "Variable Declaration",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Consider the scope of variables in Go.",
     type: "practical",
     topic: "Variable Scope",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Defer is commonly used for cleanup actions.",
     type: "theoretical",
     topic: "Defer Statement",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 6,
@@ -73,7 +73,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Setting a slice to nil resets its length to zero.",
     type: "practical",
     topic: "Slices",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 7,
@@ -83,7 +83,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Check the documentation for string manipulation methods.",
     type: "theoretical",
     topic: "String Concatenation",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 8,
@@ -94,7 +94,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Floating-point arithmetic can be imprecise.",
     type: "practical",
     topic: "Floating Point Precision",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 9,
@@ -109,7 +109,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "Goroutines are lightweight threads managed by the Go runtime.",
     type: "theoretical",
     topic: "Goroutines",
-    lang: "Go",
+    lang: "golang",
   },
   {
     id: 10,
@@ -120,6 +120,6 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     hint: "This is an example of tuple assignment.",
     type: "practical",
     topic: "Tuple Assignment",
-    lang: "Go",
+    lang: "golang",
   },
 ];
