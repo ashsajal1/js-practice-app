@@ -21,8 +21,6 @@ export default function Quiz() {
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
 
-    // console.log(quizQuestions)
-
     const preRef = useRef<HTMLPreElement>(null);
 
     useEffect(() => {
@@ -34,7 +32,6 @@ export default function Quiz() {
     }, [quizzes, lang]);
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
-    // console.log(currentQuestion)
 
     useEffect(() => {
         if (preRef.current && currentQuestion?.code) {
@@ -49,10 +46,36 @@ export default function Quiz() {
         setSelectedOption('');
     }, [quizQuestions.length]);
 
+    const playTone = useCallback((frequency: number) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        const audioContext = new AudioContext();
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sine'; // You can change the type to 'square', 'sawtooth', 'triangle' for different sounds
+        oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime); // Frequency in Hz
+        oscillator.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.1); // Duration in seconds
+    }, []);
+
+    const playSubmitTone = useCallback(() => {
+        playTone(880); // Submit action tone (A5, one octave higher)
+    }, [playTone]);
+
     const handleSubmit = useCallback(() => {
         setIsCompletedCurrentQuiz(true);
         setIsRightAnswer(currentQuestion?.answer === selectedOption);
-    }, [currentQuestion?.answer, selectedOption]);
+        playSubmitTone();
+    }, [currentQuestion?.answer, playSubmitTone, selectedOption]);
+
+    const playOptionTone = useCallback(() => {
+        playTone(440); // Option selection tone (A4)
+    }, [playTone]);
+
+    const handleOptionClick = (option: string) => {
+        setSelectedOption(option);
+        playOptionTone();
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -101,7 +124,7 @@ export default function Quiz() {
                         {currentQuestion?.options?.map((option, index) => (
                             <div
                                 key={index}
-                                onClick={() => setSelectedOption(option)}
+                                onClick={() => handleOptionClick(option)}
                                 className={cn(`p-2 dark:text-white select-none cursor-pointer rounded border my-1 dark:border-gray-800 
                                     ${selectedOption === option ? 'border-blue-600 dark:border-blue-600' : ''}`)}
                             >
