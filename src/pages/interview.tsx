@@ -9,6 +9,7 @@ import { getAllQuiz } from '../features/quiz/quizSlice';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import useSearchParams from '../hooks/useSearchParams';
 import { QuizQuestionType } from '../lib/quizzes/types';
+import { HiRefresh } from 'react-icons/hi';
 
 type MessageType = {
     user: string;
@@ -31,6 +32,14 @@ export default function Interview() {
         { value: 'react', label: 'React' },
         { value: 'dotnet', label: 'Dotnet' }
     ]);
+    const [isLastQuestion, setIsLastQuestion] = useState(false)
+
+    useEffect(() => {
+        if (currentQuestionIndex === selectedQuizzes.length - 1) {
+            setIsLastQuestion(true)
+        }
+    }, [currentQuestionIndex, selectedQuizzes.length])
+
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const { speak } = useTextToSpeech();
     const dispatch = useDispatch();
@@ -106,7 +115,6 @@ export default function Interview() {
         const feedback = isCorrect ? "Correct!" : `Incorrect. The correct answer was "${currentQuestion.answer}"`;
         speak(feedback);
         const newScore = isCorrect ? score + 1 : score;
-        const isLastQuestion = currentQuestionIndex === selectedQuizzes.length - 1;
 
         const updatedMessages = messages.map((message, idx) => (idx === messages.length - 1 ? { ...message, answered: true } : message));
 
@@ -184,14 +192,26 @@ export default function Interview() {
                                             ))}
                                         </motion.div>
                                     )}
+
+
+
                                 </AnimatePresence>
                             </div>
+
                             {message.user === 'User' && (
                                 <img className="[40px] h-[40px] rounded-full" src="/image/user.jpg" alt="user" />
                             )}
                         </div>
+
+
                     </div>
                 ))}
+                {isLastQuestion && <div className={`py-2 w-full flex items-center justify-center`}>
+                    <Button variant='outline' className='w-1/2 md:w-1/3 gap-2'>
+                        <HiRefresh />
+                        Restart
+                    </Button>
+                </div>}
             </div>
             <div className="flex items-center justify-center w-full py-24">
                 {messages.length === 0 && <div>
