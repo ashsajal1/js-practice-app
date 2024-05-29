@@ -5,6 +5,7 @@ import { QnaTypes, qna } from "./concepts/javascript";
 import { quizQuestions } from "./quizzes/javascript";
 import { golangQuizQuestions } from "./quizzes/golang";
 import { rustQuizQuestions } from "./quizzes/rust";
+import { dotnetQuizQuestions } from "./quizzes/dotnet";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -18,4 +19,4 @@ export const generateRandomConcepts = (): QnaTypes[] => {
   return randomTopics;
 };
 
-export const generateRandomQuizzes = quizQuestions.concat(golangQuizQuestions, rustQuizQuestions).sort(getRandomSort);
+export const generateRandomQuizzes = quizQuestions.concat(golangQuizQuestions, rustQuizQuestions, dotnetQuizQuestions).sort(getRandomSort);
