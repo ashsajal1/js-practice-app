@@ -89,17 +89,17 @@ export default function Quiz() {
     }, []);
 
     useEffect(() => {
-        if(currentTopics && currentTopics.length > 0) {
+        if (currentTopics && currentTopics.length > 0) {
             const newQuiz = quizzes.filter(quiz => {
                 return currentTopics.some(topic => quiz.topic.includes(topic) || quiz.lang.toLowerCase().includes(topic.toLowerCase()));
             });
-    
+
             console.log(newQuiz);
-    
+
             setQuizQuestions(newQuiz.sort(getRandomSort));
         }
     }, [currentTopics, quizzes]);
-    
+
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
@@ -111,6 +111,14 @@ export default function Quiz() {
         setIsRightAnswer(currentQuestion?.answer === selectedOption);
         playSubmitTone();
     }, [currentQuestion?.answer, playSubmitTone, selectedOption]);
+
+    const topics = ['Golang', 'Rust', 'Dotnet', 'React', 'Javascript', 'Angular'];
+
+    const toggleTopic = (topic: string) => {
+        setCurrentTopics(prevTopics =>
+            prevTopics.includes(topic) ? prevTopics.filter(t => t !== topic) : [...prevTopics, topic]
+        );
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -143,7 +151,7 @@ export default function Quiz() {
                         <AnimatePresence mode='wait'>
                             {
                                 currentQuestion.explanation &&
-                                <motion.div initial={{scale: 0}} animate={{scale:1}} exit={{scale: 0}} className='my-6 border-t pt-4 dark:text-white dark:border-t-gray-700'><span className='font-bold text-blue-600'>Explanation :</span> {currentQuestion.explanation}</motion.div>
+                                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className='my-6 border-t pt-4 dark:text-white dark:border-t-gray-700'><span className='font-bold text-blue-600'>Explanation :</span> {currentQuestion.explanation}</motion.div>
 
                             }
                         </AnimatePresence>
@@ -159,12 +167,15 @@ export default function Quiz() {
             <div className='p-4 flex flex-col items-center gap-4'>
                 <h2 className='dark:text-white font-bold text-xl'>Select Topic : </h2>
                 <div className='flex items-center gap-2'>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Golang'])} variant='outline'>Golang</Button>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Rust'])} variant='outline'>Rust</Button>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Dotnet'])} variant='outline'>Dotnet</Button>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'React'])} variant='outline'>React</Button>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Javascript'])} variant='outline'>Javascript</Button>
-                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Angular'])} variant='outline'>Angular</Button>
+                    {topics.map(topic => (
+                        <Button
+                            key={topic}
+                            onClick={() => toggleTopic(topic)}
+                            variant={`${currentTopics.includes(topic) ? 'solid' : 'outline'}`}
+                        >
+                            {topic}
+                        </Button>
+                    ))}
                 </div>
             </div>
             <div className='grid place-items-center pt-12 px-4 md:p-12 pb-24'>
