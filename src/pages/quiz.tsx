@@ -23,6 +23,7 @@ export default function Quiz() {
     const [isRightAnswer, setIsRightAnswer] = useState(false);
     const [quizQuestions, setQuizQuestions] = useState<QuizQuestionType[]>([]);
     const [currentTopics, setCurrentTopics] = useState<string[]>([]);
+    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
 
@@ -121,6 +122,10 @@ export default function Quiz() {
         );
     };
 
+    const toggleTooltip = () => {
+        setIsTooltipVisible(prev => !prev);
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -165,7 +170,7 @@ export default function Quiz() {
 
     return (
         <AnimatedPage>
-            <div className='p-4 flex flex-col items-center gap-4'>
+            <div onClick={() => setIsTooltipVisible(false)} className='p-4 flex flex-col items-center gap-4'>
                 <h2 className='dark:text-white font-bold text-xl'>Select Topic : </h2>
                 <div className='flex items-center gap-2'>
                     {topics.map(topic => (
@@ -183,8 +188,16 @@ export default function Quiz() {
                 <div className="w-full md:w-1/3 border dark:border-gray-800 p-6 md:p-4 rounded">
                     <div className='flex justify-between items-start'>
                         <p className='dark:text-white'>{currentQuestion?.question}</p>
-                        <CiCircleInfo />
+                        <div className='relative'>
+                            <CiCircleInfo onClick={toggleTooltip} className='cursor-pointer dark:text-gray-600' />
+                            {isTooltipVisible && (
+                                <div className='absolute w-[180px] bottom-6 right-0 mt-2 p-2 bg-gray-200 dark:bg-gray-700 rounded shadow-lg'>
+                                    <p className='text-sm dark:text-white'>{currentQuestion.hint}</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
+
                     <p className='py-2 text-sm font-extralight dark:text-white'>
                         Type: <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{currentQuestion?.type}</span>
                     </p>
