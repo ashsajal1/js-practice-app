@@ -172,7 +172,7 @@ export default function Quiz() {
         <AnimatedPage>
             <div onClick={() => setIsTooltipVisible(false)} className='p-4 flex flex-col items-center gap-4 w-full'>
                 <h2 className='dark:text-white font-bold text-xl'>Select Topic : </h2>
-                <div className='flex items-center gap-2 overflow-x-scroll w-full scrollbar-thumb-blue-600 scrollbar-track-blue-600 justify-center'>
+                <div className='flex items-center gap-2 overflow-x-scroll w-full scrollbar-thumb-blue-600 scrollbar-track-blue-600 md:justify-center justify-start'>
                     {topics.map(topic => (
                         <Button
                             key={topic}
