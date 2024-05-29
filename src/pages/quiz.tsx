@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { getAllQuiz } from '../features/quiz/quizSlice';
 import { useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Quiz() {
     const location = useLocation();
@@ -84,7 +85,7 @@ export default function Quiz() {
         };
     }, []);
 
-    
+
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
@@ -125,7 +126,15 @@ export default function Quiz() {
                             ))}
                         </div>
                         <div className='btn mt-2' onClick={handleNextQuestion}>Practice next</div>
+                        <AnimatePresence mode='wait'>
+                            {
+                                currentQuestion.explanation &&
+                                <motion.div initial={{scale: 0}} animate={{scale:1}} exit={{scale: 0}} className='my-6 border-t pt-4 dark:text-white dark:border-t-gray-700'><span className='font-bold text-blue-600'>Explanation :</span> {currentQuestion.explanation}</motion.div>
+
+                            }
+                        </AnimatePresence>
                     </div>
+
                 </div>
             </AnimatedPage>
         );
