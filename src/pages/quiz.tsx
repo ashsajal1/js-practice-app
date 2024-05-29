@@ -218,7 +218,7 @@ export default function Quiz() {
                 </div>
             </div>}
 
-            {quizQuestions.length === 0 && <div className='flex items-center flex-col justify-center m-12'>
+            {quizQuestions.length === 0 && <div className='flex items-center flex-col justify-center m-12 dark:text-gray-600'>
                 <h1 className='text-xl font-extralight'>
                     No question found. Select Topic!
                 </h1>
