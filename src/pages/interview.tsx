@@ -80,7 +80,7 @@ export default function Interview() {
         console.log('Selected Language/Topic:', langTopic);
         if (quizzes.length > 0) {
             let filteredQuizzes = [...quizzes];
-            filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase() === langTopic.toLowerCase());
+            filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase().includes(langTopic.toLowerCase()) || quiz.topic.toLowerCase().includes(langTopic.toLowerCase()));
 
             if (filteredQuizzes.length === 0) {
                 setMessages([{ user: 'Robot', text: `No questions found for language ${langTopic}. Please select another language.` }]);
