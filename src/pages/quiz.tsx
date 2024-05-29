@@ -198,9 +198,27 @@ export default function Quiz() {
                         </div>
                     </div>
 
-                    <p className='py-2 text-sm font-extralight dark:text-white'>
-                        Type: <span className='text-sm bg-blue-300 rounded p-1 text-blue-600'>{currentQuestion?.type}</span>
-                    </p>
+                    <div className='flex items-center gap-2'>
+                        <p className='py-2 text-sm font-extralight dark:text-white'>
+                            <span className='font-bold'>Type : </span>
+                            <span className='text-sm'>{currentQuestion?.type}</span>
+                        </p>
+
+                        <p className='py-2 text-sm font-extralight dark:text-white'>
+                            <span className='font-bold'>Language :</span>
+                            <span> {currentQuestion.lang}</span>
+                        </p>
+
+                        {currentQuestion.topic && <p className='py-2 text-sm font-extralight dark:text-white'>
+                            <span className='font-bold'>Topic :</span>
+                            <span> {currentQuestion.topic}</span>
+                        </p>}
+
+                        {currentQuestion.complexity && <p className='py-2 text-sm font-extralight dark:text-white'>
+                            <span className='font-bold'>Complexity :</span>
+                            <span> {currentQuestion.complexity}</span>
+                        </p>}
+                    </div>
                     <pre ref={preRef} className={`text-wrap p-2 ${currentQuestion?.code ? '' : 'hidden'}`}><code>{currentQuestion?.code}</code></pre>
                     <div>
                         {currentQuestion?.options?.map((option, index) => (
