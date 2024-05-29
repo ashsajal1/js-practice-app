@@ -9,6 +9,8 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { getAllQuiz } from '../features/quiz/quizSlice';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import Button from '../components/ui/button';
+import { getRandomSort } from '../lib/random';
 
 export default function Quiz() {
     const location = useLocation();
@@ -19,6 +21,7 @@ export default function Quiz() {
     const [selectedOption, setSelectedOption] = useState('');
     const [isRightAnswer, setIsRightAnswer] = useState(false);
     const [quizQuestions, setQuizQuestions] = useState<QuizQuestionType[]>([]);
+    const [currentTopics, setCurrentTopics] = useState<string[]>([]);
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
 
@@ -85,7 +88,18 @@ export default function Quiz() {
         };
     }, []);
 
-
+    useEffect(() => {
+        if(currentTopics && currentTopics.length > 0) {
+            const newQuiz = quizzes.filter(quiz => {
+                return currentTopics.some(topic => quiz.topic.includes(topic) || quiz.lang.toLowerCase().includes(topic.toLowerCase()));
+            });
+    
+            console.log(newQuiz);
+    
+            setQuizQuestions(newQuiz.sort(getRandomSort));
+        }
+    }, [currentTopics, quizzes]);
+    
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
@@ -142,6 +156,17 @@ export default function Quiz() {
 
     return (
         <AnimatedPage>
+            <div className='p-4 flex flex-col items-center gap-4'>
+                <h2 className='dark:text-white font-bold text-xl'>Select Topic : </h2>
+                <div className='flex items-center gap-2'>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Golang'])} variant='outline'>Golang</Button>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Rust'])} variant='outline'>Rust</Button>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Dotnet'])} variant='outline'>Dotnet</Button>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'React'])} variant='outline'>React</Button>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Javascript'])} variant='outline'>Javascript</Button>
+                <Button onClick={() => setCurrentTopics(existedTopics => [...existedTopics, 'Angular'])} variant='outline'>Angular</Button>
+                </div>
+            </div>
             <div className='grid place-items-center pt-12 px-4 md:p-12 pb-24'>
                 <div className="w-full md:w-1/3 border dark:border-gray-800 p-6 md:p-4 rounded">
                     <p className='dark:text-white'>{currentQuestion?.question}</p>
