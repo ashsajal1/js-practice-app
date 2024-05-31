@@ -3,6 +3,13 @@ import useSearchParams from "../hooks/useSearchParams"
 export default function Watch() {
     const searchParams = useSearchParams()
     const id = searchParams.getParam('id')
+    if(!id) {
+        return (
+            <div className="grid place-items-center p-24">
+                <h1 className="text-xl font-bold">Video not found!</h1>
+            </div>
+        )
+    }
     return (
         <div
             className="w-full p-6">
