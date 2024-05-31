@@ -9,6 +9,7 @@ import Interview from './pages/interview'
 import Concept from './pages/concept'
 import ErrorElement from './pages/error-element'
 import Tutorial from './pages/tutorial'
+import Watch from './pages/watch'
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/tutorial',
-        element: <Tutorial />
+        element: <Tutorial />,
+      },
+      {
+        path: '/watch',
+        element: <Watch />
       },
       {
         path: '*',
