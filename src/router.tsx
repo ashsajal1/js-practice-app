@@ -8,6 +8,7 @@ import Quiz from './pages/quiz'
 import Interview from './pages/interview'
 import Concept from './pages/concept'
 import ErrorElement from './pages/error-element'
+import Tutorial from './pages/tutorial'
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: '/practice',
         element: <Practice />
+      },
+      {
+        path: '/tutorial',
+        element: <Tutorial />
       },
       {
         path: '*',
