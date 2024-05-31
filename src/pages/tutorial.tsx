@@ -13,7 +13,7 @@ export default function Tutorial() {
 
             <section className="grid grid-cols-3 gap-2">
                 {jsTutorials.map(video => (
-                    <TutorialCard videoId={video.videoId} handleWatch={() => handleWatch(video.videoId)} />
+                    <TutorialCard key={video.videoId} videoId={video.videoId} handleWatch={() => handleWatch(video.videoId)} />
                 ))}
 
             </section>
