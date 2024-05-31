@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import TutorialCard from "../components/ui/tutorial-card";
 
 export default function Tutorial() {
+    const navigate = useNavigate()
     const handleWatch = () => {
-        console.log('watch')
+        navigate(`/watch?id=BVUTkSAf-6w`)
     }
     return (
         <div className="p-4">
