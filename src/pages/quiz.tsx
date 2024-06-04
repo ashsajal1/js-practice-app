@@ -13,6 +13,7 @@ import Button from '../components/ui/button';
 import { getRandomSort } from '../lib/random';
 import { CiCircleInfo } from 'react-icons/ci';
 import NoQuestion from '../components/partials/no-question';
+import useAudio from '../hooks/useAudio';
 
 export default function Quiz() {
     const location = useLocation();
@@ -27,6 +28,7 @@ export default function Quiz() {
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
+    const { playOptionTone, playSubmitTone } = useAudio()
 
     const preRef = useRef<HTMLPreElement>(null);
 
@@ -46,26 +48,6 @@ export default function Quiz() {
         }
     }, [currentQuestion?.code]);
 
-    const playTone = useCallback((frequency: number) => {
-        const audioContext = audioContextRef.current;
-        if (audioContext) {
-            const oscillator = audioContext.createOscillator();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-            oscillator.connect(audioContext.destination);
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.1);
-        }
-    }, []);
-
-    const playSubmitTone = useCallback(() => {
-        playTone(880);
-    }, [playTone]);
-
-    const playOptionTone = useCallback(() => {
-        playTone(440);
-    }, [playTone]);
-
     const handleNextQuestion = useCallback(() => {
         playSubmitTone()
         setCurrentQuestionIndex(prevIndex => (prevIndex + 1) % quizQuestions.length);
@@ -74,30 +56,11 @@ export default function Quiz() {
         setSelectedOption('');
     }, [playSubmitTone, quizQuestions.length]);
 
-    const audioContextRef = useRef<AudioContext | null>(null);
-
-    useEffect(() => {
-        // Create a single AudioContext instance
-        if (audioContextRef.current === null) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-        }
-        return () => {
-            // Cleanup AudioContext on component unmount
-            if (audioContextRef.current) {
-                audioContextRef.current.close();
-                audioContextRef.current = null;
-            }
-        };
-    }, []);
-
     useEffect(() => {
         if (currentTopics && currentTopics.length > 0) {
             const newQuiz = quizzes.filter(quiz => {
                 return currentTopics.some(topic => quiz.topic.includes(topic) || quiz.lang.toLowerCase().includes(topic.toLowerCase()));
             });
-
-            // console.log(newQuiz);
 
             setQuizQuestions(newQuiz.sort(getRandomSort));
         }
