@@ -23,7 +23,7 @@ export default function Home() {
     <AnimatedPage>
       <div>
         <section className="p-12 z-10 flex flex-col gap-6 items-center justify-center">
-          <form onSubmit={handleSearch} className="border dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
+          <form onSubmit={handleSearch} className="border bg-white dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
             <input
               onChange={(e) => setTopic(e.target.value)}
               type="text"
