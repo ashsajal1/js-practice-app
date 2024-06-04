@@ -20,6 +20,7 @@ export default function Quiz() {
     const dispatch = useDispatch();
     const { quizzes, loading, error } = useTypedSelector((state) => state.quiz);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestion, setCurrentQuestion] = useState<QuizQuestionType | null>(null);
     const [isCompletedCurrentQuiz, setIsCompletedCurrentQuiz] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [isRightAnswer, setIsRightAnswer] = useState(false);
@@ -28,7 +29,7 @@ export default function Quiz() {
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const searchParams = new URLSearchParams(location.search);
     const lang = searchParams.get('lang') || '';
-    const { playOptionTone, playSubmitTone } = useAudio()
+    const { playOptionTone, playSubmitTone } = useAudio();
 
     const preRef = useRef<HTMLPreElement>(null);
 
@@ -40,7 +41,9 @@ export default function Quiz() {
         setQuizQuestions(quizzes.filter(quiz => quiz.lang.toLowerCase().includes(lang.toLowerCase())));
     }, [quizzes, lang]);
 
-    const currentQuestion = quizQuestions[currentQuestionIndex];
+    useEffect(() => {
+        setCurrentQuestion(quizQuestions[currentQuestionIndex] || null);
+    }, [quizQuestions, currentQuestionIndex]);
 
     useEffect(() => {
         if (preRef.current && currentQuestion?.code) {
@@ -49,7 +52,7 @@ export default function Quiz() {
     }, [currentQuestion?.code]);
 
     const handleNextQuestion = useCallback(() => {
-        playSubmitTone()
+        playSubmitTone();
         setCurrentQuestionIndex(prevIndex => (prevIndex + 1) % quizQuestions.length);
         setIsCompletedCurrentQuiz(false);
         setIsRightAnswer(false);
@@ -65,7 +68,6 @@ export default function Quiz() {
             setQuizQuestions(newQuiz.sort(getRandomSort));
         }
     }, [currentTopics, quizzes]);
-
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
@@ -120,7 +122,7 @@ export default function Quiz() {
                         <div className='btn mt-2' onClick={handleNextQuestion}>Practice next</div>
                         <AnimatePresence mode='wait'>
                             {
-                                currentQuestion.explanation &&
+                                currentQuestion?.explanation &&
                                 <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className='my-6 border-t pt-4 dark:text-white dark:border-t-gray-700'><span className='font-bold text-blue-600'>Explanation :</span> {currentQuestion.explanation}</motion.div>
 
                             }
@@ -156,7 +158,7 @@ export default function Quiz() {
                             <CiCircleInfo onClick={toggleTooltip} className='cursor-pointer dark:text-gray-600' />
                             {isTooltipVisible && (
                                 <div className='absolute w-[180px] bottom-6 right-0 mt-2 p-2 bg-gray-200 dark:bg-gray-700 rounded shadow-lg'>
-                                    <p className='text-sm dark:text-white'>{currentQuestion.hint}</p>
+                                    <p className='text-sm dark:text-white'>{currentQuestion?.hint}</p>
                                 </div>
                             )}
                         </div>
@@ -170,15 +172,15 @@ export default function Quiz() {
 
                         <p className='py-2 text-sm font-extralight dark:text-white'>
                             <span className='font-bold'>Language :</span>
-                            <span> {currentQuestion.lang}</span>
+                            <span> {currentQuestion?.lang}</span>
                         </p>
 
-                        {currentQuestion.topic && <p className='py-2 text-sm font-extralight dark:text-white'>
+                        {currentQuestion?.topic && <p className='py-2 text-sm font-extralight dark:text-white'>
                             <span className='font-bold'>Topic :</span>
                             <span> {currentQuestion.topic}</span>
                         </p>}
 
-                        {currentQuestion.complexity && <p className='py-2 text-sm font-extralight dark:text-white'>
+                        {currentQuestion?.complexity && <p className='py-2 text-sm font-extralight dark:text-white'>
                             <span className='font-bold'>Complexity :</span>
                             <span> {currentQuestion.complexity}</span>
                         </p>}
