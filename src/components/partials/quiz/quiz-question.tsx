@@ -2,9 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import { CiCircleInfo } from 'react-icons/ci';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
-import { QuizQuestionType } from '../../lib/quizzes/types';
-import Button from '../ui/button';
-import { cn } from '../../lib/cn';
+import { QuizQuestionType } from '../../../lib/quizzes/types';
+import Button from '../../ui/button';
+import { cn } from '../../../lib/cn';
 
 
 interface QuizQuestionProps {

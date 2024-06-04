@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { QuizQuestionType } from '../../lib/quizzes/types';
+import { QuizQuestionType } from '../../../lib/quizzes/types';
 
 interface CompletedQuizProps {
     currentQuestion: QuizQuestionType | null;

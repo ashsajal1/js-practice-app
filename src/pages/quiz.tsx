@@ -8,10 +8,10 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { getAllQuiz } from '../features/quiz/quizSlice';
 import { useLocation } from 'react-router-dom';
 import { getRandomSort } from '../lib/random';
-import NoQuestion from '../components/partials/no-question';
+import NoQuestion from '../components/partials/quiz/no-question';
 import useAudio from '../hooks/useAudio';
-import CompletedQuiz from '../components/partials/completed-quiz';
-import QuizQuestion from '../components/partials/quiz-question';
+import CompletedQuiz from '../components/partials/quiz/completed-quiz';
+import QuizQuestion from '../components/partials/quiz/quiz-question';
 
 export default function Quiz() {
     const location = useLocation();
