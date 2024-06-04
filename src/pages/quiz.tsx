@@ -11,7 +11,8 @@ import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from '../components/ui/button';
 import { getRandomSort } from '../lib/random';
-import { CiCircleInfo, CiFaceMeh } from 'react-icons/ci';
+import { CiCircleInfo } from 'react-icons/ci';
+import NoQuestion from '../components/partials/no-question';
 
 export default function Quiz() {
     const location = useLocation();
@@ -236,14 +237,7 @@ export default function Quiz() {
                 </div>
             </div>}
 
-            {quizQuestions.length === 0 && <div className='flex items-center flex-col justify-center m-12 dark:text-gray-600'>
-                <h1 className='text-xl font-extralight'>
-                    No question found. Select Topic!
-                </h1>
-                <span className='mt-6'>
-                    <CiFaceMeh className='h-12 w-12' />
-                </span>
-            </div>}
+            {quizQuestions.length === 0 && <NoQuestion />}
         </AnimatedPage>
     );
 }
