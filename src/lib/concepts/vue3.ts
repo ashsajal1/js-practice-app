@@ -28,6 +28,16 @@ export const vue3Concepts: QnaTypes[] = [
     }
   }
   `,
+    quiz: {
+      question: "What is the main purpose of the Composition API in Vue 3?",
+      options: [
+        "To provide a more organized and scalable way to write Vue components",
+        "To improve performance of Vue applications",
+        "To add better TypeScript support",
+        "All of the above",
+      ],
+      answer: "All of the above",
+    },
   },
   {
     id: "vue3-2",
@@ -70,6 +80,17 @@ export const vue3Concepts: QnaTypes[] = [
     }
   }
   `,
+    quiz: {
+      question:
+        "What is the main difference in organizing component logic between the Options API and Composition API?",
+      options: [
+        "Options API uses options, Composition API uses functions",
+        "Options API uses classes, Composition API uses functions",
+        "There is no difference in organizing component logic",
+        "Options API uses mixins, Composition API uses composables",
+      ],
+      answer: "Options API uses options, Composition API uses functions",
+    },
   },
   {
     id: "vue3-3",
@@ -112,5 +133,16 @@ export const vue3Concepts: QnaTypes[] = [
   
   app.mount('#app')
   `,
+    quiz: {
+      question:
+        "Which of the following is NOT a key difference between Vue 2 and Vue 3?",
+      options: [
+        "Performance improvements",
+        "Composition API",
+        "Smaller bundle size",
+        "Improved data binding",
+      ],
+      answer: "Improved data binding",
+    },
   },
 ];
