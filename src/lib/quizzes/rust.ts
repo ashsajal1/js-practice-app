@@ -30,7 +30,7 @@ export const rustQuizQuestions: QuizQuestionType[] = [
     id: "rust-2",
     question:
       "Which of the following traits must be implemented for a type to be used as a key in a HashMap?",
-    options: ["Clone", "Eq", "Hash", "PartialEq"],
+    options: ["Eq, Hash", "Clone", "PartialEq", "Copy"],
     answer: "Eq, Hash",
     hint: "A key must be comparable and hashable.",
     type: "theoretical",
