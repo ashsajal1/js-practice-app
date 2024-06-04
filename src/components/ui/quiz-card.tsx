@@ -39,7 +39,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
             <div key={uniqueKey} className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
                 <p className="text-lg font-medium my-2">{quiz.question}</p>
                 {quiz.options.map((i) => (
-                    <p key={i} className={cn(`p-2 text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-white text-black dark:border-gray-800' : ''}`)}>{i}</p>
+                    <p key={i} className={cn(`p-2 text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''}`)}>{i}</p>
                 ))}
                 <div onClick={handleConfirm} className="btn w-full">Confirm or <Timer />/5</div>
             </div>
