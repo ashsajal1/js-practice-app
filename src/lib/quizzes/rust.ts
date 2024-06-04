@@ -65,7 +65,7 @@ export const rustQuizQuestions: QuizQuestionType[] = [
     question:
       "Explain the concept of lifetimes in Rust and how they prevent dangling references.",
     answer:
-      "Lifetimes in Rust are a way to enforce memory safety by tracking how long references are valid. The Rust compiler uses lifetimes to ensure that references do not outlive the data they point to, thus preventing dangling references. By annotating lifetimes, the compiler can check that all references are valid for the duration of their use.",
+      "Lifetimes in Rust determine the duration for which a reference is valid.",
     hint: "Think about how Rust's borrow checker works.",
     type: "theoretical",
     topic: "Rust",
