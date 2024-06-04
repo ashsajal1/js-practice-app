@@ -7,10 +7,11 @@ import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopicBadge from "../components/ui/topic-badge";
 import CounterStat from "../components/partials/counter-stat";
+import Blob from "../components/ui/blob";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
-  const concepts = useTypedSelector((state) => state.concept.concepts).slice(0,15);
+  const concepts = useTypedSelector((state) => state.concept.concepts).slice(0, 15);
   const navigate = useNavigate();
 
   const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
@@ -20,30 +21,34 @@ export default function Home() {
 
   return (
     <AnimatedPage>
-      <section className="p-12 flex flex-col gap-6 items-center justify-center">
-        <form onSubmit={handleSearch} className="border dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
-          <input
-            onChange={(e) => setTopic(e.target.value)}
-            type="text"
-            placeholder="Rust, Golang, React"
-            className="p-2 dark:bg-black dark:text-white rounded outline-none"
-          />
+      <div>
+        <section className="p-12 z-10 flex flex-col gap-6 items-center justify-center">
+          <form onSubmit={handleSearch} className="border dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
+            <input
+              onChange={(e) => setTopic(e.target.value)}
+              type="text"
+              placeholder="Rust, Golang, React"
+              className="p-2 dark:bg-black dark:text-white rounded outline-none"
+            />
 
-          <Button>
-            <CiSearch className="h-4 w-4" />
-          </Button>
+            <Button>
+              <CiSearch className="h-4 w-4" />
+            </Button>
 
-        </form>
+          </form>
 
-        <div className="flex gap-2 items-center">
-          <TopicBadge topic="javascript" />
-          <TopicBadge topic="react" />
-          <TopicBadge topic="rust" />
-          <TopicBadge topic="golang" />
-        </div>
+          <div className="flex gap-2 items-center">
+            <TopicBadge topic="javascript" />
+            <TopicBadge topic="react" />
+            <TopicBadge topic="rust" />
+            <TopicBadge topic="golang" />
+          </div>
 
-        <CounterStat />
-      </section>
+          <CounterStat />
+
+        </section>
+        <Blob className='top-0 -z-10' />
+      </div>
 
       <div className="p-4 flex flex-col items-center justify-center relative">
         <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore concepts to practice</h1>
