@@ -6,6 +6,7 @@ import { quizQuestions } from "./quizzes/javascript";
 import { golangQuizQuestions } from "./quizzes/golang";
 import { rustQuizQuestions } from "./quizzes/rust";
 import { dotnetQuizQuestions } from "./quizzes/dotnet";
+import { vue3Concepts } from "./concepts/vue3";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -13,7 +14,7 @@ export function getRandomSort() {
 
 export const generateRandomConcepts = (): QnaTypes[] => {
   const randomTopics = qna
-    .concat(rustConcepts, golangConcepts, reactConcepts)
+    .concat(rustConcepts, golangConcepts, reactConcepts, vue3Concepts)
     .slice()
     .sort(getRandomSort);
   return randomTopics;
