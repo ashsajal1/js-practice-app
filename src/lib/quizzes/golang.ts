@@ -2,7 +2,7 @@ import { QuizQuestionType } from "./types";
 
 export const golangQuizQuestions: QuizQuestionType[] = [
   {
-    id: 1,
+    id: "golang-1",
     question: "What does the following Go code snippet do?",
     code: "package main\n\nfunc main() {\n  println(foo())\n}\n\nfunc foo() int {\n  return bar()\n}\n\nfunc bar() int {\n  return 42\n}",
     options: [
@@ -18,7 +18,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 2,
+    id: "golang-2",
     question: "What will be the output of the following Go code snippet?",
     code: "package main\n\nfunc main() {\n  var x int\n  if x == nil {\n    println(\"x is nil\")\n  } else {\n    println(\"x is not nil\")\n  }\n}",
     options: ["x is nil", "x is not nil", "Throws a compilation error", "undefined behavior"],
@@ -29,7 +29,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 3,
+    id: "golang-3",
     question: "Which of the following is not a valid way to declare a variable in Go?",
     options: ["var x int", "x := 10", "x = 10", "var x = 10"],
     answer: "x = 10",
@@ -39,7 +39,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 4,
+    id: "golang-4",
     question: "What will the following Go code log to the console?",
     code: "package main\n\nfunc main() {\n  x := 10\n  if x > 5 {\n    x := 5\n    println(x)\n  }\n  println(x)\n}",
     options: ["10, 5", "5, 10", "10, 10", "5, 5"],
@@ -50,7 +50,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 5,
+    id: "golang-5",
     question: "What does the 'defer' keyword do in Go?",
     options: [
       "Defers the execution of a function until the surrounding function returns",
@@ -65,7 +65,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 6,
+    id: "golang-6",
     question: "What will be the output of the following Go code snippet?",
     code: "package main\n\nfunc main() {\n  arr := []int{1, 2, 3}\n  arr = nil\n  println(len(arr))\n}",
     options: ["0", "3", "nil", "Throws a runtime error"],
@@ -76,7 +76,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 7,
+    id: "golang-7",
     question: "Which of the following is not a valid method to concatenate strings in Go?",
     options: ["Using + operator", "Using fmt.Sprintf", "Using strings.Join", "Using append()"],
     answer: "Using append()",
@@ -86,7 +86,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 8,
+    id: "golang-8",
     question: "What will be the result of the following Go code?",
     code: "package main\n\nimport \"fmt\"\n\nfunc main() {\n  fmt.Println(0.1 + 0.2 == 0.3)\n}",
     options: ["true", "false", "undefined", "Throws a runtime error"],
@@ -97,7 +97,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 9,
+    id: "golang-9",
     question: "How can you create a goroutine in Go?",
     options: [
       "go func()",
@@ -112,7 +112,7 @@ export const golangQuizQuestions: QuizQuestionType[] = [
     lang: "golang",
   },
   {
-    id: 10,
+    id: "golang-10",
     question: "What will the following Go code output?",
     code: "package main\n\nimport \"fmt\"\n\nfunc main() {\n  a, b := 1, 2\n  a, b = b, a\n  fmt.Println(a, b)\n}",
     options: ["1, 2", "2, 1", "undefined, undefined", "Throws a compilation error"],
