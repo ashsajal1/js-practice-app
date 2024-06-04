@@ -47,7 +47,7 @@ export default function Home() {
           <CounterStat />
 
         </section>
-        <Blob className='top-0 -z-10' />
+        <Blob className='top-0 w-full -z-10' />
       </div>
 
       <div className="p-4 flex flex-col items-center justify-center relative">
