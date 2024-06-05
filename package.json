@@ -2,6 +2,24 @@
   "name": "js-practice-app",
   "private": true,
   "version": "0.0.0",
+  "description": "A JavaScript practice application using React, Redux, and Tailwind CSS",
+  "author": "Ashfiquzzaman Sajal",
+  "keywords": [
+    "JavaScript",
+    "React",
+    "Redux",
+    "Tailwind CSS",
+    "Vite",
+    "TypeScript"
+  ],
+  "homepage": "https://github.com/ashsajal1/js-practice-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ashsajal1/js-practice-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ashsajal1/js-practice-app/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
