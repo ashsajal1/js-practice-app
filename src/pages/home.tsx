@@ -29,6 +29,7 @@ export default function Home() {
               type="text"
               placeholder="Rust, Golang, React"
               className="p-2 dark:bg-black dark:text-white rounded outline-none"
+              required
             />
 
             <Button>
