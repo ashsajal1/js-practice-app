@@ -60,7 +60,7 @@ export default function Quiz() {
     useEffect(() => {
         if (currentTopics && currentTopics.length > 0) {
             const newQuiz = quizzes.filter(quiz => {
-                return currentTopics.some(topic => quiz.topic.includes(topic) || quiz.lang.toLowerCase().includes(topic.toLowerCase()));
+                return currentTopics.some(topic => quiz.topic.toLowerCase().includes(topic.toLowerCase()) || quiz.lang.toLowerCase().includes(topic.toLowerCase()));
             });
 
             setQuizQuestions(newQuiz.sort(getRandomSort));
@@ -78,11 +78,11 @@ export default function Quiz() {
         playSubmitTone();
     }, [currentQuestion?.answer, playSubmitTone, selectedOption]);
 
-    const topics = ['Golang', 'Rust', 'Dotnet', 'React', 'Javascript', 'Angular'];
+    const topics = ['Golang', 'Rust', 'Dotnet', 'React', 'Javascript', 'Angular' ,"TailwindCss"];
 
     const toggleTopic = (topic: string) => {
         setCurrentTopics(prevTopics =>
-            prevTopics.includes(topic) ? prevTopics.filter(t => t !== topic) : [...prevTopics, topic]
+            prevTopics.includes(topic.toLowerCase()) ? prevTopics.filter(t => t !== topic) : [...prevTopics, topic]
         );
     };
 
