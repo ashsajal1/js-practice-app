@@ -1,7 +1,7 @@
 {
   "name": "js-practice-app",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A JavaScript practice application using React, Redux, and Tailwind CSS",
   "author": "Ashfiquzzaman Sajal",
   "keywords": [
