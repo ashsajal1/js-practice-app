@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import TopicBadge from "../components/ui/topic-badge";
 import CounterStat from "../components/partials/counter-stat";
 import Blob from "../components/ui/blob";
+import { topicList } from "../lib/utils";
+import { getRandomSort } from "../lib/random";
 
 export default function Home() {
   const [topic, setTopic] = useState('all');
@@ -39,10 +41,9 @@ export default function Home() {
           </form>
 
           <div className="flex gap-2 items-center">
-            <TopicBadge topic="javascript" />
-            <TopicBadge topic="react" />
-            <TopicBadge topic="rust" />
-            <TopicBadge topic="golang" />
+            {topicList.sort(getRandomSort).slice(0,4).map(topic => 
+              <TopicBadge topic={topic} />
+            )}
           </div>
 
           <CounterStat />
