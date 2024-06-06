@@ -12,7 +12,7 @@ export default function Concept() {
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const page = parseInt(searchParams.get('page') || '1', 10);
-    const topic = searchParams.get('topic')
+    const topic = searchParams.get('topic') || 'all'
 
     const concepts = useTypedSelector((state) => state.concept.concepts);
     const filteredConcepts = topic === 'all' ? concepts : concepts.filter((concept) => concept.topic.toLowerCase().includes(topic.toLowerCase()));
@@ -32,7 +32,7 @@ export default function Concept() {
         <AnimatedPage>
             <div className="p-4 flex flex-col items-center justify-center relative">
 
-                {topic.length > 0 && <div className="p-2 rounded w-full border dark:border-gray-700 shadow dark:shadow my-3 flex items-center justify-between">
+                {(topic.length > 0 && topic !== 'all') && <div className="p-2 rounded w-full border dark:border-gray-700 shadow dark:shadow my-3 flex items-center justify-between">
                     <p className="dark:text-white">Showing results for : <span className="text-blue-600">{topic}</span></p>
 
                     <HiMiniXMark onClick={() => {history.back()}} className="h-6 w-6 dark:text-white" />
