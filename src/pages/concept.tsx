@@ -5,13 +5,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import TopicBadge from "../components/ui/topic-badge";
 import Button from "../components/ui/button";
 import { ArrowDownLeftIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { HiMiniXMark } from "react-icons/hi2";
 
 export default function Concept() {
     const location = useLocation();
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const page = parseInt(searchParams.get('page') || '1', 10);
-    const topic = searchParams.get('topic') || 'all';
+    const topic = searchParams.get('topic')
 
     const concepts = useTypedSelector((state) => state.concept.concepts);
     const filteredConcepts = topic === 'all' ? concepts : concepts.filter((concept) => concept.topic.toLowerCase().includes(topic.toLowerCase()));
@@ -30,6 +31,13 @@ export default function Concept() {
     return (
         <AnimatedPage>
             <div className="p-4 flex flex-col items-center justify-center relative">
+
+                {topic.length > 0 && <div className="p-2 rounded w-full border dark:border-gray-700 shadow dark:shadow my-3 flex items-center justify-between">
+                    <p className="dark:text-white">Showing results for : <span className="text-blue-600">{topic}</span></p>
+
+                    <HiMiniXMark onClick={() => {history.back()}} className="h-6 w-6 dark:text-white" />
+                </div>}
+
                 <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore questions to practice</h1>
 
                 {totalQuestions === 0 ? (
