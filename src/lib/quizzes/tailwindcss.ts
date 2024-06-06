@@ -1,4 +1,6 @@
-export const tailwindcssQuizzes = [
+import { QuizQuestionType } from "./types";
+
+export const tailwindcssQuizzes: QuizQuestionType[] = [
   {
     id: "tailwind-1",
     question: "How do you apply a box shadow to a button only when it is both hovered and focused using Tailwind CSS?",
