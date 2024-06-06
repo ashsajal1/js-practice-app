@@ -96,14 +96,12 @@ export default function Practice() {
         <div className={`${showQuiz ? "hidden" : ""}`}>
           <div data-aos="fade-right" className="dark:text-white mb-2 flex items-center gap-2">
             {currentConcept.question}
-            <HiSpeakerWave className="h-5 w-5" onClick={() => { speak(currentConcept.question) }} />
           </div>
           <div
             data-aos="fade-right"
             className="select-none font-bold md:text-2xl text-xl border dark:border-gray-800 rounded flex-wrap flex p-2 g-text"
           >
             {renderAnswer(currentConcept.answer, char)}
-            <HiSpeakerWave onClick={() => {speak(currentConcept.answer)}} className="h-5 w-5 text-blue-700 mt-[6px] ml-2" />
           </div>
 
           <form data-aos="fade-right" onSubmit={handleSubmit}>
