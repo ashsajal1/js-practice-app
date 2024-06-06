@@ -1,8 +1,10 @@
 import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import TopicBadge from "../components/ui/topic-badge";
+import Button from "../components/ui/button";
+import { ArrowDownLeftIcon, HomeIcon } from "@heroicons/react/24/outline";
 
 export default function Concept() {
     const location = useLocation();
@@ -40,6 +42,21 @@ export default function Concept() {
                                 <TopicBadge topic="react" />
                                 <TopicBadge topic="rust" />
                                 <TopicBadge topic="golang" />
+                            </div>
+
+                            <div className="flex items-center mt-4 gap-2">
+
+                                <Button onClick={() => window.history.back()} variant="outline" className="gap-2">
+                                    <ArrowDownLeftIcon className="h-5 w-5" />
+                                    Back
+                                </Button>
+
+                                <Link to='/'>
+                                    <Button className="gap-2">
+                                        <HomeIcon className="h-5 w-5" />
+                                        Go to home
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </>
