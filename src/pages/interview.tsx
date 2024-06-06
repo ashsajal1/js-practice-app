@@ -30,7 +30,8 @@ export default function Interview() {
         { value: 'javascript', label: 'Javascript' },
         { value: 'golang', label: 'Golang' },
         { value: 'react', label: 'React' },
-        { value: 'dotnet', label: 'Dotnet' }
+        { value: 'dotnet', label: 'Dotnet' },
+        { value: 'tailwindcss', label: 'TailwindCSS' }
     ]);
     const [isLastQuestion, setIsLastQuestion] = useState(false)
 
