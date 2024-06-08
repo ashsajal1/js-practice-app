@@ -163,9 +163,9 @@ export default function Interview() {
             <div className="mb-4 flex flex-col gap-2 w-full">
                 {messages.map((message, index) => (
                     <div key={index} className={`flex w-full ${message.user === 'User' ? 'justify-end my-6' : 'justify-start'}`}>
-                        <div className={`flex gap-2 w-full md:w-3/4 ${message.user === 'User' ? 'items-end' : 'items-start'}`}>
+                        <div className={`flex gap-2 w-full md:w-3/4 ${message.user === 'User' ? 'items-start' : 'items-start'}`}>
                             {message.user === 'Robot' && (
-                                <img className="[40px] h-[40px] rounded-full contain-content" src="/image/interviewer.jpg" alt="interviewer" />
+                                <img className="[40px] h-[40px] bg-black dark:bg-slate-400 rounded-full contain-content" src="/image/interviewer.jpg" alt="interviewer" />
                             )}
                             <div ref={lastMessageRef} className="w-full">
                                 <Message className={`${message.user === 'Robot' ? 'bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none' : 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none'}`} text={message.text} />
@@ -200,7 +200,7 @@ export default function Interview() {
                             </div>
 
                             {message.user === 'User' && (
-                                <img className="[40px] h-[40px] rounded-full" src="/image/user.jpg" alt="user" />
+                                <img className="[40px] h-[40px] bg-black dark:bg-slate-400 rounded-full" src="/image/user.jpg" alt="user" />
                             )}
                         </div>
 
