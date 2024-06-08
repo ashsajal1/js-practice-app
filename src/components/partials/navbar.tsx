@@ -49,7 +49,7 @@ export default function Navbar() {
                 duration: 0.1
             }}
 
-            className={`flex flex-col items-center justify-between z-10 border-b dark:border-gray-800 p-4 min-h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
+            className={`flex flex-col items-center justify-between z-10 border-b dark:border-none p-4 min-h-[80px] fixed top-0 w-full bg-white ${backdropClass} dark:bg-black`}>
             <div className="flex w-full items-center justify-between">
                 <Link to={'/'} className="g-text font-extrabold text-2xl select-none">JS Practice</Link>
                 <div className="flex items-center justify-between gap-2">
