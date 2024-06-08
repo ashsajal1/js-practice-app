@@ -208,7 +208,7 @@ export default function Interview() {
                     </div>
                 ))}
                 {isLastQuestion && <div className={`py-2 w-full flex items-center justify-center`}>
-                    <Button onClick={() => window.location.reload()} variant='outline' className='w-1/2 md:w-1/3 gap-2'>
+                    <Button onClick={() => window.location.reload()} variant='outline' className='w-full md:w-1/3 gap-2'>
                         <HiRefresh />
                         Restart
                     </Button>
