@@ -78,7 +78,6 @@ export default function Interview() {
     }, [messages, speak]);
 
     const startQuiz = () => {
-        console.log('Selected Language/Topic:', langTopic);
         if (quizzes.length > 0) {
             let filteredQuizzes = [...quizzes];
             filteredQuizzes = quizzes.filter((quiz) => quiz.lang.toLowerCase().includes(langTopic.toLowerCase()) || quiz.topic.toLowerCase().includes(langTopic.toLowerCase()));
