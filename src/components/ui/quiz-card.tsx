@@ -48,7 +48,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
 
     return (
         <div key={uniqueKey} className="p-4 rounded border shadow dark:border-gray-600">
-            <p className="text-lg font-medium my-2 dark:text-white">{quiz.question}</p>
+            <p className="text-lg font-medium my-2">{quiz.question}</p>
             {quiz.options.map((i) => (
                 <p key={i} onClick={() => setSelectedOption(i)} className={cn(`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 dark:text-white ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`)}>{i}</p>
             ))}

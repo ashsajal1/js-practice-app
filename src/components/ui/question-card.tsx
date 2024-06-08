@@ -6,7 +6,7 @@ export default function QuestionCard({ question, answer, id }: { question: strin
         <>
             <motion.div
                 data-aos='fade-up'
-                className="flex flex-col rounded p-4 border dark:border-gray-700 w-full md:min-w-[350px] md:max-w-[430px] bg-white dark:bg-black dark:text-white">
+                className="flex flex-col rounded p-4 border dark:border-gray-700 w-full md:min-w-[350px] md:max-w-[430px] bg-white dark:bg-darkColor dark:text-darkText">
                 <p className='font-bold'>{question.slice(0, 40)} {question.length > 40 ? '...' : ''}</p>
                 <p className='font-light'>{answer.slice(0, 80)}...</p>
                 <div className='mt-4'>

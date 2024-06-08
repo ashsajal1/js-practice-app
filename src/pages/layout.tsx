@@ -28,7 +28,7 @@ export default function Layout() {
     return (
         <>
             <Navbar />
-            <main className="mt-[80px] dark:bg-gray-950">
+            <main className="mt-[80px] dark:bg-gray-950 dark:text-darkText">
                 <AnimatePresence mode="wait">
                     <Outlet />
                 </AnimatePresence>
