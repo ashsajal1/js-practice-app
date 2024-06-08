@@ -78,11 +78,13 @@ export default function Quiz() {
         playSubmitTone();
     }, [currentQuestion?.answer, playSubmitTone, selectedOption]);
 
-    const topics = ['Golang', 'Rust', 'Dotnet', 'React', 'Javascript', 'Angular' ,"TailwindCss"];
+    const topics = ['Golang', 'Rust', 'Dotnet', 'React', 'Javascript', 'Angular', "TailwindCss"];
 
     const toggleTopic = (topic: string) => {
         setCurrentTopics(prevTopics =>
-            prevTopics.includes(topic.toLowerCase()) ? prevTopics.filter(t => t !== topic) : [...prevTopics, topic]
+            prevTopics.includes(topic)
+                ? prevTopics.filter(t => t !== topic)
+                : [...prevTopics, topic]
         );
     };
 
