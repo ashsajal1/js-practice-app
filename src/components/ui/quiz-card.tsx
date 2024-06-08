@@ -37,9 +37,9 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
     if (hasSubmitted) {
         return (
             <div key={uniqueKey} className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
-                <p className="text-lg font-medium my-2">{quiz.question}</p>
+                <p className="text-lg text-darkColor font-medium my-2">{quiz.question}</p>
                 {quiz.options.map((i) => (
-                    <p key={i} className={cn(`p-2 text-black border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''}`)}>{i}</p>
+                    <p key={i} className={cn(`p-2 text-darkColor border rounded mb-2 cursor-pointer select-none ${quiz.answer === i ? 'bg-green-600' : ''} ${selectedOption === quiz.answer && selectedOption === i ? 'bg-green-600' : ''} ${isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''} ${!isRightAnswer && selectedOption === i ? 'bg-red-600' : ''} ${!isRightAnswer && selectedOption !== i ? 'border border-black text-black dark:border-gray-800' : ''}`)}>{i}</p>
                 ))}
                 <div onClick={handleConfirm} className="btn w-full">Confirm or <Timer />/5</div>
             </div>
@@ -50,7 +50,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
         <div key={uniqueKey} className="p-4 rounded border shadow dark:border-gray-600">
             <p className="text-lg font-medium my-2">{quiz.question}</p>
             {quiz.options.map((i) => (
-                <p key={i} onClick={() => setSelectedOption(i)} className={cn(`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 dark:text-white ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`)}>{i}</p>
+                <p key={i} onClick={() => setSelectedOption(i)} className={cn(`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 text-darkColor dark:text-darkText ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`)}>{i}</p>
             ))}
             <button onClick={handleQuizSubmit} className="btn w-full">Submit</button>
         </div>

@@ -110,7 +110,7 @@ export default function Practice() {
               onChange={handlePromptChange}
               rows={6}
               placeholder="Enter the answer below"
-              className="p-2 mt-4 w-full rounded border outline-none focus:ring-1 ring-blue-200 focus:border-none dark:bg-black dark:border-gray-600 dark:text-white"
+              className="p-2 mt-4 w-full rounded border outline-none focus:ring-1 ring-blue-600 focus:border-none dark:bg-darkColor dark:border-gray-600 dark:text-white"
             />
 
             <button className="mt-2 btn w-full" type="submit">
