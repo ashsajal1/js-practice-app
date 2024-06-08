@@ -11,7 +11,7 @@ export default function Footer() {
         duration: 0.5,
         delay: 0
       }}
-      className="flex flex-col gap-6 items-start justify-between p-4 border-t dark:bg-black dark:text-white dark:border-gray-700 w-full">
+      className="flex flex-col gap-6 items-start justify-between p-4 border-t dark:border-none dark:bg-black dark:text-darkText w-full">
 
       <div className="flex w-full justify-between flex-col md:flex-row gap-6">
         <div className="md:w-1/3 w-3/4">

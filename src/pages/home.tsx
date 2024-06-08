@@ -30,13 +30,13 @@ export default function Home() {
     <AnimatedPage>
       <div>
         <section className="p-12 z-10 flex flex-col gap-6 items-center justify-center">
-          <form onSubmit={handleSearch} className="border dark:bg-black bg-white dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
+          <form onSubmit={handleSearch} className="border dark:bg-darkColor bg-white dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
             <input
               onChange={(e) => setTopic(e.target.value)}
               value={topic}
               type="text"
               placeholder="Rust, Golang, React"
-              className="p-2 dark:bg-black dark:text-white rounded outline-none"
+              className="p-2 dark:bg-darkColor dark:text-darkText rounded outline-none"
               required
             />
 
