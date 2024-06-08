@@ -216,7 +216,7 @@ export default function Interview() {
             </div>
             <div className="flex items-center justify-center w-full py-24">
                 {messages.length === 0 && <div>
-                    <select value={langTopic} onChange={(e) => setLangTopic(e.target.value)} className='p-3 rounded outline-none w-full mb-2' title='select language'>
+                    <select value={langTopic} onChange={(e) => setLangTopic(e.target.value)} className='p-3 rounded outline-none w-full dark:border dark:border-gray-700 dark:bg-darkColor mb-2 dark:text-darkText' title='select language'>
                         {defaultLang.map(option => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
