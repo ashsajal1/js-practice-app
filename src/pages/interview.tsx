@@ -207,12 +207,18 @@ export default function Interview() {
 
                     </div>
                 ))}
-                {isLastQuestion && <div className={`py-2 w-full flex items-center justify-center`}>
+                {isLastQuestion && <motion.div
+                 initial={{scale:0}}
+                 animate={{scale:1}}
+                 transition={{
+                    delay: 5
+                 }}
+                 className={`py-2 w-full flex items-center justify-center`}>
                     <Button onClick={() => window.location.reload()} variant='outline' className='w-full md:w-1/3 gap-2'>
                         <HiRefresh />
                         Restart
                     </Button>
-                </div>}
+                </motion.div>}
             </div>
             <div className="flex items-center justify-center w-full py-24">
                 {messages.length === 0 && <div>
