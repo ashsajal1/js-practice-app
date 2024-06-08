@@ -3,7 +3,7 @@ import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { CiSearch } from "react-icons/ci";
 import Button from "../components/ui/button";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopicBadge from "../components/ui/topic-badge";
 import CounterStat from "../components/partials/counter-stat";
@@ -13,8 +13,13 @@ import { getRandomSort } from "../lib/random";
 
 export default function Home() {
   const [topic, setTopic] = useState('');
+  const [topicsList, setTopicsList] = useState<null | string[]>(null);
   const concepts = useTypedSelector((state) => state.concept.concepts).slice(0, 15);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    setTopicsList(topicList.sort(getRandomSort))
+  }, [])
 
   const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +47,7 @@ export default function Home() {
           </form>
 
           <div className="flex gap-2 items-center">
-            {topicList.sort(getRandomSort).slice(0,4).map(topic => 
+            {topicsList?.slice(0, 4).map(topic =>
               <TopicBadge onClick={() => setTopic(topic)} topic={topic} />
             )}
           </div>
