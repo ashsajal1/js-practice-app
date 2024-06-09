@@ -1,10 +1,10 @@
 import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { CiSearch } from "react-icons/ci";
+import { CiLaptop, CiPalette, CiSearch } from "react-icons/ci";
 import Button from "../components/ui/button";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TopicBadge from "../components/ui/topic-badge";
 import CounterStat from "../components/partials/counter-stat";
 import Blob from "../components/ui/blob";
@@ -16,7 +16,7 @@ export default function Home() {
   const [topicsList, setTopicsList] = useState<null | string[]>(null);
   const concepts = useTypedSelector((state) => state.concept.concepts).slice(0, 15);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     setTopicsList(topicList.sort(getRandomSort))
   }, [])
@@ -53,6 +53,22 @@ export default function Home() {
           </div>
 
           <CounterStat />
+
+          <div className="flex items-center gap-2">
+            <Link to='/quiz'>
+              <Button className="flex items-center gap-2" variant="outline">
+                <CiPalette />
+                <span>Play Quiz</span>
+              </Button>
+            </Link>
+            <Link to='/interview'>
+              <Button className="flex items-center gap-2" variant="outline">
+                <CiLaptop />
+                <span>Start Interview</span>
+              </Button>
+            </Link>
+
+          </div>
 
         </section>
         <Blob className='top-0 w-full -z-10' />
