@@ -8,6 +8,7 @@ import { CiTrophy, CiBeaker1 } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { setVoice } from "../../features/voice/voiceSlice";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { LuMic } from "react-icons/lu";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -136,7 +137,8 @@ export default function Navbar() {
                         </Link>
                     </div>
 
-                    <Button className="w-full" variant="outline">
+                    <Button className="w-full flex items-center gap-2" variant="outline">
+                        <LuMic />
                         <select onChange={handleVoiceChange} className="w-full">
                             <option disabled selected>{voice}</option>
                             {voices.map(voice => <option key={voice.name} value={voice.name}>{voice.name}</option>)}
