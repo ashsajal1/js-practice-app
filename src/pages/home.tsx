@@ -29,12 +29,12 @@ export default function Home() {
   return (
     <AnimatedPage>
       <div>
-        <section className="p-12 z-10 flex flex-col gap-6 items-center justify-center">
+        <section className="md:p-12 p-6 z-10 flex flex-col gap-6 items-center justify-center">
 
-          <div className="p-6 md:px-60">
+          <div className="md:p-6 md:px-60">
             <h1 className="text-2xl md:text-4xl font-extrabold text-center from-blue-600 to-blue-800 bg-clip-text text-transparent bg-gradient-to-br">Procrastination Leads to Regret – Start Mastering Today!</h1>
 
-            <p className="text-center mt-3 text-lg md:text-xl px-12 font-extralight text-blue-600">Transform Your Skills with Our Quizzes, Interview Prep, and Programming Practice. Start Now!</p>
+            <p className="text-center mt-3 md:text-xl md:px-12 px-4 font-extralight text-blue-600">Transform Your Skills with Our Quizzes, Interview Prep, and Programming Practice. Start Now!</p>
           </div>
           <form onSubmit={handleSearch} className="border dark:bg-darkColor bg-white dark:border-gray-700 flex items-center justify-between rounded px-2  md:w-1/3 gap-2 p-1 focus-within:border-blue-600">
             <input
