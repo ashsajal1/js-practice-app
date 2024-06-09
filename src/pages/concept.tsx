@@ -38,7 +38,7 @@ export default function Concept() {
                     <HiMiniXMark onClick={() => {history.back()}} className="h-6 w-6 dark:text-white" />
                 </div>}
 
-                {filteredConcepts.length !== 0 && <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore questions to practice</h1>}
+                {filteredConcepts.length !== 0 && <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore concepts to practice</h1>}
 
                 {totalQuestions === 0 ? (
                     <>
