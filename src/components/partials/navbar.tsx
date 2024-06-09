@@ -137,9 +137,9 @@ export default function Navbar() {
                         </Link>
                     </div>
 
-                    <Button className="w-full flex items-center gap-2" variant="outline">
+                    <Button className="w-full focus-within:bg-blue-100 flex items-center gap-2" variant="outline">
                         <LuMic />
-                        <select onChange={handleVoiceChange} className="w-full">
+                        <select onChange={handleVoiceChange} className="w-full bg-white dark:bg-black hover:bg-blue-100 focus:outline-none">
                             <option disabled selected>{voice}</option>
                             {voices.map(voice => <option key={voice.name} value={voice.name}>{voice.name}</option>)}
                         </select>
