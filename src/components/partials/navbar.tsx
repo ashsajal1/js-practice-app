@@ -121,17 +121,20 @@ export default function Navbar() {
                         duration: 0.2,
                         type: 'tween'
                     }}
-                    className={`flex items-center gap-2 w-full mt-6 md:hidden`}>
-                    <Link onClick={() => setIsShowMenu(!isShowMenu)} className="w-full" to='/quiz'><Button className="w-full flex items-center gap-1" variant="outline">
-                        <CiTrophy className="h-5 w-5" />
-                        Play Quiz
-                    </Button></Link>
-                    <Link className="w-full" onClick={() => setIsShowMenu(!isShowMenu)} to='/interview'>
-                        <Button className="w-full flex items-center gap-1" variant="outline">
-                            <CiBeaker1 className="h-5 w-5" />
-                            Start Interview
-                        </Button>
-                    </Link>
+                    className={`flex flex-col items-center gap-2 w-full mt-6 md:hidden`}>
+
+                    <div className="flex items-center gap-2 w-full">
+                        <Link onClick={() => setIsShowMenu(!isShowMenu)} className="w-full" to='/quiz'><Button className="w-full flex items-center gap-1" variant="outline">
+                            <CiTrophy className="h-5 w-5" />
+                            Play Quiz
+                        </Button></Link>
+                        <Link className="w-full" onClick={() => setIsShowMenu(!isShowMenu)} to='/interview'>
+                            <Button className="w-full flex items-center gap-1" variant="outline">
+                                <CiBeaker1 className="h-5 w-5" />
+                                Start Interview
+                            </Button>
+                        </Link>
+                    </div>
 
                     <Button className="w-full" variant="outline">
                         <select onChange={handleVoiceChange} className="w-full">
