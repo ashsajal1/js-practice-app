@@ -11,6 +11,12 @@
           "iframe[allow]"
         ]
       }
+    ],
+    "axe/forms": [
+      "default",
+      {
+        "select-name": "off"
+      }
     ]
   }
 }

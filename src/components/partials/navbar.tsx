@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
 import { CiTrophy, CiBeaker1 } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { setVoice } from "../../features/voice/voiceSlice";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -12,6 +15,35 @@ export default function Navbar() {
     const [isShowIconAnimaition, setIsShowIconAnimation] = useState(false);
     const { isDarkMode, toggleMode } = useThemeContext()
 
+    const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+    const dispatch = useDispatch()
+    const voice = useTypedSelector(state => state.voice.voice)
+
+    useEffect(() => {
+        const synth = window.speechSynthesis;
+        if (voice) {
+            const selectedVoice = synth.getVoices()
+            if (selectedVoice) {
+                setVoices(selectedVoice);
+            }
+        } else {
+            const handleVoicesChanged = () => {
+                setVoices(synth.getVoices());
+            };
+
+            // Load voices initially
+            handleVoicesChanged();
+            // Ensure the voices are loaded on all browsers
+            if (synth.onvoiceschanged !== undefined) {
+                synth.onvoiceschanged = handleVoicesChanged;
+            }
+        }
+    }, [voice]);
+
+    const handleVoiceChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        const selectedVoiceName = e.target.value;
+        dispatch(setVoice(selectedVoiceName));
+    };
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 120) {
@@ -37,7 +69,6 @@ export default function Navbar() {
 
         return () => clearInterval(interval);
     }, []);
-
 
     const backdropClass = scrolled ? 'bg-opacity-80 dark:bg-opacity-80 backdrop-blur-sm' : ''
 
@@ -101,6 +132,13 @@ export default function Navbar() {
                             Start Interview
                         </Button>
                     </Link>
+
+                    <Button className="w-full" variant="outline">
+                        <select onChange={handleVoiceChange} className="w-full">
+                            <option disabled selected>{voice}</option>
+                            {voices.map(voice => <option key={voice.name} value={voice.name}>{voice.name}</option>)}
+                        </select>
+                    </Button>
                 </motion.div>}
             </AnimatePresence>
 
