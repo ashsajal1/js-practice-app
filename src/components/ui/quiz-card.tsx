@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { QuizProps } from "../../lib/concepts/javascript";
 import Timer from "./timer";
 import { cn } from "../../lib/cn";
+import useAudio from "../../hooks/useAudio";
 
 // define submissionTimeout variable to hold the timeout ID
 let submissionTimeout: ReturnType<typeof setTimeout>;
@@ -12,6 +13,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
     const [hasSubmitted, setHasSubmitted] = useState(false);
     const [isRightAnswer, setIsRightAnswer] = useState(false);
     const navigate = useNavigate();
+    const { playOptionTone, playSubmitTone } = useAudio()
 
     const handleConfirm = () => {
         clearTimeout(submissionTimeout); // clear the previous timeout
@@ -21,6 +23,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
     };
 
     const handleQuizSubmit = () => {
+        playSubmitTone()
         if (selectedOption === quiz.answer) {
             setIsRightAnswer(true);
         }
@@ -33,6 +36,11 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
             });
         }, 5000);
     };
+
+    const handleOptionSelect = (option: string) => {
+        playOptionTone()
+        setSelectedOption(option)
+    }
 
     if (hasSubmitted) {
         return (
@@ -50,7 +58,7 @@ export default function QuizCard({ quiz, question, uniqueKey, topic }: { quiz: Q
         <div key={uniqueKey} className="p-4 rounded border shadow dark:border-gray-600">
             <p className="text-lg font-medium my-2">{quiz.question}</p>
             {quiz.options.map((i) => (
-                <p key={i} onClick={() => setSelectedOption(i)} className={cn(`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 text-darkColor dark:text-darkText ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`)}>{i}</p>
+                <p key={i} onClick={() => handleOptionSelect(i)} className={cn(`p-2 border rounded mb-2 cursor-pointer select-none dark:border-gray-800 text-darkColor dark:text-darkText ${selectedOption === i ? 'border-blue-700 dark:border-blue-800' : ''}`)}>{i}</p>
             ))}
             <button onClick={handleQuizSubmit} className="btn w-full">Submit</button>
         </div>
