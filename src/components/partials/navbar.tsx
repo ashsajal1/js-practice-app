@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon, Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/re
 import { AnimatePresence, motion } from 'framer-motion'
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
-import { CiTrophy, CiBeaker1 } from "react-icons/ci";
+import { CiTrophy, CiBeaker1, CiMicrophoneOn } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { setVoice } from "../../features/voice/voiceSlice";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -103,6 +103,15 @@ export default function Navbar() {
                                 Start Interview
                             </Button>
                         </Link>
+
+                        <Button className="focus-within:bg-blue-100 flex items-center gap-2" variant="outline">
+                            <CiMicrophoneOn className="h-6 w-6" />
+                            <select onChange={handleVoiceChange} className="w-[40px] dark:bg-black hover:bg-blue-100 focus:outline-none">
+                                <option disabled selected>{voice}</option>
+                                {voices.map(voice => <option key={voice.name} value={voice.name}>{voice.name}</option>)}
+                            </select>
+                        </Button>
+
                     </div>
 
                     <Bars3CenterLeftIcon onClick={() => setIsShowMenu(!isShowMenu)} className={`h-6 w-6 dark:text-white text-black md:hidden ${isShowMenu ? 'hidden' : ''}`} />
