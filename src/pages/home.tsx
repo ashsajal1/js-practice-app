@@ -31,7 +31,7 @@ export default function Home() {
       <div>
         <section className="md:p-12 p-6 z-10 flex flex-col gap-6 items-center justify-center">
 
-          <div className="md:p-6 md:px-60">
+          <div className="md:p-6 md:px-60 py-6">
             <h1 className="text-2xl md:text-4xl font-extrabold text-center from-blue-600 to-blue-800 bg-clip-text text-transparent bg-gradient-to-br">Procrastination Leads to Regret – Start Mastering Today!</h1>
 
             <p className="text-center mt-3 md:text-xl md:px-12 px-4 font-extralight text-blue-600">Transform Your Skills with Our Quizzes, Interview Prep, and Programming Practice. Start Now!</p>
