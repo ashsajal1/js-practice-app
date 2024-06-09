@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-center w-full mt-6">All rights reserved &copy; {new Date().getFullYear()}</p>
+      <p className="text-center w-full mt-6">&copy; {new Date().getFullYear()} All rights reserved by JS Practice App</p>
     </motion.footer>
   )
 }
