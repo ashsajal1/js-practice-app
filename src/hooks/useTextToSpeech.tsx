@@ -14,7 +14,7 @@ export function useTextToSpeech() {
 
   // Get selected voice from Redux store
   const selectedVoice = useSelector((state: RootState) => state.voice.voice);
-  console.log("Selected voice : ", selectedVoice)
+  // console.log("Selected voice : ", selectedVoice)
   useEffect(() => {
     // Get the speech synthesis service
     const speechSynthesis = window.speechSynthesis;
