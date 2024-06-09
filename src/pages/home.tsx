@@ -1,7 +1,7 @@
 import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { CiLaptop, CiPalette, CiSearch } from "react-icons/ci";
+import { CiCompass1, CiLaptop, CiPalette, CiSearch } from "react-icons/ci";
 import Button from "../components/ui/button";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -86,6 +86,12 @@ export default function Home() {
             />
           ))}
         </div>
+
+        <Link to='/concepts' className="w-full">
+          <Button className="w-full mt-4 flex items-center gap-2" variant="outline">
+            <CiCompass1 />
+            Explore more concepts
+          </Button></Link>
       </div>
     </AnimatedPage>
   );
