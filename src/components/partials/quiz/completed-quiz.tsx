@@ -19,7 +19,7 @@ const CompletedQuiz: React.FC<CompletedQuizProps> = ({
         <div className='grid place-items-center pt-12 px-4 md:p-12 pb-24'>
             <div className="w-full md:w-1/2 border dark:border-gray-800 p-6 md:p-4 rounded">
                 <div className={`p-4 rounded border shadow ${isRightAnswer ? 'bg-green-200' : 'bg-red-200'}`}>
-                    <p className="text-lg font-medium my-2">{currentQuestion?.question}</p>
+                    <p className="text-lg text-darkColor font-medium my-2">{currentQuestion?.question}</p>
                     {currentQuestion?.options?.map((option, index) => (
                         <p
                             key={index}
@@ -39,7 +39,7 @@ const CompletedQuiz: React.FC<CompletedQuizProps> = ({
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             exit={{ scale: 0 }}
-                            className='my-6 border-t pt-4 dark:text-white dark:border-t-gray-700'
+                            className='my-6 border-t pt-4 dark:text-darkText dark:border-t-gray-700'
                         >
                             <span className='font-bold text-blue-600'>Explanation :</span> {currentQuestion.explanation}
                         </motion.div>
