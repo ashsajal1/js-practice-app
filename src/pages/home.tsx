@@ -87,7 +87,7 @@ export default function Home() {
           ))}
         </div>
 
-        <Link to='/concepts' className="w-full">
+        <Link to='/concept' className="w-full">
           <Button className="w-full mt-4 flex items-center gap-2" variant="outline">
             <CiCompass1 />
             Explore more concepts
