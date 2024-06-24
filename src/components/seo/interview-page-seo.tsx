@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-export default function InterviewPageSeo({
+export default function PageSeo({
     title = "JavaScript Practice App - Practice Interview Questions | Rust, JavaScript, Go, React, Vue, and More",
     description = "Prepare for your next coding interview with our comprehensive practice platform. Test your skills with questions and challenges in Rust, JavaScript, Go, React, Vue, and other popular programming languages and frameworks. Enhance your problem-solving abilities and get ready to ace your interviews.",
     keywords = "programming interview, coding interview practice, Rust interview questions, JavaScript interview questions, Go interview questions, React interview questions, Vue interview questions, programming languages, frameworks, coding challenges, interview preparation",
