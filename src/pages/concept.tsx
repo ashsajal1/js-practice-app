@@ -6,6 +6,7 @@ import TopicBadge from "../components/ui/topic-badge";
 import Button from "../components/ui/button";
 import { ArrowDownLeftIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { HiMiniXMark } from "react-icons/hi2";
+import PageSeo from "../components/seo/interview-page-seo";
 
 export default function Concept() {
     const location = useLocation();
@@ -30,12 +31,14 @@ export default function Concept() {
 
     return (
         <AnimatedPage>
+            <PageSeo title="Explore and Practice Programming Concepts" description="Dive into a comprehensive guide designed to help you master key programming concepts. From basic data types and control flow to advanced topics like asynchronous programming and memory management, explore detailed explanations and practical exercises to enhance your coding skills." />
+
             <div className="p-4 flex flex-col items-center justify-center relative">
 
                 {(topic.length > 0 && topic !== 'all') && <div className="p-2 rounded w-full border dark:border-gray-700 shadow dark:shadow my-3 flex items-center justify-between">
                     <p className="dark:text-white">Showing results for : <span className="text-blue-600">{topic}</span></p>
 
-                    <HiMiniXMark onClick={() => {history.back()}} className="h-6 w-6 dark:text-white" />
+                    <HiMiniXMark onClick={() => { history.back() }} className="h-6 w-6 dark:text-white" />
                 </div>}
 
                 {filteredConcepts.length !== 0 && <h1 className="g-text font-extrabold text-3xl text-center pb-6">Explore concepts to practice</h1>}

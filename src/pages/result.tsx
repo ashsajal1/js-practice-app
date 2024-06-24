@@ -4,14 +4,16 @@ import SuggestedCard from "../components/ui/suggested-card";
 import AnimatedPage from "../components/ui/animated-page";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { getRandomSort } from "../lib/random";
+import PageSeo from "../components/seo/interview-page-seo";
 
 export default function Result() {
     const location = useLocation();
     let content;
+    let question;
     // console.log(location.state)
     const concepts = useTypedSelector(state => state.concept.concepts.filter(i => i.topic === location.state.topic).slice(0,10).sort(getRandomSort))
     if (location.state?.question) {
-        const question = location.state?.question;
+        question = location.state?.question;
         content = <>
             <h1 className="g-text font-extralight text-3xl p-6 text-center">You have completed "{question}" question.</h1>
 
@@ -27,6 +29,7 @@ export default function Result() {
     }
     return (
         <AnimatedPage>
+            <PageSeo title={`Resutls of ${question}`} />
             <div className="h-screen m-auto">
                 {content}
 

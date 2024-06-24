@@ -10,6 +10,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import useSearchParams from '../hooks/useSearchParams';
 import { QuizQuestionType } from '../lib/quizzes/types';
 import { HiRefresh } from 'react-icons/hi';
+import PageSeo from '../components/seo/interview-page-seo';
 
 type MessageType = {
     user: string;
@@ -159,6 +160,7 @@ export default function Interview() {
 
     return (
         <div className="p-4 w-full">
+            <PageSeo title = "Programming Interview Practice | Rust, JavaScript, Go, React, Vue, and More" />
             <div className="mb-4 flex flex-col gap-2 w-full">
                 {messages.map((message, index) => (
                     <div key={index} className={`flex w-full ${message.user === 'User' ? 'justify-end my-6' : 'justify-start'}`}>
