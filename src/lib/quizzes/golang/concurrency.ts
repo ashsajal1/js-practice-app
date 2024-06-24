@@ -79,9 +79,9 @@ export const golangConcurrencyQuestions: QuizQuestionType[] = [
       "Channels provide a mechanism for goroutines to communicate and synchronize with each other. They ensure data is passed between goroutines in a safe and predictable manner.",
     options: [
       "Channels are a way to store data in a shared memory location.",
-      "Channels are a way to pass data between goroutines.",
-      "Channels are a way to synchronize the execution of goroutines.",
-      "Channels are a way to communicate between goroutines and the operating system.",
+      "Channels are a way to pass data between goroutines, but without any type safety.",
+      "Channels are a way to synchronize the execution of goroutines, ensuring that only one goroutine can access a shared resource at a time.",
+      "Channels are typed communication conduits that allow goroutines to safely exchange data.",
     ],
   },
   {
@@ -211,17 +211,17 @@ export const golangConcurrencyQuestions: QuizQuestionType[] = [
     explanation:
       "Unbuffered channels provide a direct communication link between goroutines. If a sender attempts to send data to an unbuffered channel and no receiver is ready, the sender will block until a receiver is available. Buffered channels allow a sender to send data even if no receiver is immediately available, as long as the buffer is not full. The data is stored in the buffer until a receiver is ready to retrieve it.",
     options: [
-      "A buffered channel can store data even if no receiver is available, while an unbuffered channel requires a sender and receiver to be ready at the same time.",
-      "A buffered channel is faster than an unbuffered channel.",
-      "An unbuffered channel is faster than a buffered channel.",
+      "A buffered channel is faster than an unbuffered channel because it doesn't have to wait for a receiver.",
+      "An unbuffered channel is faster than a buffered channel because it doesn't have to manage a buffer.",
       "There is no difference between a buffered and unbuffered channel.",
+      "An unbuffered channel requires a sender and receiver to be ready at the same time, while a buffered channel allows the sender to send data even if no receiver is immediately available.",
     ],
   },
   {
     id: "concurrency-12-golang",
     question: "What is a race condition in Go concurrency?",
     answer:
-      "A race condition occurs when multiple goroutines access and modify shared data simultaneously, leading to unpredictable and potentially incorrect results.",
+      "A race condition occurs when multiple goroutines try to access and modify shared data simultaneously, leading to unpredictable and potentially incorrect results.",
     type: "theoretical",
     topic: "Concurrency",
     lang: "golang",
