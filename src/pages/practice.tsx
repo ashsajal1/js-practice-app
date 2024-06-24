@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { useTextToSpeech } from "../hooks/useTextToSpeech";
 import Button from "../components/ui/button";
+import PageSeo from "../components/seo/interview-page-seo";
 
 export default function Practice() {
   const [char, setChar] = useState("");
@@ -92,6 +93,7 @@ export default function Practice() {
 
   return (
     <AnimatedPage>
+      <PageSeo title={`Practice ${currentConcept.question}`} description={`${currentConcept.question} + ' : ' + ${currentConcept.answer}`} />
       <div className={`p-12 ${currentConcept.code ? "" : "h-screen"}`}>
         <div className={`${showQuiz ? "hidden" : ""}`}>
           <div data-aos="fade-right" className="dark:text-white mb-2 flex items-center gap-2">
