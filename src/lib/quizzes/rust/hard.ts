@@ -1,6 +1,6 @@
-import { QuizQuestionType } from "./types";
+import { QuizQuestionType } from "../types";
 
-export const rustQuizQuestions: QuizQuestionType[] = [
+export const rustHardQuizQuestions: QuizQuestionType[] = [
   {
     id: "rust-1",
     question: "What will be the output of the following Rust code snippet?",
