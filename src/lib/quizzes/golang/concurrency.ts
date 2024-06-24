@@ -1,17 +1,12 @@
-export interface QuizQuestionType {
-  id: number | string;
-  question: string;
-  code?: string;
-  options?: string[];
-  answer: string;
-  hint?: string;
-  type?: "practical" | "theoretical";
-  topic: string;
-  subTopic?: string;
-  lang: string;
-  explanation?: string;
-  complexity?: "easy" | "normal" | "hard";
-}
+// Concurrency:
+
+// Goroutines: Lightweight, concurrent execution units
+// Channels: Typed communication conduits for goroutines
+// Synchronization: Mutexes (sync.Mutex), WaitGroups (sync.WaitGroup), Atomic operations (sync/atomic)
+// Select Statement: Multiplexing communication on multiple channels
+// Deadlocks: Understanding and avoiding deadlocks in concurrent programs
+
+import { QuizQuestionType } from "../types";
 
 export const golangConcurrencyQuestions: QuizQuestionType[] = [
   {
