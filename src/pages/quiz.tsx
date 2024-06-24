@@ -36,7 +36,7 @@ export default function Quiz() {
     }, [dispatch]);
 
     useEffect(() => {
-        setQuizQuestions(quizzes.filter(quiz => quiz.lang.toLowerCase().includes(lang.toLowerCase())));
+        setQuizQuestions(quizzes.filter(quiz => quiz.lang.toLowerCase().includes(lang.toLowerCase())).sort(getRandomSort));
     }, [quizzes, lang]);
 
     useEffect(() => {
