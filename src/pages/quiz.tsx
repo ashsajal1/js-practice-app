@@ -12,6 +12,7 @@ import NoQuestion from '../components/partials/quiz/no-question';
 import useAudio from '../hooks/useAudio';
 import CompletedQuiz from '../components/partials/quiz/completed-quiz';
 import QuizQuestion from '../components/partials/quiz/quiz-question';
+import PageSeo from '../components/seo/interview-page-seo';
 
 export default function Quiz() {
     const location = useLocation();
@@ -115,6 +116,7 @@ export default function Quiz() {
 
     return (
         <AnimatedPage>
+            <PageSeo title="Programming Quiz Practice | Rust, JavaScript, Go, React, Vue, and More" />
             <QuizQuestion
                 currentQuestion={currentQuestion}
                 selectedOption={selectedOption}
