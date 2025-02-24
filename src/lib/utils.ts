@@ -17,4 +17,8 @@ export const topicList = [
   "angular",
   "DSA",
   "Algorithms",
+  "docker",
+  "devops",
+  "data-center",
+  "server",
 ];
