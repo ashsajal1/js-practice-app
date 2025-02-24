@@ -10,6 +10,7 @@ import { tailwindcssQuizzes } from "./quizzes/tailwindcss";
 import { vue3Concepts } from "./concepts/vue3";
 import { cssConcepts } from "./concepts/css";
 import { cssAnimationConcepts } from "./concepts/css-animation";
+import { ethicalHackingConcepts } from "./concepts/ethical-hacking";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -23,7 +24,8 @@ export const generateRandomConcepts = (): QnaTypes[] => {
       reactConcepts,
       vue3Concepts,
       cssConcepts,
-      cssAnimationConcepts
+      cssAnimationConcepts,
+      ethicalHackingConcepts
     )
     .slice()
     .sort(getRandomSort);
