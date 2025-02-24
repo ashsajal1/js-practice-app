@@ -21,4 +21,6 @@ export const topicList = [
   "devops",
   "data-center",
   "server",
+  "database",
+  "system-design",
 ];

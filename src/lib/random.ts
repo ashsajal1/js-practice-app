@@ -16,6 +16,9 @@ import { serverConcepts } from "./concepts/server";
 import { dataCenterConcepts } from "./concepts/data-center";
 import { devopsConcepts } from "./concepts/devops";
 import { dockerConcepts } from "./concepts/docker";
+import { operatingSystemConcepts } from "./concepts/os";
+import { databaseConcepts } from "./concepts/database";
+import { systemDesignConcepts } from "./concepts/system-design";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -35,7 +38,10 @@ export const generateRandomConcepts = (): QnaTypes[] => {
       serverConcepts,
       dataCenterConcepts,
       devopsConcepts,
-      dockerConcepts
+      dockerConcepts,
+      operatingSystemConcepts,
+      databaseConcepts,
+      systemDesignConcepts
     )
     .slice()
     .sort(getRandomSort);
