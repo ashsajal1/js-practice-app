@@ -46,9 +46,9 @@ export default function Layout() {
           {topicList?.map((topic) => (
             <Link
               to={`/concept?topic=${topic}`}
-              className="bg-blue-300 cursor-pointer text-blue-600 px-3 py-1 rounded-md hover:bg-blue-700 hover:text-white"
+              className="bg-blue-300 cursor-pointer text-nowrap text-blue-600 px-3 py-1 rounded-md hover:bg-blue-700 hover:text-white"
             >
-              {topic.charAt(0).toUpperCase() + topic.slice(1)}
+              {topic.charAt(0).toUpperCase() + topic.slice(1).split("-").join(" ")}
             </Link>
           ))}
         </div>
