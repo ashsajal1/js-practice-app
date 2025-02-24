@@ -11,6 +11,10 @@ import { vue3Concepts } from "./concepts/vue3";
 import { cssConcepts } from "./concepts/css";
 import { cssAnimationConcepts } from "./concepts/css-animation";
 import { ethicalHackingConcepts } from "./concepts/ethical-hacking";
+import { linuxConcepts } from "./concepts/linux";
+import { serverConcepts } from "./concepts/server";
+import { dataCenterConcepts } from "./concepts/data-center";
+import { devopsConcepts } from "./concepts/devops";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -25,7 +29,11 @@ export const generateRandomConcepts = (): QnaTypes[] => {
       vue3Concepts,
       cssConcepts,
       cssAnimationConcepts,
-      ethicalHackingConcepts
+      ethicalHackingConcepts,
+      linuxConcepts,
+      serverConcepts,
+      dataCenterConcepts,
+      devopsConcepts
     )
     .slice()
     .sort(getRandomSort);
