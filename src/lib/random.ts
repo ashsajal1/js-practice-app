@@ -9,6 +9,7 @@ import { dotnetQuizQuestions } from "./quizzes/dotnet";
 import { tailwindcssQuizzes } from "./quizzes/tailwindcss";
 import { vue3Concepts } from "./concepts/vue3";
 import { cssConcepts } from "./concepts/css";
+import { cssAnimationConcepts } from "./concepts/css-animation";
 
 export function getRandomSort() {
   return Math.random() - 0.5;
@@ -16,10 +17,24 @@ export function getRandomSort() {
 
 export const generateRandomConcepts = (): QnaTypes[] => {
   const randomTopics = qna
-    .concat(rustConcepts, golangConcepts, reactConcepts, vue3Concepts, cssConcepts)
+    .concat(
+      rustConcepts,
+      golangConcepts,
+      reactConcepts,
+      vue3Concepts,
+      cssConcepts,
+      cssAnimationConcepts
+    )
     .slice()
     .sort(getRandomSort);
   return randomTopics;
 };
 
-export const generateRandomQuizzes = quizQuestions.concat(golangQuizQuestions, rustQuizQuestions, dotnetQuizQuestions, tailwindcssQuizzes).sort(getRandomSort);
+export const generateRandomQuizzes = quizQuestions
+  .concat(
+    golangQuizQuestions,
+    rustQuizQuestions,
+    dotnetQuizQuestions,
+    tailwindcssQuizzes
+  )
+  .sort(getRandomSort);
