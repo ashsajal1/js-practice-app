@@ -14,7 +14,7 @@ const StatCard = ({
   highlight: string; 
   icon: React.ElementType 
 }) => (
-  <div className="group relative flex-1 flex items-center gap-4 p-4 backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 dark:border-gray-700/50 hover:border-blue-200/50 dark:hover:border-blue-500/30">
+  <div className="group relative w-full sm:w-auto flex-1 flex items-center gap-4 p-4 backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 dark:border-gray-700/50 hover:border-blue-200/50 dark:hover:border-blue-500/30">
     <div className="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
       <Icon className="w-6 h-6 text-white" />
     </div>
@@ -36,7 +36,7 @@ const StatCard = ({
 
 export default function CounterStat() {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 px-4 py-6">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 py-6">
       <StatCard 
         value={129} 
         speed={15} 
@@ -44,7 +44,7 @@ export default function CounterStat() {
         label="to Practice"
         icon={BookOpen}
       />
-      <div className="w-px h-12 bg-gray-200 dark:bg-gray-700 mx-2"></div>
+      <div className="hidden sm:block w-px h-12 bg-gray-200 dark:bg-gray-700 mx-2"></div>
       <StatCard 
         value={201} 
         speed={20} 
@@ -52,7 +52,7 @@ export default function CounterStat() {
         label="using now"
         icon={Users}
       />
-      <div className="w-px h-12 bg-gray-200 dark:bg-gray-700 mx-2"></div>
+      <div className="hidden sm:block w-px h-12 bg-gray-200 dark:bg-gray-700 mx-2"></div>
       <StatCard 
         value={207} 
         speed={18} 
