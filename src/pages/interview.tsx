@@ -273,27 +273,108 @@ export default function Interview() {
           </motion.div>
         )}
       </div>
-      <div className="flex items-center justify-center w-full py-24">
+      <AnimatePresence>
         {messages.length === 0 && (
-          <div>
-            <select
-              value={langTopic}
-              onChange={(e) => setLangTopic(e.target.value)}
-              className="p-3 bg-darkText rounded outline-none w-full dark:border dark:border-gray-700 dark:bg-darkColor mb-2 dark:text-darkText"
-              title="select language"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+            className="flex flex-col items-center justify-center w-full min-h-[60vh] px-4"
+          >
+            <motion.div 
+              className="w-full max-w-md space-y-6"
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
             >
-              {defaultLang.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <Button className="p-4 ml-2" onClick={startQuiz}>
-              Start Interview
-            </Button>
-          </div>
+              <motion.div 
+                className="relative"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <select 
+                  value={langTopic} 
+                  onChange={(e) => setLangTopic(e.target.value)} 
+                  className="w-full p-4 text-lg bg-white dark:bg-darkColor border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300 cursor-pointer appearance-none pl-5 pr-12"
+                  title="Select programming language"
+                >
+                  {defaultLang.map((option, index) => (
+                    <motion.option 
+                      key={option.value} 
+                      value={option.value}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="p-2 dark:bg-darkColor dark:text-white"
+                    >
+                      {option.label}
+                    </motion.option>
+                  ))}
+                </select>
+                <motion.div 
+                  className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+                  animate={{ y: [0, 2, 0] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                >
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+              
+              <div className="w-full space-y-4">
+                <Button 
+                  onClick={startQuiz} 
+                  className="w-full py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  Start Interview
+                </Button>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+                    <div className="bg-blue-100 dark:bg-blue-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Multiple Choice</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Answer technical questions with multiple choice options</p>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+                    <div className="bg-green-100 dark:bg-green-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                    </div>
+                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Code Challenges</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Solve real-world coding problems in your chosen language</p>
+                  </div>
+                  
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
+                    <div className="bg-purple-100 dark:bg-purple-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Instant Feedback</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Get immediate scoring and detailed explanations</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.p 
+              className="mt-6 text-center text-gray-500 dark:text-gray-400 text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Select a language and start practicing for your next interview!
+            </motion.p>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 }
