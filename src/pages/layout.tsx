@@ -42,7 +42,7 @@ export default function Layout() {
     <>
       <Navbar />
 
-      <main className="min-h-screen mt-[80px] dark:bg-gray-950 dark:text-darkText">
+      <main className="min-h-screen mt-[80px] dark:bg-gray-950 dark:text-darkText p-4">
         <TopicList />
         <AnimatePresence mode="wait">
           <Outlet />
