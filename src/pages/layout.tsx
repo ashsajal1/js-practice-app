@@ -41,7 +41,7 @@ export default function Layout() {
     <>
       <Navbar />
 
-      <main className="mt-[80px] dark:bg-gray-950 dark:text-darkText">
+      <main className="min-h-screen mt-[80px] dark:bg-gray-950 dark:text-darkText">
         <div className="flex gap-2 justify-start items-center py-2 overflow-x-scroll">
           {topicList?.map((topic) => (
             <Link
