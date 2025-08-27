@@ -2,6 +2,7 @@ import { CiLinkedin, CiTwitter } from "react-icons/ci";
 import { LiaGithub } from "react-icons/lia";
 import { FaReact, FaNodeJs, FaVuejs } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const socialLinks = [
   {
@@ -103,7 +104,7 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {["Home", "Interview", "Practice", "Roadmap", "Blog"].map(
+              {["Home", "Interview", "Practice", "Tutorial"].map(
                 (item, index) => (
                   <motion.li
                     key={item}
@@ -111,13 +112,13 @@ export default function Footer() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.2 + index * 0.05 }}
                   >
-                    <a
-                      href={`#${item.toLowerCase()}`}
+                    <Link
+                      to={`/${item === "Home" ? "" : item.toLowerCase()}`}
                       className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 text-sm transition-colors flex items-center"
                     >
                       <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
                       {item}
-                    </a>
+                    </Link>
                   </motion.li>
                 )
               )}
