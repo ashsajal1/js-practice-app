@@ -87,6 +87,9 @@ export default function Quiz() {
                 ? prevTopics.filter(t => t !== topic)
                 : [...prevTopics, topic]
         );
+
+        setCurrentQuestionIndex(0);
+        setCurrentQuestion(quizQuestions[currentQuestionIndex] || null);
     };
 
     const toggleTooltip = () => {
