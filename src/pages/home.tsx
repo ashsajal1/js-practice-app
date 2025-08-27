@@ -17,6 +17,7 @@ import { topicList } from "../lib/utils";
 import { getRandomSort } from "../lib/random";
 import QuestionCard from "../components/ui/question-card";
 import AnimatedPage from "../components/ui/animated-page";
+import TopicList from "../components/partials/topic-list";
 
 const features = [
   {
@@ -61,6 +62,7 @@ export default function Home() {
 
   return (
     <AnimatedPage>
+      <TopicList />
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
