@@ -90,7 +90,7 @@ export default function Navbar() {
 
     const navBackground = isScrolled 
         ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm' 
-        : 'bg-transparent';
+        : 'bg-transparent bg-white/80 dark:bg-gray-900';
 
     const navBorder = isScrolled 
         ? 'border-b border-gray-200 dark:border-gray-800' 
