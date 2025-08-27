@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/partials/navbar";
 import Footer from "../components/partials/footer";
 import AOS from "aos";
@@ -10,23 +10,8 @@ import GotoTop from "../components/ui/go-to-top";
 import { getRandomConcepts } from "../features/concept/conceptSlice";
 import { setVoice } from "../features/voice/voiceSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { topicList } from "../lib/utils";
-import React from "react";
+import TopicList from "../components/partials/topic-list";
 
-const TopicList = React.memo(() => {
-  return (
-    <div className="flex gap-2 justify-start items-center py-2 overflow-x-scroll">
-      {topicList?.map((topic) => (
-        <Link
-          to={`/concept?topic=${topic}`}
-          className="bg-blue-300 cursor-pointer text-nowrap text-blue-600 px-3 py-1 rounded-md hover:bg-blue-700 hover:text-white"
-        >
-          {topic.charAt(0).toUpperCase() + topic.slice(1).split("-").join(" ")}
-        </Link>
-      ))}
-    </div>
-  );
-});
 
 export default function Layout() {
   const location = useLocation();
