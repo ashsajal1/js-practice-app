@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { topicList } from "../../lib/utils";
 import { Link, useLocation } from "react-router-dom";
 
