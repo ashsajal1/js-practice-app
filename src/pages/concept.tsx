@@ -80,16 +80,87 @@ export default function Concept() {
                     </div>
                 )}
                 {totalQuestions > 0 && (
-                    <div className="mt-6 flex justify-center">
-                        {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                    <div className="mt-8 flex flex-col items-center justify-center w-full">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            Showing <span className="font-medium">{startIndex + 1}-{Math.min(endIndex, totalQuestions)}</span> of <span className="font-medium">{totalQuestions}</span> questions
+                        </div>
+                        <div className="flex items-center gap-1">
                             <button
-                                key={pageNumber}
-                                className={`px-3 py-2 rounded-md mx-1 ${pageNumber === page ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-                                onClick={() => handlePageChange(pageNumber)}
+                                onClick={() => handlePageChange(1)}
+                                disabled={page === 1}
+                                className="p-2 rounded-md border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="First page"
                             >
-                                {pageNumber}
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                                </svg>
                             </button>
-                        ))}
+                            <button
+                                onClick={() => handlePageChange(page - 1)}
+                                disabled={page === 1}
+                                className="p-2 rounded-md border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="Previous page"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                            
+                            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                                let pageNum;
+                                if (totalPages <= 5) {
+                                    pageNum = i + 1;
+                                } else if (page <= 3) {
+                                    pageNum = i + 1;
+                                } else if (page >= totalPages - 2) {
+                                    pageNum = totalPages - 4 + i;
+                                } else {
+                                    pageNum = page - 2 + i;
+                                }
+                                
+                                return (
+                                    <button
+                                        key={pageNum}
+                                        onClick={() => handlePageChange(pageNum)}
+                                        className={`w-10 h-10 flex items-center justify-center rounded-md mx-0.5 transition-colors ${
+                                            pageNum === page
+                                                ? 'bg-blue-600 text-white font-medium shadow-md'
+                                                : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                                        }`}
+                                        aria-current={pageNum === page ? 'page' : undefined}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                );
+                            })}
+                            
+                            <button
+                                onClick={() => handlePageChange(page + 1)}
+                                disabled={page === totalPages}
+                                className="p-2 rounded-md border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="Next page"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                            <button
+                                onClick={() => handlePageChange(totalPages)}
+                                disabled={page === totalPages}
+                                className="p-2 rounded-md border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                                aria-label="Last page"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                    <path fillRule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                        {totalPages > 5 && (
+                            <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                Page {page} of {totalPages}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
