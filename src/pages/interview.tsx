@@ -46,6 +46,7 @@ export default function Interview() {
     { value: "tailwindcss", label: "TailwindCSS" },
   ]);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [interviewEnded, setInterviewEnded] = useState(false);
 
   useEffect(() => {
     if (currentQuestionIndex === selectedQuizzes.length - 1) {
@@ -91,6 +92,14 @@ export default function Interview() {
       speak(messages[messages.length - 1].text);
     }
   }, [messages, speak]);
+
+  const resetInterview = (): void => {
+    setMessages([]);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setInterviewEnded(false);
+    setIsLastQuestion(false);
+  };
 
   const startQuiz = (): void => {
     if (quizzes.length > 0) {
@@ -162,6 +171,7 @@ export default function Interview() {
           user: "Robot",
           text: `Interview finished! Your score: ${newScore}/${selectedQuizzes.length}`,
         });
+        setInterviewEnded(true);
       } else {
         const nextQuestion = selectedQuizzes[currentQuestionIndex + 1];
         botMessages.push({
@@ -197,7 +207,7 @@ export default function Interview() {
         lastMessageRef={lastMessageRef} 
       />
       
-      {isLastQuestion && (
+      {interviewEnded && (
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -205,7 +215,7 @@ export default function Interview() {
           className="py-2 w-full flex items-center justify-center"
         >
           <Button
-            onClick={() => window.location.reload()}
+            onClick={resetInterview}
             variant="outline"
             className="w-full md:w-1/3 gap-2"
           >
