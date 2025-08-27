@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import Message from "../components/ui/message";
 import { AnimatePresence, motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { HiRefresh, HiOutlineDocumentText, HiOutlineCode, HiOutlineLightningBolt } from "react-icons/hi";
+import { MessageList } from "../components/interview/MessageList";
+import { FeatureCard } from "../components/interview/FeatureCard";
 import Button from "../components/ui/button";
 import { getRandomSort } from "../lib/random";
 import { useTextToSpeech } from "../hooks/useTextToSpeech";
-import { useDispatch } from "react-redux";
 import { getAllQuiz } from "../features/quiz/quizSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import useSearchParams from "../hooks/useSearchParams";
 import { QuizQuestionType } from "../lib/quizzes/types";
-import { HiRefresh } from "react-icons/hi";
 import PageSeo from "../components/seo/interview-page-seo";
+
+// Type for the quiz slice in Redux store
+interface AppState {
+  quiz: {
+    quizzes: QuizQuestionType[];
+    loading: boolean;
+  };
+}
 
 type MessageType = {
   user: string;
@@ -18,6 +27,8 @@ type MessageType = {
   options?: string[];
   answered?: boolean;
   code?: string;
+  isCorrect?: boolean;
+  explanation?: string;
 };
 
 export default function Interview() {
@@ -26,9 +37,7 @@ export default function Interview() {
   const [score, setScore] = useState(0);
   const [langTopic, setLangTopic] = useState("javascript");
   const [isBotWriting, setIsBotWriting] = useState(false);
-  const [selectedQuizzes, setSelectedQuizzes] = useState<QuizQuestionType[]>(
-    []
-  );
+  const [selectedQuizzes, setSelectedQuizzes] = useState<QuizQuestionType[]>([]);
   const [defaultLang, setDefaultLang] = useState([
     { value: "javascript", label: "Javascript" },
     { value: "golang", label: "Golang" },
@@ -68,7 +77,8 @@ export default function Interview() {
     dispatch(getAllQuiz());
   }, [dispatch]);
 
-  const { quizzes, loading } = useTypedSelector((state) => state.quiz);
+  const { quizzes, loading } = useTypedSelector((state: AppState) => state.quiz);
+
 
   useEffect(() => {
     if (lastMessageRef.current) {
@@ -82,13 +92,11 @@ export default function Interview() {
     }
   }, [messages, speak]);
 
-  const startQuiz = () => {
+  const startQuiz = (): void => {
     if (quizzes.length > 0) {
-      let filteredQuizzes = [...quizzes];
-      filteredQuizzes = quizzes.filter(
-        (quiz) =>
-          quiz.lang.toLowerCase().includes(langTopic.toLowerCase()) ||
-          quiz.topic.toLowerCase().includes(langTopic.toLowerCase())
+      const filteredQuizzes = [...quizzes].filter((quiz) =>
+        quiz.lang.toLowerCase().includes(langTopic.toLowerCase()) ||
+        quiz.topic.toLowerCase().includes(langTopic.toLowerCase())
       );
 
       if (filteredQuizzes.length === 0) {
@@ -120,13 +128,13 @@ export default function Interview() {
     }
   };
 
-  const handleOptionSelect = (index: number) => {
+  const handleOptionSelect = (optionIndex: number): void => {
     if (isBotWriting) return;
 
     const currentQuestion = selectedQuizzes[currentQuestionIndex];
-    const selectedOption = currentQuestion.options
-      ? currentQuestion.options[index]
-      : "";
+    if (!currentQuestion) return;
+    
+    const selectedOption = currentQuestion.options?.[optionIndex] || "";
     const isCorrect = selectedOption === currentQuestion.answer;
     const feedback = isCorrect
       ? "Correct!"
@@ -140,7 +148,7 @@ export default function Interview() {
 
     const newMessages = [
       ...updatedMessages,
-      { user: "User", text: `Option ${index + 1}: ${selectedOption}` },
+      { user: "User", text: `Option ${optionIndex + 1}: ${selectedOption}` },
     ];
 
     setMessages(newMessages);
@@ -183,96 +191,29 @@ export default function Interview() {
   return (
     <div className="p-4 w-full">
       <PageSeo title="Programming Interview Practice | Rust, JavaScript, Go, React, Vue, and More" />
-      <div className="mb-4 flex flex-col gap-2 w-full">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`flex w-full ${
-              message.user === "User" ? "justify-end my-6" : "justify-start"
-            }`}
+      <MessageList 
+        messages={messages} 
+        onOptionSelect={handleOptionSelect} 
+        lastMessageRef={lastMessageRef} 
+      />
+      
+      {isLastQuestion && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5 }}
+          className="py-2 w-full flex items-center justify-center"
+        >
+          <Button
+            onClick={() => window.location.reload()}
+            variant="outline"
+            className="w-full md:w-1/3 gap-2"
           >
-            <div
-              className={`flex gap-3 w-full md:w-3/4 ${
-                message.user === "User" ? "flex-row-reverse" : ""
-              }`}
-            >
-              <img
-                className={`w-10 h-10 flex-shrink-0 rounded-full object-cover ${
-                  message.user === "User"
-                    ? "ml-3 bg-blue-500"
-                    : "mr-3 bg-gray-300"
-                }`}
-                src={message.user === "User" ? "/image/user.jpg" : "/image/interviewer.jpg"}
-                alt={message.user === "User" ? "User" : "Interviewer"}
-              />
-              <div ref={lastMessageRef} className="flex-1">
-                <div className={`flex ${message.user === "User" ? "justify-end" : "justify-start"}`}>
-                  <Message
-                    className={`${
-                      message.user === "Robot"
-                        ? "bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white border-none"
-                        : "bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 text-white border-none"
-                    }`}
-                    text={message.text}
-                  />
-                </div>
-                {message.code && (
-                  <div className={`mt-2 ${message.user === "User" ? "text-right" : "text-left"}`}>
-                    <pre className="bg-gray-200 dark:bg-gray-800 dark:text-gray-100 text-wrap p-3 rounded-lg inline-block max-w-full overflow-x-auto">
-                      {message.code}
-                    </pre>
-                  </div>
-                )}
-
-                <AnimatePresence>
-                  {message.options && !message.answered && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{
-                        duration: 0.3,
-                      }}
-                      className={`flex gap-2 flex-wrap mt-2 ${
-                        message.user === "User" ? "justify-end" : "justify-start"
-                      }`}
-                    >
-                      {message.options.map((option, optionIndex) => (
-                        <Button
-                          variant="outline"
-                          key={optionIndex}
-                          className="px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
-                          onClick={() => handleOptionSelect(optionIndex)}
-                        >
-                          {option}
-                        </Button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-          </div>
-        ))}
-        {isLastQuestion && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{
-              delay: 5,
-            }}
-            className={`py-2 w-full flex items-center justify-center`}
-          >
-            <Button
-              onClick={() => window.location.reload()}
-              variant="outline"
-              className="w-full md:w-1/3 gap-2"
-            >
-              <HiRefresh />
-              Restart
-            </Button>
-          </motion.div>
-        )}
-      </div>
+            <HiRefresh />
+            Restart
+          </Button>
+        </motion.div>
+      )}
       <AnimatePresence>
         {messages.length === 0 && (
           <motion.div
@@ -331,35 +272,29 @@ export default function Interview() {
                 </Button>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
-                    <div className="bg-blue-100 dark:bg-blue-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Multiple Choice</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Answer technical questions with multiple choice options</p>
-                  </div>
+                  <FeatureCard
+                    icon={<HiOutlineDocumentText className="h-6 w-6" />}
+                    title="Multiple Choice"
+                    description="Answer technical questions with multiple choice options"
+                    iconBg="bg-blue-100 dark:bg-blue-900/30"
+                    iconColor="text-blue-600 dark:text-blue-400"
+                  />
                   
-                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
-                    <div className="bg-green-100 dark:bg-green-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Code Challenges</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Solve real-world coding problems in your chosen language</p>
-                  </div>
+                  <FeatureCard
+                    icon={<HiOutlineCode className="h-6 w-6" />}
+                    title="Code Challenges"
+                    description="Solve real-world coding problems in your chosen language"
+                    iconBg="bg-green-100 dark:bg-green-900/30"
+                    iconColor="text-green-600 dark:text-green-400"
+                  />
                   
-                  <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border border-gray-100 dark:border-gray-700">
-                    <div className="bg-purple-100 dark:bg-purple-900/30 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-1">Instant Feedback</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Get immediate scoring and detailed explanations</p>
-                  </div>
+                  <FeatureCard
+                    icon={<HiOutlineLightningBolt className="h-6 w-6" />}
+                    title="Instant Feedback"
+                    description="Get immediate scoring and detailed explanations"
+                    iconBg="bg-purple-100 dark:bg-purple-900/30"
+                    iconColor="text-purple-600 dark:text-purple-400"
+                  />
                 </div>
               </div>
             </motion.div>
