@@ -11,6 +11,22 @@ import { getRandomConcepts } from "../features/concept/conceptSlice";
 import { setVoice } from "../features/voice/voiceSlice";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { topicList } from "../lib/utils";
+import React from "react";
+
+const TopicList = React.memo(() => {
+  return (
+    <div className="flex gap-2 justify-start items-center py-2 overflow-x-scroll">
+      {topicList?.map((topic) => (
+        <Link
+          to={`/concept?topic=${topic}`}
+          className="bg-blue-300 cursor-pointer text-nowrap text-blue-600 px-3 py-1 rounded-md hover:bg-blue-700 hover:text-white"
+        >
+          {topic.charAt(0).toUpperCase() + topic.slice(1).split("-").join(" ")}
+        </Link>
+      ))}
+    </div>
+  );
+});
 
 export default function Layout() {
   const location = useLocation();
@@ -42,17 +58,7 @@ export default function Layout() {
       <Navbar />
 
       <main className="min-h-screen mt-[80px] dark:bg-gray-950 dark:text-darkText">
-        <div className="flex gap-2 justify-start items-center py-2 overflow-x-scroll">
-          {topicList?.map((topic) => (
-            <Link
-              to={`/concept?topic=${topic}`}
-              className="bg-blue-300 cursor-pointer text-nowrap text-blue-600 px-3 py-1 rounded-md hover:bg-blue-700 hover:text-white"
-            >
-              {topic.charAt(0).toUpperCase() + topic.slice(1).split("-").join(" ")}
-            </Link>
-          ))}
-        </div>
-
+        <TopicList />
         <AnimatePresence mode="wait">
           <Outlet />
         </AnimatePresence>
