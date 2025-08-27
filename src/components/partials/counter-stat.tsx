@@ -36,7 +36,7 @@ const StatCard = ({
 
 export default function CounterStat() {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 py-6">
+    <div className="flex flex-col w-full sm:w-auto sm:flex-row items-center justify-center gap-4 px-4 py-6">
       <StatCard 
         value={129} 
         speed={15} 

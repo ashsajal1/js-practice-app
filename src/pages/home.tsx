@@ -143,7 +143,7 @@ export default function Home() {
                   </div>
                 </motion.div>
 
-                <div className="grid place-items-center mt-10">
+                <div className="grid place-items-center mt-10 w-full">
                   <CounterStat />
                 </div>
 
