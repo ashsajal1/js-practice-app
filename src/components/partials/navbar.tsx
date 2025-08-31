@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Moon, Sun, Menu, X, Mic, Trophy, FlaskConical, ChevronDown, Home as HomeIcon } from 'lucide-react';
+import { Moon, Sun, Menu, X, Mic, Trophy, FlaskConical, ChevronDown, Home as HomeIcon, BookOpen } from 'lucide-react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
@@ -14,7 +14,7 @@ const navItems = [
   { name: 'Play Quiz', path: '/quiz', icon: <Trophy className="h-4 w-4" /> },
   { name: 'Interview Prep', path: '/interview', icon: <FlaskConical className="h-4 w-4" /> },
   { name: 'Practice', path: '/practice', icon: <FlaskConical className="h-4 w-4" /> },
-  { name: 'Concepts', path: '/concept', icon: <FlaskConical className="h-4 w-4" /> },
+  { name: 'Concepts', path: '/concept', icon: <BookOpen className="h-4 w-4" /> },
 ];
 
 export default function Navbar() {
