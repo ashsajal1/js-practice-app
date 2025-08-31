@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Play Quiz', path: '/quiz', icon: <Trophy className="h-4 w-4" /> },
   { name: 'Interview Prep', path: '/interview', icon: <FlaskConical className="h-4 w-4" /> },
   { name: 'Practice', path: '/practice', icon: <FlaskConical className="h-4 w-4" /> },
+  { name: 'Concepts', path: '/concept', icon: <FlaskConical className="h-4 w-4" /> },
 ];
 
 export default function Navbar() {
