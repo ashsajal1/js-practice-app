@@ -225,13 +225,13 @@ export default function Navbar() {
                     <Button
                         variant="ghost"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        className="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     >
                         {isMenuOpen ? (
-                            <X className="h-5 w-5" />
+                            <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                         ) : (
-                            <Menu className="h-5 w-5" />
+                            <Menu className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                         )}
                     </Button>
                 </div>
