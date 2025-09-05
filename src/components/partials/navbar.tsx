@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Moon, Sun, Menu, X, Mic, Trophy, FlaskConical, ChevronDown, Home as HomeIcon } from 'lucide-react';
+import { Moon, Sun, Menu, X, Mic, Trophy, FlaskConical, ChevronDown, Home as HomeIcon, BookOpen } from 'lucide-react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Button from "../ui/button";
@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Play Quiz', path: '/quiz', icon: <Trophy className="h-4 w-4" /> },
   { name: 'Interview Prep', path: '/interview', icon: <FlaskConical className="h-4 w-4" /> },
   { name: 'Practice', path: '/practice', icon: <FlaskConical className="h-4 w-4" /> },
+  { name: 'Concepts', path: '/concept', icon: <BookOpen className="h-4 w-4" /> },
 ];
 
 export default function Navbar() {
@@ -224,13 +225,13 @@ export default function Navbar() {
                     <Button
                         variant="ghost"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        className="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     >
                         {isMenuOpen ? (
-                            <X className="h-5 w-5" />
+                            <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                         ) : (
-                            <Menu className="h-5 w-5" />
+                            <Menu className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                         )}
                     </Button>
                 </div>
